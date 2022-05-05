@@ -1,0 +1,8 @@
+{
+  "name": "proyek-sistem-inventarisasi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/FadisFab/proyek-sistem-inventarisasi.git",
+  "author": "SOK",
+  "license": "MIT"
+}
