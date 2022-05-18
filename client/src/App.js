@@ -24,7 +24,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Routes>
-        <Route path="/" element={<Pendataan />} />
+        <Route path="/Pendataan" element={<Pendataan />} />
       </Routes>
     </ThemeProvider>
   );
