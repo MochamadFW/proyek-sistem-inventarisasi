@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "repository": "https://github.com/FadisFab/proyek-sistem-inventarisasi.git",
   "author": "SOK",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@mui/icons-material": "^5.8.0"
+  }
 }
