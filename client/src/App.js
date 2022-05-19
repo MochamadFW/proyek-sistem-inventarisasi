@@ -1,8 +1,10 @@
 import logo from './logo.svg';
 import { Routes, Route, Link } from "react-router-dom";
-
-import Pendataan from './views/pendataan/pages/pendataan';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+import Dashboard from './views/dashboard/pages/dashboard';
+import Pendataan from './views/pendataan/pages/pendataan';
+
 
 const theme = createTheme({
   palette: {
@@ -14,8 +16,8 @@ const theme = createTheme({
       darker: "#2669BF"
     },
     font: {
-      main:"#263238",
-      white:"#FFFFFF"
+      main: "#263238",
+      white: "#FFFFFF"
     }
   },
 })
@@ -24,7 +26,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Routes>
-        <Route path="/Pendataan" element={<Pendataan />} />
+        <Route path="/pendataan" element={<Pendataan />} />
+        <Route path="/" element={<Dashboard />} />
       </Routes>
     </ThemeProvider>
   );

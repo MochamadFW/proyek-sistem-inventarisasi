@@ -15,7 +15,7 @@ const Layout = (props) => {
                 height: '100vh'
             }}>
             <Sidebar />
-            <Box sx={{ p: 3 }}>
+            <Box sx={{ p: 3, width: '100%' }}>
                 {props.children}
             </Box>
         </Container>
