@@ -1,10 +1,13 @@
-// import logo from './logo.svg';
-import './App.css';
-import Login from './views/login/components/login';
+import logo from './logo.svg';
+import { Routes, Route, Link } from "react-router-dom";
+
+import Pendataan from './views/pendataan/pages/pendataan';
 
 function App() {
   return (
-    <Login />
+    <Routes>
+      <Route path="/" element={<Pendataan/>} />
+    </Routes>
   );
 }
 
