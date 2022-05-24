@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+import { DateProvider } from "./hooks/useDateContext";
+
+import Dashboard from './views/dashboard/pages/dashboard';
+import Pendataan from './views/pendataan/pages/pendataan';
+
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#F2F2F2',
+    },
+    secondary: {
+      main: "#3084F2",
+      darker: "#2669BF"
+    },
+    font: {
+      main: "#263238",
+      white: "#FFFFFF"
+    },
+    button:{
+      main:'#F2D424'
+    }
+  },
+})
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <DateProvider>
+        <Routes>
+          <Route path="/pendataan" element={<Pendataan />} />
+          <Route path="/" element={<Dashboard />} />
+        </Routes>
+      </DateProvider>
+    </ThemeProvider>
   );
 }
 
