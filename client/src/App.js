@@ -1,6 +1,7 @@
-import logo from './logo.svg';
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+import { DateProvider } from "./hooks/useDateContext";
 
 import Dashboard from './views/dashboard/pages/dashboard';
 import Pendataan from './views/pendataan/pages/pendataan';
@@ -18,6 +19,9 @@ const theme = createTheme({
     font: {
       main: "#263238",
       white: "#FFFFFF"
+    },
+    button:{
+      main:'#F2D424'
     }
   },
 })
@@ -25,10 +29,12 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Routes>
-        <Route path="/pendataan" element={<Pendataan />} />
-        <Route path="/" element={<Dashboard />} />
-      </Routes>
+      <DateProvider>
+        <Routes>
+          <Route path="/pendataan" element={<Pendataan />} />
+          <Route path="/" element={<Dashboard />} />
+        </Routes>
+      </DateProvider>
     </ThemeProvider>
   );
 }
