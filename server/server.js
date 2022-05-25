@@ -4,6 +4,7 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 
 import userRouter from './routes/User.js'
+import barangRouter from './routes/Barang.js'
 
 const app = express()
 
@@ -17,6 +18,7 @@ app.get('/', (req, res) => {
     res.json({ message: "Sistem Informasi Inventarisasi Dinas Sumber Daya Air dan Bina Marga Kota Bandung." })
 })
 app.use('/user', userRouter)
+app.use('/barang', barangRouter)
 
 // error handling
 app.use((error, req, res, next) => {

@@ -1,4 +1,3 @@
-import { updatePasswordByUsername } from '../controllers/User.js'
 import User from '../models/User.js'
 
 export const newUser = async (username, password, user_role) => {
