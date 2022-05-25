@@ -2,21 +2,26 @@
   "name": "proyek-sistem-inventarisasi",
   "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "serve:development": "nodemon --experimental-specifier-resolution=node -r dotenv/config main.js dotenv_config_path=.env"
+  },
   "description": "Proyek Sistem Informasi Inventarisasi Dinas Sumber Daya Air dan Bina Marga Kota Bandung",
   "main": "index.js",
   "repository": "https://github.com/FadisFab/proyek-sistem-inventarisasi.git",
   "author": "SOK",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "cls-hooked": "^4.2.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.16",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "react": "^18.1.0",
-    "sequelize": "^6.19.0"
+    "sequelize": "^6.20.0"
   }
 }

@@ -1,11 +1,12 @@
 import { updatePasswordByUsername } from '../controllers/User.js'
 import User from '../models/User.js'
 
-export const newUser = async (username, password) => {
+export const newUser = async (username, password, user_role) => {
     try {
         const user = await User.create({
             username: username,
-            password: password
+            password: password,
+            user_role: user_role
         })
         return user
     } catch (error) {

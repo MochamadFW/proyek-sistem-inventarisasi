@@ -3,10 +3,11 @@ import User from '../models/User.js'
 
 export const postNewUser = async (req, res, next) => {
     try {
-        const { username, password } = req.body
+        const { username, password, user_role } = req.body
         const user = await UserDAO.newUser(
             username,
-            password
+            password,
+            user_role
         )
 
         res.status(200).json({
