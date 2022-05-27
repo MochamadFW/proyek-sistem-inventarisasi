@@ -109,7 +109,16 @@ export const deleteRuanganByKoderuangan = async (KODE_RUANGAN) => {
             }
         })
         return result
-    } catch (erorr) {
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const countRuangan = async () => {
+    try {
+        const jumlah = await Ruangan.count()
+        return jumlah
+    } catch (error) {
         console.log(error)
     }
 }
