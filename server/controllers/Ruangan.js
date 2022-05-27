@@ -2,8 +2,9 @@ import * as RuanganDAO from '../dao/Ruangan.js'
 
 export const postNewRuangan = async (req, res, next) => {
     try {
-        const { kode_ruangan, nama_ruangan, luas_lantai, kode_barang, nama_barang, tipe_barang, ukuran_barang, bahan_barang, tahun_perolehan, jumlah_barang, harga_barang, keterangan_barang } = req.body
+        const { nomor_registrasi, kode_ruangan, nama_ruangan, luas_lantai, kode_barang, nama_barang, tipe_barang, ukuran_barang, bahan_barang, tahun_perolehan, jumlah_barang, harga_barang, keterangan_barang } = req.body
         const ruangan = await RuanganDAO.newRuangan(
+            nomor_registrasi,
             kode_ruangan,
             nama_ruangan,
             luas_lantai,
@@ -76,7 +77,7 @@ export const getRuanganByKoderuangan = async (req, res, next) => {
 export const updateRuanganById = async (req, res, next) => {
     try {
         const { id } = req.params
-        const updateRuangan = await RuanganDAO.updateRuangan(id, req.body.kode_ruangan, req.body.nama_ruangan, req.body.luas_lantai, req.body.kode_barang, 
+        const updateRuangan = await RuanganDAO.updateRuangan(id, req.body.nomor_registrasi, req.body.kode_ruangan, req.body.nama_ruangan, req.body.luas_lantai, req.body.kode_barang, 
             req.body.nama_barang, req.body.tipe_barang, req.body.ukuran_barang, req.body.bahan_barang, req.body.tahun_perolehan, req.body.jumlah_barang, 
             req.body.harga_barang, req.body. keterangan_barang)
         if (updateRuangan == 1 ) {

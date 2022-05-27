@@ -1,8 +1,9 @@
 import Ruangan from '../models/Ruangan.js'
 
-export const newRuangan = async (KODE_RUANGAN, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KETERANGAN_BARANG) => {
+export const newRuangan = async (KODE_RUANGAN, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KETERANGAN_BARANG, NOMOR_REGISTER) => {
     try {
         const ruangan = await Ruangan.create({
+            nomor_register: NOMOR_REGISTER,
             kode_ruangan: KODE_RUANGAN,
             nama_ruangan: NAMA_RUANGAN,
             luas_lantai: LUAS_LANTAI,
