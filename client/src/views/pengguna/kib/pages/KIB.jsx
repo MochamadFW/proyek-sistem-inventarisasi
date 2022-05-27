@@ -12,9 +12,7 @@ import Layout from '../../../shared/components/layout';
 import InputBase from '@mui/material/InputBase';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
 
 function createData(no, kode, jenis, noreg, merk, cc, bahan, tahun, pabrik, rangka, mesin, polisi, bpkb, asal, harga) {
   return { no, kode, jenis, noreg, merk, cc, bahan, tahun, pabrik, rangka, mesin, polisi, bpkb, asal, harga };

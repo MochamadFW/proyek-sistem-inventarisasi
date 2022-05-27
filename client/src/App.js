@@ -6,7 +6,7 @@ import { DateProvider } from "./hooks/useDateContext";
 import Dashboard from './views/dashboard/pages/dashboard';
 import Pendataan from './views/pendataan/pages/pendataan';
 import Login from './views/login/pages/login';
-import PenggunaKib from './views/pengguna/kib/pages/penggunaKib'
+import PenggunaKib from './views/pengguna/kib/pages/KIB'
 
 
 const theme = createTheme({
