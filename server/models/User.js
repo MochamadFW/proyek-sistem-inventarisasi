@@ -10,11 +10,15 @@ const User = db.define('User', {
   },
   username: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   password: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
+  },
+  user_role: {
+    type: Sequelize.STRING,
+    allowNull: true
   }
 })
 

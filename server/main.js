@@ -1,5 +1,5 @@
 import db from './db.js'
-import server from './server.js'
+import server from './server'
 //import { setAssociations } from "./associations"
 console.log(process.env.SERVER_PORT)
 db.authenticate()
