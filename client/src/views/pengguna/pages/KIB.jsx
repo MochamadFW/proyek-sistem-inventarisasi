@@ -88,29 +88,30 @@ const PenggunaKib = () => {
             <TableRow
               sx={{bgcolor:'#66BB6A'}}
             >
-              <TableCell>No</TableCell>
-              <TableCell align="center">Kode Barang</TableCell>
-              <TableCell align="center">Jenis Barang/Nama Barang</TableCell>
-              <TableCell align="center">Nomor Register</TableCell>
-              <TableCell align="center">Merk/Type</TableCell>
-              <TableCell align="center">Ukuran/CC</TableCell>
-              <TableCell align="center">Bahan</TableCell>
-              <TableCell align="center">Nomor</TableCell>
-              <TableRow>
-                <TableCell align="center" colSpan={2}>
-                  Nomor
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell align="center">Pabrik</TableCell>
-                <TableCell align="center">Rangka</TableCell>
-              </TableRow>
-              <TableCell align="center">Rangka</TableCell>
-              <TableCell align="center">Mesin</TableCell>
-              <TableCell align="center">Polisi</TableCell>
-              <TableCell align="center">BPKB</TableCell>
-              <TableCell align="center">Asal usul</TableCell>
-              <TableCell align="center">Harga (Rp)</TableCell>
+              <TableCell sx={{ border: 0 }} align="center" colSpan={8} />
+              <TableCell sx={{ border: 1, borderTop: 0 }} align="center" colSpan={5}>
+                Nomor
+              </TableCell>
+              <TableCell sx={{ border: 0 }} align="center" colSpan={2} />
+            </TableRow>
+            <TableRow
+              sx={{bgcolor:'#66BB6A'}}
+            >
+              <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">No</TableCell>
+              <TableCell sx={{ border: 1 }} align="center">Kode Barang</TableCell>
+              <TableCell sx={{ border: 1 }} align="center">Jenis Barang/Nama Barang</TableCell>
+              <TableCell sx={{ border: 1 }} align="center">Nomor Register</TableCell>
+              <TableCell sx={{ border: 1 }} align="center">Merk/Type</TableCell>
+              <TableCell sx={{ border: 1 }} align="center">Ukuran/CC</TableCell>
+              <TableCell sx={{ border: 1 }} align="center">Bahan</TableCell>
+              <TableCell sx={{ border: 1 }} align="center">Tahun Pembelian</TableCell>
+              <TableCell sx={{ border: 1 }} align="center">Pabrik</TableCell>
+              <TableCell sx={{ border: 1 }} align="center">Rangka</TableCell>
+              <TableCell sx={{ border: 1 }} align="center">Mesin</TableCell>
+              <TableCell sx={{ border: 1 }} align="center">Polisi</TableCell>
+              <TableCell sx={{ border: 1 }} align="center">BPKB</TableCell>
+              <TableCell sx={{ border: 1 }} align="center">Asal usul</TableCell>
+              <TableCell sx={{ border: 1, borderRight: 0 }} align="center">Harga (Rp)</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -118,25 +119,24 @@ const PenggunaKib = () => {
             .map((row, index) => (
               <TableRow
                 key={row.name}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
+                <TableCell sx={{ border: 1, borderLeft: 0 }} align="center" component="th" scope="row">
                   {row.no}
                 </TableCell>
-                <TableCell align="center">{row.kode}</TableCell>
-                <TableCell align="center">{row.jenis}</TableCell>
-                <TableCell align="center">{row.noreg}</TableCell>
-                <TableCell align="center">{row.merk}</TableCell>
-                <TableCell align="center">{row.cc}</TableCell>
-                <TableCell align="center">{row.bahan}</TableCell>
-                <TableCell align="center">{row.tahun}</TableCell>
-                <TableCell align="center">{row.pabrik}</TableCell>
-                <TableCell align="center">{row.rangka}</TableCell>
-                <TableCell align="center">{row.mesin}</TableCell>
-                <TableCell align="center">{row.polisi}</TableCell>
-                <TableCell align="center">{row.bpkb}</TableCell>
-                <TableCell align="center">{row.asal}</TableCell>
-                <TableCell align="center">{row.harga}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.jenis}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.noreg}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.merk}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.kode}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.cc}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.bahan}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.tahun}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.pabrik}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.rangka}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.mesin}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.polisi}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.bpkb}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.asal}</TableCell>
+                <TableCell sx={{ border: 1, borderRight: 0 }} align="center">{row.harga}</TableCell>
               </TableRow>
             ))}
             {emptyRows > 0 && (
