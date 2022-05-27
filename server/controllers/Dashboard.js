@@ -1,5 +1,6 @@
 import * as BarangDAO from '../dao/Barang.js'
 import * as RuanganDAO from '../dao/Ruangan.js'
+import * as PermintaanDAO from '../dao/Permintaan_Perbaikan.js'
 
 export const countTotalAset = async (req, res, next) => {
     try {
@@ -10,6 +11,20 @@ export const countTotalAset = async (req, res, next) => {
             message: 'Get total aset success',
             data: {
                 totalAset
+            }
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const countTotalPermintaan = async (req, res, next) => {
+    try {
+        const totalPermintaan = await PermintaanDAO.countPermintaan()
+        res.status(200).json({
+            message: 'Get total permintaan success',
+            data: {
+                totalPermintaan
             }
         })
     } catch (error) {
