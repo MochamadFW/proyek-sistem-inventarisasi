@@ -55,6 +55,11 @@ const Ruangan = db.define('Ruangan', {
     keterangan_barang: {
         type: Sequelize.STRING,
         allowNull: true
+    },
+    nomor_register: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        autoIncrement: true
     }
 })
 
