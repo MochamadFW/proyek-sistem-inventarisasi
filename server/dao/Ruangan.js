@@ -1,11 +1,20 @@
 import Ruangan from '../models/Ruangan.js'
 
-export const newRuangan = async (kode_ruangan, nama_ruangan, luas_lantai) => {
+export const newRuangan = async (KODE_RUANGAN, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KETERANGAN_BARANG) => {
     try {
         const ruangan = await Ruangan.create({
-            kode_ruangan: kode_ruangan,
-            nama_ruangan: nama_ruangan,
-            luas_lantai: luas_lantai
+            kode_ruangan: KODE_RUANGAN,
+            nama_ruangan: NAMA_RUANGAN,
+            luas_lantai: LUAS_LANTAI,
+            kode_barang: KODE_BARANG,
+            nama_barang: NAMA_BARANG,
+            tipe_barang: TIPE_BARANG,
+            ukuran_barang: UKURAN_BARANG,
+            bahan_barang: BAHAN_BARANG,
+            tahun_perolehan: TAHUN_PEROLEHAN,
+            jumlah_barang: JUMLAH_BARANG,
+            harga_barang: HARGA_BARANG,
+            keterangan_barang: KETERANGAN_BARANG
         })
         return ruangan
     } catch (error) {
@@ -22,11 +31,11 @@ export const findAllRuangan = async () => {
     }
 }
 
-export const findRuanganByKoderuangan = async (kode_ruangan) => {
+export const findRuanganById = async (ID) => {
     try {
         const ruangan = await Ruangan.findOne({
-            where:{
-                kode_ruangan: kode_ruangan
+            where: {
+                id: ID
             }
         })
         return ruangan
@@ -35,17 +44,40 @@ export const findRuanganByKoderuangan = async (kode_ruangan) => {
     }
 }
 
-export const updateRuangan = async (id, kode_ruangan, nama_ruangan, luas_lantai) => {
+export const findRuanganByKoderuangan = async (KODE_RUANGAN) => {
+    try {
+        const ruangan = await Ruangan.findOne({
+            where:{
+                kode_ruangan: KODE_RUANGAN
+            }
+        })
+        return ruangan
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const updateRuangan = async (ID, KODE_RUANGAN, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KETERANGAN_BARANG, UPDATEDAT) => {
     try {
         const ruangan = await Ruangan.update(
             {
-                kode_ruangan: kode_ruangan,
-                nama_ruangan: nama_ruangan,
-                luas_lantai: luas_lantai
+                kode_ruangan: KODE_RUANGAN,
+                nama_ruangan: NAMA_RUANGAN,
+                luas_lantai: LUAS_LANTAI,
+                kode_barang: KODE_BARANG,
+                nama_barang: NAMA_BARANG,
+                tipe_barang: TIPE_BARANG,
+                ukuran_barang: UKURAN_BARANG,
+                bahan_barang: BAHAN_BARANG,
+                tahun_perolehan: TAHUN_PEROLEHAN,
+                jumlah_barang: JUMLAH_BARANG,
+                harga_barang: HARGA_BARANG,
+                keterangan_barang: KETERANGAN_BARANG,
+                updatedAt: UPDATEDAT
             },
             {
                 where: {
-                    id: id
+                    id: ID
                 }
             }
         )
@@ -55,15 +87,28 @@ export const updateRuangan = async (id, kode_ruangan, nama_ruangan, luas_lantai)
     }
 }
 
-export const deleteRuangan = async (kode_ruangan) => {
+export const deleteRuanganById = async (ID) => {
     try {
         const result = await Ruangan.destroy({
             where: {
-                kode_ruangan: kode_ruangan
+                id: ID
             }
         })
         return result
     } catch (error) {
+        console.log(error)
+    }
+}
+
+export const deleteRuanganByKoderuangan = async (KODE_RUANGAN) => {
+    try {
+        const result = await Ruangan.destroy({
+            where: {
+                kode_ruangan: KODE_RUANGAN
+            }
+        })
+        return result
+    } catch (erorr) {
         console.log(error)
     }
 }

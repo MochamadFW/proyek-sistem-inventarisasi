@@ -6,6 +6,7 @@ import bodyParser from 'body-parser'
 import userRouter from './routes/User.js'
 import barangRouter from './routes/Barang.js'
 import ruanganRouter from './routes/Ruangan.js'
+import permintaanRouter from './routes/Permintaan_Perbaikan.js'
 
 const app = express()
 
@@ -21,6 +22,7 @@ app.get('/', (req, res) => {
 app.use('/user', userRouter)
 app.use('/barang', barangRouter)
 app.use('/ruangan', ruanganRouter)
+app.use('/permintaan', permintaanRouter)
 
 // error handling
 app.use((error, req, res, next) => {
