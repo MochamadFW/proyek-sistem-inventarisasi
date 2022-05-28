@@ -1,6 +1,7 @@
 import * as BarangDAO from '../dao/Barang.js'
 import * as RuanganDAO from '../dao/Ruangan.js'
 import * as PermintaanDAO from '../dao/Permintaan_Perbaikan.js'
+import * as UserDAO from '../dao/User.js'
 
 export const countTotalAset = async (req, res, next) => {
     try {
@@ -27,6 +28,24 @@ export const countTotalPermintaan = async (req, res, next) => {
                 totalPermintaan
             }
         })
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const countTotalLogin = async (req, res, next) => {
+    try {
+        const { username, password, total_login } = req.body
+        const totalLogin = await UserDAO.userLoginValidation(username, password)
+        if (totalLogin == 1) {
+            var jumlahLogin = total_login + 1
+            res.status(200).json({
+                message: 'Login success & total_login + 1',
+                data: {
+                    jumlahLogin
+                }
+            })
+        }
     } catch (error) {
         next(error)
     }
