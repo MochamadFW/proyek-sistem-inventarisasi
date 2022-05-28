@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { DateProvider } from "./hooks/useDateContext";
+import { KegiatanProvider } from "./hooks/useKegiatanContext";
 
 import Dashboard from './views/dashboard/pages/dashboard';
 import Pendataan from './views/pendataan/pages/pendataan';
@@ -22,22 +23,36 @@ const theme = createTheme({
       main: "#263238",
       white: "#FFFFFF"
     },
-    button:{
-      main:'#F2D424'
+    button: {
+      main: '#F2D424'
+    },
+    info: {
+      main: '#29B6F6'
     }
   },
+  components: {
+    MuiPickerStaticWrapper: {
+      styleOverrides: {
+        root: {
+          width: '768px',
+        }
+      }
+    }
+  }
 })
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <DateProvider>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/pendataan" element={<Pendataan />} />
-          <Route path="/pengguna/kib" element={<PenggunaKib />} />
-        </Routes>
+        <KegiatanProvider>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/pendataan" element={<Pendataan />} />
+            <Route path="/pengguna/kib" element={<PenggunaKib />} />
+          </Routes>
+        </KegiatanProvider>
       </DateProvider>
     </ThemeProvider>
   );
