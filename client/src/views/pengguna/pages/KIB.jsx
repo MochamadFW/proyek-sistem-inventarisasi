@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -28,6 +29,16 @@ const rows = [
   createData(7, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
   createData(8, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
 ];
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: '#E5E5E5',
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    borderBottom: 0,
+  },
+}));
 
 const PenggunaKib = () => {
 
@@ -117,7 +128,7 @@ const PenggunaKib = () => {
           <TableBody>
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((row, index) => (
-              <TableRow
+              <StyledTableRow
                 key={row.name}
               >
                 <TableCell sx={{ border: 1, borderLeft: 0 }} align="center" component="th" scope="row">
@@ -137,7 +148,7 @@ const PenggunaKib = () => {
                 <TableCell sx={{ border: 1 }} align="center">{row.bpkb}</TableCell>
                 <TableCell sx={{ border: 1 }} align="center">{row.asal}</TableCell>
                 <TableCell sx={{ border: 1, borderRight: 0 }} align="center">{row.harga}</TableCell>
-              </TableRow>
+              </StyledTableRow>
             ))}
             {emptyRows > 0 && (
               <TableRow
