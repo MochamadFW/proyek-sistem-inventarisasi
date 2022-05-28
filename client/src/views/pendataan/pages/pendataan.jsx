@@ -77,7 +77,7 @@ const FormKegiatan = ({ onSubmit, setDate }) => {
                         />
                     </Box>
                     <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
-                        <SubmitButton Label="Tambah Kegiatan" Types='submit' />
+                        <SubmitButton Label="Tambah Kegiatan" Types='submit' sx={{backgroundColor:'button.submit', '&:hover':{backgroundColor:'#4A874D'}}} />
                     </Box>
                 </Box>
             </form>

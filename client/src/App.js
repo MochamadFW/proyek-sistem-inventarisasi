@@ -24,7 +24,8 @@ const theme = createTheme({
       white: "#FFFFFF"
     },
     button: {
-      main: '#F2D424'
+      main: '#F2D424',
+      submit: '#66BB6A',
     },
     info: {
       main: '#29B6F6'
