@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
+    Button,
     Box,
     Collapse,
     List,
@@ -12,6 +13,7 @@ import {
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { useNavigate, useLocation } from "react-router-dom";
 import Icon from '@mui/material/Icon';
 
 import "../style/scrollbar.css"
@@ -19,6 +21,18 @@ import { DateContext } from "../../../hooks/useDateContext";
 
 const Sidebar = () => {
     const { selectedDate, setSelectedDate } = useContext(DateContext);
+    const navigate = useNavigate();
+    let currentPath = useLocation();
+    const [openPendataanCollapse, setOpenPendataanCollapse] = useState(false);
+    useEffect(() => {
+        if (currentPath.pathname === "/pendataan") { setOpenPendataanCollapse(true) }
+        else { setOpenPendataanCollapse(false) }
+    }, [currentPath]);
+    const [openPencatatanCollapse, setOpenPencatatancollapse] = useState(false);
+    const [openSubPencatatanCollapse, setOpenSubPencatatancollapse] = useState({});
+    const handleClickSubPencatatan = (e) => {
+        setOpenSubPencatatancollapse({ [e]: !openSubPencatatanCollapse[e] })
+    }
     const account = [
         {
             name: 'Siti Mulyani',
@@ -39,27 +53,28 @@ const Sidebar = () => {
             id: 1,
             name: 'Kartu Inventaris Barang (KIB)',
             menu: [
-                { id: 1, name: 'KIB (A)' },
-                { id: 2, name: 'KIB (B)' },
-                { id: 3, name: 'KIB (C)' },
-                { id: 4, name: 'KIB (D)' },
-                { id: 5, name: 'KIB (E)' },
-                { id: 6, name: 'KIB (F)' }
+                { id: 1, name: 'KIB (A)', link: '#' },
+                { id: 2, name: 'KIB (B)', link: '/pencatatan/kib/b' },
+                { id: 3, name: 'KIB (C)', link: '#' },
+                { id: 4, name: 'KIB (D)', link: '#' },
+                { id: 5, name: 'KIB (E)', link: '#' },
+                { id: 6, name: 'KIB (F)', link: '#' }
             ]
         },
         {
             id: 2,
             name: 'Kartu Inventaris Ruangan (KIR)',
             menu: [
-                { id: 1, name: 'R. Kepala Dinas' },
-                { id: 2, name: 'R. Sekretaris Dinas' },
-                { id: 3, name: 'R. Kasubag Umpegdatin' },
-                { id: 4, name: 'R. Staff Umum' },
-                { id: 5, name: 'R. Kasubag Keuangan' },
-                { id: 6, name: 'R. Keuangan I' },
+                { id: 1, name: 'R. Kepala Dinas', link: '#' },
+                { id: 2, name: 'R. Sekretaris Dinas', link: '#' },
+                { id: 3, name: 'R. Kasubag Umpegdatin', link: '#' },
+                { id: 4, name: 'R. Staff Umum', link: '/pencatatan/kir/staff-umum' },
+                { id: 5, name: 'R. Kasubag Keuangan', link: '#' },
+                { id: 6, name: 'R. Keuangan I', link: '#' },
             ]
         }
-    ]
+    ];
+    const [isAdmin, setIsAdmin] = useState(true);
     return (
         <Box
             sx={{
@@ -97,85 +112,88 @@ const Sidebar = () => {
                             flexDirection: 'column',
                             overflowY: 'scroll',
                         }}
-                    >
-                        <List key={1} sx={{ color: "font.white" }} disablePadding>
-                            <ListItemButton sx={{ px: 3, py: 1 }} alignItems="center">
-                                <Icon sx={{ color: 'font.white', mr: 2 }}>dashboard</Icon>
-                                <ListItemText primary="Dashboard" />
-                            </ListItemButton>
-                        </List>
-                        <List key={2} sx={{ color: "font.white" }} disablePadding>
-                            <ListItemButton sx={{ px: 3, py: 1 }} alignItems="center">
-                                <Icon sx={{ color: 'font.white', mr: 2 }}>bar_chart</Icon>
-                                <ListItemText primary="Pendataan" />
-                            </ListItemButton>
-                            <Collapse in={true} component="li" timeout="auto" unmountOnExit>
-                                <List key={3} disablePadding sx={{ color: 'font.white', pl: 8 }}>
-                                    <ListItem sx={{ gap: '1rem', p: 0, mb: 2 }}>
-                                        <ListItemText primary="Bulan" />
-                                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                            <DatePicker
-                                                disableMaskedInput
-                                                inputFormat="MMMM"
-                                                views={["month"]}
-                                                value={selectedDate}
-                                                onChange={(newValue) => {
-                                                    setSelectedDate(newValue);
-                                                }}
-                                                renderInput={(params) => <TextField sx={{ backgroundColor: 'font.white', borderRadius: '4px', borderColor: 'transparent' }} {...params} inputProps={{ ...params.inputProps, placeholder: "month" }} />}
-                                            />
-                                        </LocalizationProvider>
-                                    </ListItem>
-                                    <ListItem sx={{ gap: '1rem', p: 0 }}>
-                                        <ListItemText primary="Tahun" />
-                                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                            <DatePicker
-                                                views={["year"]}
-                                                value={selectedDate}
-                                                onChange={(newValue) => {
-                                                    setSelectedDate(newValue);
-                                                }}
-                                                renderInput={(params) => <TextField sx={{ backgroundColor: 'font.white', borderRadius: '4px', borderColor: 'transparent' }} {...params} inputProps={{ ...params.inputProps, placeholder: "year" }} />}
-                                            />
-                                        </LocalizationProvider>
-                                    </ListItem>
-                                </List>
-                            </Collapse>
-                        </List>
-                        <List key={4} sx={{ color: "font.white" }} disablePadding>
-                            <ListItemButton sx={{ px: 3, py: 1 }} alignItems="center">
-                                <Icon sx={{ color: 'font.white', mr: 2 }}>edit_note</Icon>
-                                <ListItemText primary="Pencatatan" />
-                            </ListItemButton>
-                            <Collapse in={true} component="li" timeout="auto" unmountOnExit sx={{ backgroundColor: 'secondary.darker', ml: 3, p: 1, borderRadius: '4px' }}>
-                                <List key={5} disablePadding>
-                                    {subMenuPencatatan.map((data, index) =>
-                                        <>
-                                            <ListItemButton key={index} sx={{ p: 1 }}>
-                                                <ListItemText primary={data.name} />
-                                                <Icon>expand_less</Icon>
-                                            </ListItemButton>
-                                            <Collapse in={true} component="li" timeout="auto" unmountOnExit>
-                                                <List key={index + `a`} sx={{ py: 0 }} disablePadding>
-                                                    {data.menu.map((menu, index) =>
+                    >{isAdmin ?
+                        <>
+                            <List sx={{ color: "font.white" }} disablePadding>
+                                <ListItemButton key={1} sx={{ px: 3, py: 1 }} alignItems="center" onClick={() => { navigate('/') }}>
+                                    <Icon sx={{ color: 'font.white', mr: 2 }}>dashboard</Icon>
+                                    <ListItemText primary="Dashboard" />
+                                </ListItemButton>
+                            </List>
+                            <List sx={{ color: "font.white" }} disablePadding>
+                                <ListItemButton key={2} sx={{ px: 3, py: 1 }} alignItems="center" onClick={() => { navigate('/pendataan') }}>
+                                    <Icon sx={{ color: 'font.white', mr: 2 }}>bar_chart</Icon>
+                                    <ListItemText primary="Pendataan" />
+                                </ListItemButton>
+                                <Collapse in={openPendataanCollapse} component="li" timeout="auto" unmountOnExit>
+                                    <List disablePadding sx={{ color: 'font.white', pl: 8 }}>
+                                        <ListItem key={"asd3"} sx={{ gap: '1rem', p: 0, mb: 2 }}>
+                                            <ListItemText primary="Bulan" />
+                                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                                <DatePicker
+                                                    disableMaskedInput
+                                                    inputFormat="MMMM"
+                                                    views={["month"]}
+                                                    value={selectedDate}
+                                                    onChange={(newValue) => {
+                                                        setSelectedDate(newValue);
+                                                    }}
+                                                    renderInput={(params) => <TextField sx={{ backgroundColor: 'font.white', borderRadius: '4px', borderColor: 'transparent' }} {...params} inputProps={{ ...params.inputProps, placeholder: "month" }} />}
+                                                />
+                                            </LocalizationProvider>
+                                        </ListItem>
+                                        <ListItem key={"asd4"} sx={{ gap: '1rem', p: 0 }}>
+                                            <ListItemText primary="Tahun" />
+                                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                                <DatePicker
+                                                    views={["year"]}
+                                                    value={selectedDate}
+                                                    onChange={(newValue) => {
+                                                        setSelectedDate(newValue);
+                                                    }}
+                                                    renderInput={(params) => <TextField sx={{ backgroundColor: 'font.white', borderRadius: '4px', borderColor: 'transparent' }} {...params} inputProps={{ ...params.inputProps, placeholder: "year" }} />}
+                                                />
+                                            </LocalizationProvider>
+                                        </ListItem>
+                                    </List>
+                                </Collapse>
+                            </List>
+                            <List sx={{ color: "font.white" }} disablePadding>
+                                <ListItemButton key={5} sx={{ px: 3, py: 1 }} alignItems="center" onClick={() => setOpenPencatatancollapse(!openPencatatanCollapse)}>
+                                    <Icon sx={{ color: 'font.white', mr: 2 }}>edit_note</Icon>
+                                    <ListItemText primary="Pencatatan" />
+                                </ListItemButton>
+                                <Collapse in={openPencatatanCollapse} component="li" timeout="auto" unmountOnExit sx={{ backgroundColor: 'secondary.darker', ml: 3, p: 1, borderRadius: '4px' }}>
+                                    <List disablePadding>
+                                        {subMenuPencatatan.map((data, index) =>
+                                            <React.Fragment key={index}>
+                                                <ListItemButton key={index} sx={{ p: 1 }} onClick={() => handleClickSubPencatatan(data.name)}>
+                                                    <Typography variant="body1" fontWeight={700}>{data.name}</Typography>
+                                                    <Icon>{openSubPencatatanCollapse[data.name] ? 'expand_less' : 'expand_more'}</Icon>
+                                                </ListItemButton>
+                                                <Collapse in={openSubPencatatanCollapse[data.name]} component="li" timeout="auto" unmountOnExit>
+                                                    <List key={index + `a`} sx={{ py: 0 }} disablePadding>
+                                                        {data.menu.map((menu, index) =>
 
-                                                        <ListItemButton sx={{ color: "font.white", py: 0 }}>
-                                                            <ListItemText primary={menu.name} />
-                                                        </ListItemButton>
-                                                    )}
-                                                </List>
-                                            </Collapse>
-                                        </>
-                                    )}
-                                </List>
-                            </Collapse>
-                        </List>
-                        <List sx={{ color: "font.white" }} disablePadding key={6}>
-                            <ListItemButton sx={{ px: 3, py: 1 }} alignItems="center" dense >
-                                <Icon sx={{ color: 'font.white', mr: 2 }}>summarize</Icon>
-                                <ListItemText primary="Pelaporan" sx={{ color: "font.white" }} />
-                            </ListItemButton>
-                        </List>
+                                                            <ListItemButton key={index} sx={{ color: "font.white", py: 0 }} onClick={() => { navigate(menu.link) }}>
+                                                                <Typography variant="body1" marginY={1}>{menu.name}</Typography>
+                                                            </ListItemButton>
+                                                        )}
+                                                    </List>
+                                                </Collapse>
+                                            </React.Fragment>
+                                        )}
+                                    </List>
+                                </Collapse>
+                            </List>
+                            <List sx={{ color: "font.white" }} disablePadding key={6}>
+                                <ListItemButton key={88} sx={{ px: 3, py: 1 }} alignItems="center" dense >
+                                    <Icon sx={{ color: 'font.white', mr: 2 }}>summarize</Icon>
+                                    <ListItemText primary="Pelaporan" sx={{ color: "font.white" }} />
+                                </ListItemButton>
+                            </List></> :
+                        <></>}
+                        <Button onClick={() => { setIsAdmin(!isAdmin) }}>Toogle</Button>
                     </Box>
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
