@@ -96,3 +96,13 @@ export const deleteBarang = async (kode_barang) => {
         console.log(error)
     }
 }
+
+export const countBarang = async () => {
+    try {
+        const jumlah = await Barang.count()
+        console.log(jumlah)
+        return jumlah
+    } catch (error) {
+        console.log(error)
+    }
+}

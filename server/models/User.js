@@ -19,6 +19,11 @@ const User = db.define('User', {
   user_role: {
     type: Sequelize.STRING,
     allowNull: true
+  },
+  total_login: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0
   }
 })
 

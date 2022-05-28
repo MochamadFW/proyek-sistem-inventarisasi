@@ -16,24 +16,24 @@ const Permintaan_Perbaikan = db.define('Permintaan_Perbaikan', {
      type: Sequelize.DATE,
      allowNull: true
  },
- jumlah_barang: {
-     type: Sequelize.INTEGER,
-     allowNull: true
- },
  keterangan_barang: {
-     type: Sequelize.STRING,
-     allowNull: true
- },
- nama_barang: {
-     type: Sequelize.STRING,
-     allowNull: true
- },
- keberadaan_aset: {
      type: Sequelize.STRING,
      allowNull: true
  },
  jenis_kerusakan: {
      type: Sequelize.STRING,
+     allowNull: true
+ },
+ nama_barang: {
+    type: Sequelize.STRING,
+    allowNull: true
+},
+nama_ruangan: {
+    type: Sequelize.STRING,
+    allowNull: true
+},
+ jumlah_barang: {
+     type: Sequelize.INTEGER,
      allowNull: true
  }
 })
