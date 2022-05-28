@@ -77,7 +77,7 @@ const FormKegiatan = ({ onSubmit, setDate }) => {
                         />
                     </Box>
                     <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
-                        <SubmitButton Label="Tambah Kegiatan" Types='submit' sx={{backgroundColor:'button.submit', '&:hover':{backgroundColor:'#4A874D'}}} />
+                        <SubmitButton Label="Tambah Kegiatan" Types='submit' sx={{ backgroundColor: 'button.submit', '&:hover': { backgroundColor: '#4A874D' } }} />
                     </Box>
                 </Box>
             </form>
@@ -125,8 +125,8 @@ const Pendataan = () => {
     const idNotification = openNotification ? 'notification-popover' : undefined;
     return (
         <Layout>
-            <Box sx={{ py: 2, px: 3, mb: 3, backgroundColor: 'font.white', textTransform: 'uppercase', }}>
-                <Typography variant="h5" color="font.main" sx={{ fontWeight: 'medium' }}>siinvent</Typography>
+            <Box sx={{ py: 2, px: 3, mb: 3, backgroundColor: 'font.white', textTransform: 'uppercase', border: '1px solid #29B6F6' }}>
+                <Typography variant="h5" color="font.main" sx={{ fontWeight: 'medium' }}>sistem informasi inventarisasi aset</Typography>
             </Box>
 
             <Box sx={{ display: 'flex', flexDirection: 'row', gap: '1.5rem' }}>
@@ -144,7 +144,7 @@ const Pendataan = () => {
                             renderInput={(params) => <TextField {...params} />}
                         />
                     </LocalizationProvider>
-                    <Box sx={{display:'flex', flexDirection:'row-reverse'}} onClick={handleToggleFormKegiatan}>
+                    <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }} onClick={handleToggleFormKegiatan}>
                         <SubmitButton Label="Edit" />
                     </Box>
                 </Box>
