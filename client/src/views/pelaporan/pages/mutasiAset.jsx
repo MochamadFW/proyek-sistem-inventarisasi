@@ -17,49 +17,51 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
-import FormBox from '../../shared/components/formBox';
+import FormBox from '../../shared/components/formBox'
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import { Typography } from '@mui/material';
 
-function createData(no, kode, jenis, noreg, merk, cc, bahan, tahun, pabrik, rangka, mesin, polisi, bpkb, asal, harga) {
-  return { no, kode, jenis, noreg, merk, cc, bahan, tahun, pabrik, rangka, mesin, polisi, bpkb, asal, harga };
+function createData(no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, harga, baik, kbaik, rberat, ketmutasi) {
+  return { no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, harga, baik, kbaik, rberat, ketmutasi};
 }
 
 const rows = [
-  createData(1, 159, 6.0, 24, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(2, 237, 9.0, 37, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(3, 262, 16.0, 24, 6.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(4, 305, 3.7, 67, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(5, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(6, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(7, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(8, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(9, 159, 6.0, 24, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(10, 237, 9.0, 37, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(11, 262, 16.0, 24, 6.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(12, 305, 3.7, 67, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(13, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(14, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(15, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(16, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(1, 159, 6.0, 24, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(2, 237, 9.0, 37, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(3, 262, 16.0, 24, 6.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(4, 305, 3.7, 67, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(5, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(6, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(7, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(8, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(9, 159, 6.0, 24, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(10, 237, 9.0, 37, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(11, 262, 16.0, 24, 6.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(12, 305, 3.7, 67, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(13, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(14, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(15, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(16, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
 ];
 
 const headerRow = [
   "",
-  "No",
-  "Kode Barang",
-  "Jenis Barang / Nama Barang",
-  "Nomor Register",
-  "Merk/Type",
-  "Ukuran/CC",
+  "No. Urut",
+  "Nama barang / Jenis barang",
+  "Merk/Model",
+  "No. Seri nokode",
+  "Ukuran",
   "Bahan",
-  "Tahun Pembelian",
-  "Pabrik",
-  "Rangka",
-  "Mesin",
-  "Polisi",
-  "BPKB",
-  "Asal Usul",
-  "Harga"
+  "Tahun Pembuatan / Pembelian",
+  "Nomor kode Barang",
+  "Jumlah Barang / Register (X)",
+  "Harga Beli / Perolehan",
+  "Baik (B)",
+  "Kurang Baik (KB)",
+  "Rusak Berat (RB)",
+  "Keterangan Mutasi dll"
 ]
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -72,7 +74,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const PencatatanKib = () => {
+const PelaporanMutasiAset = () => {
+
+  const [age, setAge] = React.useState('');
+
+  const handleChangeSelect = (event) => {
+    setAge(event.target.value);
+  };
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -148,30 +156,6 @@ const PencatatanKib = () => {
             component="div"
             sx={{
               display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              mb: 2
-            }}
-          >
-            <Typography>No</Typography>
-            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:83}} />
-          </Box>
-          <Box
-            component="div"
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              mb: 2
-            }}
-          >
-            <Typography>Nomor Register</Typography>
-            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:83}} />
-          </Box>
-          <Box
-            component="div"
-            sx={{
-              display: "flex",
               flexDirection: "column",
               justifyContent: "flex-start",
               mb: 2
@@ -196,132 +180,12 @@ const PencatatanKib = () => {
             component="div"
             sx={{
               display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              mb: 2
-            }}
-          >
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column"
-              }}
-            >
-              <Typography>Merk/Type</Typography>
-              <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:144}} />
-            </Box>
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column"
-              }}
-            >
-              <Typography>Ukuran/CC</Typography>
-              <TextField id="filled-basic" label="" variant="filled" sx={{width:155}} />
-            </Box>
-          </Box>
-          <Box
-            component="div"
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              mb: 2
-            }}
-          >
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column"
-              }}
-            >
-              <Typography>Tahun Pembelian</Typography>
-              <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:144}} />
-            </Box>
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column"
-              }}
-            >
-              <Typography>Bahan</Typography>
-              <TextField id="filled-basic" label="" variant="filled" sx={{width:155}} />
-            </Box>
-          </Box>
-          <Box
-            component="div"
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              mb: 2
-            }}
-          >
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column"
-              }}
-            >
-              <Typography>No. Pabrik</Typography>
-              <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:144}} />
-            </Box>
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column"
-              }}
-            >
-              <Typography>No. Rangka</Typography>
-              <TextField id="filled-basic" label="" variant="filled" sx={{width:155}} />
-            </Box>
-          </Box>
-          <Box
-            component="div"
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              mb: 2
-            }}
-          >
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column"
-              }}
-            >
-              <Typography>No. Mesin</Typography>
-              <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:144}} />
-            </Box>
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column"
-              }}
-            >
-              <Typography>No. Polisi</Typography>
-              <TextField id="filled-basic" label="" variant="filled" sx={{width:155}} />
-            </Box>
-          </Box>
-          <Box
-            component="div"
-            sx={{
-              display: "flex",
               flexDirection: "column",
               justifyContent: "flex-start",
               mb: 2
             }}
           >
-            <Typography>No. BPKB</Typography>
+            <Typography>Merk/Model</Typography>
             <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
           </Box>
           <Box
@@ -333,7 +197,67 @@ const PencatatanKib = () => {
               mb: 2
             }}
           >
-            <Typography>Asal Usul</Typography>
+            <Typography>No. Seri Pabrik</Typography>
+            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+          </Box>
+          <Box
+            component="div"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              mb: 2
+            }}
+          >
+            <Typography>Ukuran</Typography>
+            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+          </Box>
+          <Box
+            component="div"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              mb: 2
+            }}
+          >
+            <Typography>Bahan</Typography>
+            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+          </Box>
+          <Box
+            component="div"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              mb: 2
+            }}
+          >
+            <Typography>Tahun Perolehan</Typography>
+            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+          </Box>
+          <Box
+            component="div"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              mb: 2
+            }}
+          >
+            <Typography>Nomor Kode</Typography>
+            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+          </Box>
+          <Box
+            component="div"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              mb: 2
+            }}
+          >
+            <Typography>Jumlah Barang</Typography>
             <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
           </Box>
           <Box
@@ -346,7 +270,45 @@ const PencatatanKib = () => {
             }}
           >
             <Typography>Harga</Typography>
-            <TextField id="filled-basic" label="Rp" variant="filled" sx={{width:1}} />
+            <TextField hiddenLabel id="filled-basic" label="Rp" variant="filled" sx={{width:1}} />
+          </Box>
+          <Box
+            component="div"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              mb: 2
+            }}
+          >
+            <Typography>Keadaan Barang</Typography>
+            <FormControl fullWidth sx={{bgcolor:"#E8E8E8", borderBottom: 1, borderColor: "#8D8D8D", borderRadius: 1}}>
+              <Select
+                value={age}
+                onChange={handleChangeSelect}
+                displayEmpty
+                inputProps={{ 'aria-label': 'Without label' }}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>Baik</MenuItem>
+                <MenuItem value={20}>Kurang Baik</MenuItem>
+                <MenuItem value={30}>Rusak Berat</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+          <Box
+            component="div"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              mb: 2
+            }}
+          >
+            <Typography>Keterangan</Typography>
+            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
           </Box>
           <Button
             Label="Submit"
@@ -363,7 +325,7 @@ const PencatatanKib = () => {
           </Button>
         </FormBox>
         <FormBox
-          title="Mesin & Peralatan (KIB B)"
+          title="Kartu Inventaris Ruangan Staff Umum"
           sx={{maxWidth:686}}
         >
 
@@ -375,11 +337,11 @@ const PencatatanKib = () => {
                 <TableRow
                   sx={{bgcolor:'#66BB6A'}}
                 >
-                  <TableCell sx={{ border: 0 }} align="center" colSpan={9} />
-                  <TableCell sx={{ border: 1, borderTop: 0 }} align="center" colSpan={5}>
-                    Nomor
+                  <TableCell sx={{ border: 0 }} align="center" colSpan={11} />
+                  <TableCell sx={{ border: 1, borderTop: 0 }} align="center" colSpan={3}>
+                    Keadaan Barang
                   </TableCell>
-                  <TableCell sx={{ border: 0 }} align="center" colSpan={2} />
+                  <TableCell sx={{ border: 0 }} align="center" colSpan={1} />
                 </TableRow>
                 <TableRow
                   sx={{bgcolor:'#66BB6A'}}
@@ -424,20 +386,19 @@ const PencatatanKib = () => {
                     <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">
                       {row.no}
                     </TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.jenis}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.noreg}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.merk}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.kode}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.cc}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.bahan}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.tahun}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.pabrik}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.rangka}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.mesin}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.polisi}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.bpkb}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.asal}</TableCell>
-                    <TableCell sx={{ border: 1, borderRight: 0 }} align="center">{row.harga}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.jenis}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.merk}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.noseri}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.ukuran}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.bahan}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.tahun}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.nokode}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.reg}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.harga}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.baik}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.kbaik}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.rberat}</TableCell>
+                <TableCell sx={{ border: 1, borderRight: 0 }} align="center">{row.ketmutasi}</TableCell>
                   </StyledTableRow>
                 ))}
                 {emptyRows > 0 && (
@@ -454,13 +415,16 @@ const PencatatanKib = () => {
           </TableContainer>
           <Box
             component="div"
-            sx={{width: 1, display: 'flex', justifyContent: 'flex-end'}}
+            sx={{width: 1, display: 'flex', justifyContent: 'flex-end', mt: 12}}
           >
             <Button
-              Label="Laporan KIB"
+              Label="Laporan Mutasi Barang"
               sx={{
-                mt: 12,
+                mr: 3,
               }}
+            />
+            <Button
+              Label="Berita Acara Mutasi Barang"
             />
           </Box>
         </FormBox>
@@ -469,4 +433,4 @@ const PencatatanKib = () => {
   );
 }
 
-export default PencatatanKib;
+export default PelaporanMutasiAset;
