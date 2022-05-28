@@ -62,7 +62,7 @@ export const getRuanganById = async (req, res, next) => {
 export const getRuanganByKoderuangan = async (req, res, next) => {
     try {
         const { kode_ruangan } = req.params
-        const ruangan = await RuanganDAO.findRuanganByKoderuangan(kode_ruangann)
+        const ruangan = await RuanganDAO.findRuanganByKoderuangan(kode_ruangan)
         res.status(200).json({
             message: 'Get ruangan by Koderuangan berhasil',
             data: {
@@ -71,6 +71,34 @@ export const getRuanganByKoderuangan = async (req, res, next) => {
         })
     } catch (error) {
         next(error)
+    }
+}
+
+export const getNamaBarangByNamaRuangan = async (req, res, next) => {
+    try {
+        const { nama_ruangan } = req.params
+        const namaBarang = await RuanganDAO.findNamaBarangByNamaRuangan(nama_ruangan)
+        res.status(200).json({
+            data: {
+                namaBarang
+            }
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const getJumlahBarangByNamaBarang = async (req, res, next) => {
+    try {
+        const { nama_ruangan, nama_barang } = req.params
+        const jumlahBarang = await RuanganDAO.findJumlahBarangByNamaBarang(nama_ruangan, nama_barang)
+        res.status(200).json({
+            data: {
+                jumlahBarang
+            }
+        })
+    } catch (error) {
+        
     }
 }
 

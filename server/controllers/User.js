@@ -36,6 +36,21 @@ export const getAllUser = async (req, res, next) => {
     }
 }
 
+// export const getRoleByUsername = async (req, res, next) => {
+//     try {
+//         const { username } = req.params
+//         const usernameRole = await UserDAO.findRoleByUsername(username)
+//         res.status(200).json({
+//             message: 'Get user_role By username success',
+//             data: {
+//                 usernameRole
+//             }
+//         })
+//     } catch (error) {
+//         next(error)
+//     }
+// }
+
 export const getUserByUsername = async (req, res, next) => {
     try {
         const { username } = req.params
