@@ -94,4 +94,4 @@ const DashboardAdmin = () => {
     </Layout>)
 }
 
-export default Dashboard;
+export default DashboardAdmin;

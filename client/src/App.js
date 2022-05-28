@@ -29,8 +29,8 @@ function App() {
     <ThemeProvider theme={theme}>
       <Routes>
         <Route path="/pendataan" element={<Pendataan />} />
-        <Route path="/dashboard-pengguna-barang" element={<DashboardPenggunaBarang />} />
-        <Route path="/" element={<DashboardAdmin />} />
+        <Route path="/dashboard-admin" element={<DashboardAdmin />} />
+        <Route path="/" element={<DashboardPenggunaBarang />} />
       </Routes>
     </ThemeProvider>
   );
