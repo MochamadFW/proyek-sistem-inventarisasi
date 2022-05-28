@@ -1,11 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
 import { DateProvider } from "./hooks/useDateContext";
 import { KegiatanProvider } from "./hooks/useKegiatanContext";
 
-import Dashboard from './views/dashboard/pages/dashboard';
+import DashboardAdmin from './views/dashboard/pages/dashboard';
 import Pendataan from './views/pendataan/pages/pendataan';
+import DashboardPenggunaBarang from './views/dashboard/pages/dashboardpenggunabarang';
 import Login from './views/login/pages/login';
 import PenggunaKib from './views/pengguna/pages/KIB'
 
@@ -47,7 +47,8 @@ function App() {
       <DateProvider>
         <KegiatanProvider>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<DashboardAdmin />} />
+            <Route path="/dashboard-pengguna-barang" element={<DashboardPenggunaBarang />} />
             <Route path="/login" element={<Login />} />
             <Route path="/pendataan" element={<Pendataan />} />
             <Route path="/pengguna/kib" element={<PenggunaKib />} />
