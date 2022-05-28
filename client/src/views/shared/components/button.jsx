@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 
-const SubmitButton = ({ Label, Types}) => {
+const SubmitButton = ({sx = [], Label, Types }) => {
+
     return (
         <Button
             type={Types}
@@ -8,14 +9,17 @@ const SubmitButton = ({ Label, Types}) => {
                 [
                     {
                         backgroundColor: "button.main",
-                        px: 3,
-                        py: 1
+                        px: 3, 
+                        py: 1,
+                        textTransform: 'capitalize',
+                        fontWeight: 'bold'
                     },
                     {
                         '&:hover': {
                             backgroundColor: '#d4b60c',
                         },
                     },
+                    ...(Array.isArray(sx) ? sx : [sx]),
                 ]
             }
             variant="contained">

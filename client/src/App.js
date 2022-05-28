@@ -6,6 +6,8 @@ import { KegiatanProvider } from "./hooks/useKegiatanContext";
 
 import Dashboard from './views/dashboard/pages/dashboard';
 import Pendataan from './views/pendataan/pages/pendataan';
+import Login from './views/login/pages/login';
+import PenggunaKib from './views/pengguna/pages/KIB'
 
 
 const theme = createTheme({
@@ -45,8 +47,10 @@ function App() {
       <DateProvider>
         <KegiatanProvider>
           <Routes>
-            <Route path="/pendataan" element={<Pendataan />} />
             <Route path="/" element={<Dashboard />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/pendataan" element={<Pendataan />} />
+            <Route path="/pengguna/kib" element={<PenggunaKib />} />
           </Routes>
         </KegiatanProvider>
       </DateProvider>
