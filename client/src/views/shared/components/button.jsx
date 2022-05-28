@@ -1,13 +1,14 @@
 import { Button } from "@mui/material";
 
-const SubmitButton = ({ Label }) => {
+const SubmitButton = ({ Label, Types}) => {
     return (
         <Button
+            type={Types}
             sx={
                 [
                     {
                         backgroundColor: "button.main",
-                        px: 3, 
+                        px: 3,
                         py: 1
                     },
                     {
