@@ -10,6 +10,7 @@ import Login from './views/login/pages/login';
 import PenggunaKib from './views/pengguna/pages/KIB'
 import PenggunaKir from './views/pengguna/pages/KIR'
 import PencatatanKib from './views/pencatatan/pages/KIB'
+import PencatatanKir from './views/pencatatan/pages/KIR'
 
 import Layout from "./views/shared/components/layout";
 const theme = createTheme({
@@ -55,6 +56,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/pendataan" element={<Pendataan />} />
             <Route path="/pengguna/kib" element={<PenggunaKib />} />
+            <Route path="/pengguna/kir" element={<PenggunaKir />} />
             <Route path="/pencatatan">
               <Route path="kib">
                 <Route path="b" element={<Layout><div>asdas</div></Layout>} />
