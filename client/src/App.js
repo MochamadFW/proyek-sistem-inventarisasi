@@ -8,6 +8,8 @@ import Pendataan from './views/pendataan/pages/pendataan';
 // import DashboardPenggunaBarang from './views/dashboard/pages/dashboardpenggunabarang';
 import Login from './views/login/pages/login';
 import PenggunaKib from './views/pengguna/pages/KIB'
+import PenggunaKir from './views/pengguna/pages/KIR'
+import PencatatanKib from './views/pencatatan/pages/KIB'
 
 import Layout from "./views/shared/components/layout";
 const theme = createTheme({
