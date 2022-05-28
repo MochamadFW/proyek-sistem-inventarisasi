@@ -9,6 +9,7 @@ import ruanganRouter from './routes/Ruangan.js'
 import permintaanRouter from './routes/Permintaan_Perbaikan.js'
 import jadwalkegiatanRouter from './routes/JadwalKegiatan.js'
 import dashboardRouter from './routes/Dashboard.js'
+import loginRouter from './routes/Login.js'
 
 const app = express()
 
@@ -27,6 +28,7 @@ app.use('/ruangan', ruanganRouter)
 app.use('/permintaan', permintaanRouter)
 app.use('/jadwalkegiatan', jadwalkegiatanRouter)
 app.use('/dashboard', dashboardRouter)
+app.use('/login', loginRouter)
 
 // error handling
 app.use((error, req, res, next) => {
