@@ -9,7 +9,7 @@ import Pendataan from './views/pendataan/pages/pendataan';
 import Login from './views/login/pages/login';
 import PenggunaKib from './views/pengguna/pages/KIB'
 
-
+import Layout from "./views/shared/components/layout";
 const theme = createTheme({
   palette: {
     primary: {
@@ -53,6 +53,18 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/pendataan" element={<Pendataan />} />
             <Route path="/pengguna/kib" element={<PenggunaKib />} />
+            <Route path="/pencatatan">
+              <Route path="kib">
+                <Route path="b" element={<Layout><div>asdas</div></Layout>} />
+              </Route>
+              <Route path="kir">
+                <Route path="staff-umum" element={<Layout><div>kir staf umum</div></Layout>} />
+              </Route>
+            </Route>
+            <Route path="/pelaporan">
+              <Route path="mutasi" element={<Layout>mutasi</Layout>} />
+              <Route path="buku-inventaris-barang" element={<Layout>buku inventaris</Layout>} />
+            </Route>
           </Routes>
         </KegiatanProvider>
       </DateProvider>
