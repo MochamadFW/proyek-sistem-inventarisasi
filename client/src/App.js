@@ -5,7 +5,7 @@ import { KegiatanProvider } from "./hooks/useKegiatanContext";
 
 import DashboardAdmin from './views/dashboard/pages/dashboard';
 import Pendataan from './views/pendataan/pages/pendataan';
-import DashboardPenggunaBarang from './views/dashboard/pages/dashboardpenggunabarang';
+// import DashboardPenggunaBarang from './views/dashboard/pages/dashboardpenggunabarang';
 import Login from './views/login/pages/login';
 import PenggunaKib from './views/pengguna/pages/KIB'
 
@@ -48,7 +48,7 @@ function App() {
         <KegiatanProvider>
           <Routes>
             <Route path="/" element={<DashboardAdmin />} />
-            <Route path="/dashboard-pengguna-barang" element={<DashboardPenggunaBarang />} />
+            {/* <Route path="/dashboard-pengguna-barang" element={<DashboardPenggunaBarang />} /> */}
             <Route path="/login" element={<Login />} />
             <Route path="/pendataan" element={<Pendataan />} />
             <Route path="/pengguna/kib" element={<PenggunaKib />} />

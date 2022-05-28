@@ -1,8 +1,7 @@
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import React from "react";
 import Layout from "../../shared/components/layout";
 import { Box } from "@mui/material";
-import { Container, height } from "@mui/system";
 
 const DashboardAdmin = () => {
     return (<Layout>
@@ -13,7 +12,7 @@ const DashboardAdmin = () => {
                 <Typography variant="h5" color="font.main">SISTEM INFORMASI INVENTARIS ASET</Typography>
             </Box>
             <Box
-                sx={{ mt: 3, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                sx={{ mt: 3, display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
                 <Box>
                     <img src={process.env.PUBLIC_URL + 'logo_kota_bandung.png'}></img>
                 </Box>
@@ -43,7 +42,7 @@ const DashboardAdmin = () => {
                     </Box>
                 </Box>
             </Box>
-            <Box sx={{ mt: 8, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Box sx={{ mt: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Box
                     width="327px"
                     height="158px"
@@ -94,4 +93,4 @@ const DashboardAdmin = () => {
     </Layout>)
 }
 
-export default Dashboard;
+export default DashboardAdmin;

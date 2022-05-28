@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Alert, Box, Badge, Icon, IconButton, Snackbar, Typography, TextField, Dialog, Button, Popover } from "@mui/material";
+import { Alert, Box, Badge, Icon, IconButton, Snackbar, Typography, TextField, Dialog, Popover } from "@mui/material";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
@@ -25,7 +25,7 @@ const NotificationKegiatan = ({ data }) => {
             </Box>
             <Box className="menu" sx={{ width: '320px', maxHeight: '100%', gap: 2, display: 'flex', flexDirection: 'column', px: 3, py: 2, overflowX: 'hidden', overflowY: 'scroll', userSelect: "none", MozUserSelect: "none" }}>
                 {data.map((datas, index) => (
-                    <Box sx={{ width: '100%', borderBottom: index == (data.length - 1) ? '' : '1px solid rgba(0,0,0,.1)', wordBreak: 'break-all' }} key={index}>
+                    <Box sx={{ width: '100%', borderBottom: index === (data.length - 1) ? '' : '1px solid rgba(0,0,0,.1)', wordBreak: 'break-all' }} key={index}>
                         <Typography variant="subtitle2">{moment(datas.tanggalKegiatan).format("DD MMMM YYYY")}</Typography>
                         <Typography variant="body1">{datas.namaKegiatan}</Typography>
                     </Box>)
@@ -94,7 +94,7 @@ const Pendataan = () => {
                 backgroundColor: "secondary.main",
                 color: "font.white",
                 '&:hover, &:focus': { backgroundColor: "secondary.darker" },
-                '&&.${pickersDayClasses.today}': { backgroundColor: "secondary.main" },
+                [`&&.${pickersDayClasses.today}`]: { backgroundColor: "secondary.main" },
                 [`&&.${pickersDayClasses.selected}`]: { color: 'font.white', backgroundColor: "secondary.darker", border: '2px solid', borderColor: 'secondary.darker' }
             } : a;
         }, {});
