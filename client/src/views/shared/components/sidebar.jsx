@@ -3,12 +3,15 @@ import {
     Button,
     Box,
     Collapse,
+    FormControl,
     List,
     ListItem,
     ListItemButton,
     ListItemText,
+    MenuItem,
     Typography,
-    TextField
+    TextField,
+    Select
 } from "@mui/material";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -26,13 +29,16 @@ const Sidebar = () => {
     const [openPendataanCollapse, setOpenPendataanCollapse] = useState(false);
     useEffect(() => {
         if (currentPath.pathname === "/pendataan") { setOpenPendataanCollapse(true) }
+        else if (currentPath.pathname === "/pelaporan/mutasi") { setOpenFormPerbaikanCollapse(true) }
         else { setOpenPendataanCollapse(false) }
     }, [currentPath]);
     const [openPencatatanCollapse, setOpenPencatatancollapse] = useState(false);
     const [openSubPencatatanCollapse, setOpenSubPencatatancollapse] = useState({});
     const handleClickSubPencatatan = (e) => {
         setOpenSubPencatatancollapse({ [e]: !openSubPencatatanCollapse[e] })
-    }
+    };
+    const [openPelaporanCollapse, setOpenPelaporanCollapse] = useState(false);
+    const [openFormPerbaikanCollapse, setOpenFormPerbaikanCollapse] = useState(false);
     const account = [
         {
             name: 'Siti Mulyani',
@@ -74,7 +80,15 @@ const Sidebar = () => {
             ]
         }
     ];
+    const subMenuPelaporan = [
+        { id: 1, name: 'Mutasi Barang', link: '/pelaporan/mutasi' },
+        { id: 2, name: 'Buku Inventaris Barang', link: '/pelaporan/buku-inventaris-barang' }
+    ];
     const [isAdmin, setIsAdmin] = useState(true);
+    const [age, setAge] = useState('');
+    const handleChange = (event) => {
+        setAge(event.target.value);
+    };
     return (
         <Box
             sx={{
@@ -113,7 +127,7 @@ const Sidebar = () => {
                             overflowY: 'scroll',
                         }}
                     >{isAdmin ?
-                        <>
+                        <React.Fragment>
                             <List sx={{ color: "font.white" }} disablePadding>
                                 <ListItemButton key={1} sx={{ px: 3, py: 1 }} alignItems="center" onClick={() => { navigate('/') }}>
                                     <Icon sx={{ color: 'font.white', mr: 2 }}>dashboard</Icon>
@@ -187,13 +201,58 @@ const Sidebar = () => {
                                 </Collapse>
                             </List>
                             <List sx={{ color: "font.white" }} disablePadding key={6}>
-                                <ListItemButton key={88} sx={{ px: 3, py: 1 }} alignItems="center" dense >
+                                <ListItemButton key={88} sx={{ px: 3, py: 1 }} alignItems="center" dense onClick={() => setOpenPelaporanCollapse(!openPelaporanCollapse)}>
                                     <Icon sx={{ color: 'font.white', mr: 2 }}>summarize</Icon>
                                     <ListItemText primary="Pelaporan" sx={{ color: "font.white" }} />
                                 </ListItemButton>
-                            </List></> :
-                        <></>}
-                        <Button onClick={() => { setIsAdmin(!isAdmin) }}>Toogle</Button>
+                                <Collapse in={openPelaporanCollapse} component="li" timeout="auto" unmountOnExit sx={{ backgroundColor: 'secondary.darker', ml: 3, p: 1, borderRadius: '4px' }}>
+                                    {subMenuPelaporan.map((data, index) =>
+                                        <ListItemButton key={index} sx={{ p: 1 }} onClick={() => { navigate(data.link) }}>
+                                            <Typography variant="body1" fontWeight={700}>{data.name}</Typography>
+                                        </ListItemButton>
+                                    )}
+                                </Collapse>
+                            </List>
+                        </React.Fragment> :
+                        <React.Fragment>
+                            <List sx={{ color: "font.white" }} disablePadding>
+                                <ListItemButton key={1} sx={{ px: 3, py: 1 }} alignItems="center" onClick={() => { navigate('/') }}>
+                                    <Icon sx={{ color: 'font.white', mr: 2 }}>edit_note</Icon>
+                                    <ListItemText primary="Form Perbaikan & Pemeliharaan" />
+                                </ListItemButton>
+                                <Collapse in={openFormPerbaikanCollapse}>
+                                    <ListItem sx={{ px: 3, py: 1 }}>
+                                        <Icon sx={{ color: 'font.white', mr: 2 }} />
+                                        <Typography variant="body1" marginRight={2}>Ruangan</Typography>
+                                        <FormControl variant="filled" fullWidth>
+                                            <Select
+                                                labelId="demo-simple-select-label"
+                                                id="demo-simple-select"
+                                                value={age}
+                                                label="Age"
+                                                onChange={handleChange}>
+                                                <MenuItem value={10}>Ten</MenuItem>
+                                                <MenuItem value={20}>Twenty</MenuItem>
+                                                <MenuItem value={30}>Thirty</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </ListItem>
+                                </Collapse>
+                            </List>
+                            <List sx={{ color: "font.white" }} disablePadding>
+                                <ListItemButton key={1} sx={{ px: 3, py: 1 }} alignItems="center" onClick={() => { navigate('/') }}>
+                                    <Icon sx={{ color: 'font.white', mr: 2 }}>credit_card</Icon>
+                                    <ListItemText primary="Kartu Inventaris Barang" />
+                                </ListItemButton>
+                            </List>
+                            <List sx={{ color: "font.white" }} disablePadding>
+                                <ListItemButton key={1} sx={{ px: 3, py: 1 }} alignItems="center" onClick={() => { navigate('/') }}>
+                                    <Icon sx={{ color: 'font.white', mr: 2 }}>style</Icon>
+                                    <ListItemText primary="Kartu Inventaris Ruangan" />
+                                </ListItemButton>
+                            </List>
+                        </React.Fragment>
+                        }
                     </Box>
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
