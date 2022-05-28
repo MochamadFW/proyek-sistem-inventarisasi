@@ -4,6 +4,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import Dashboard from './views/dashboard/pages/dashboard';
 import Pendataan from './views/pendataan/pages/pendataan';
+import DashboardPenggunaBarang from './views/dashboard/pages/dashboardpenggunabarang';
+import DashboardAdmin from './views/dashboard/pages/dashboardadmin';
 
 
 const theme = createTheme({
@@ -27,7 +29,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <Routes>
         <Route path="/pendataan" element={<Pendataan />} />
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/dashboard-pengguna-barang" element={<DashboardPenggunaBarang />} />
+        <Route path="/" element={<DashboardAdmin />} />
       </Routes>
     </ThemeProvider>
   );
