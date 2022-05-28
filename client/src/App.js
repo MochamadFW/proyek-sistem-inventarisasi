@@ -8,6 +8,7 @@ import Pendataan from './views/pendataan/pages/pendataan';
 import Login from './views/login/pages/login';
 import PenggunaKib from './views/pengguna/pages/KIB'
 import PenggunaKir from './views/pengguna/pages/KIR'
+import PencatatanKib from './views/pencatatan/pages/KIB'
 
 
 const theme = createTheme({
@@ -39,6 +40,7 @@ function App() {
           <Route path="/pendataan" element={<Pendataan />} />
           <Route path="/pengguna/kib" element={<PenggunaKib />} />
           <Route path="/pengguna/kir" element={<PenggunaKir />} />
+          <Route path="/pengurus/kib" element={<PencatatanKib />} />
         </Routes>
       </DateProvider>
     </ThemeProvider>
