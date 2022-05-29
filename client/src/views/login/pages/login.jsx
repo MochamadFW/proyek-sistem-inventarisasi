@@ -2,9 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { Button, Container, FilledInput, FormControl, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
-import PropTypes from 'prop-types';
-import { Link as RouterLink, MemoryRouter } from 'react-router-dom';
-import { StaticRouter } from 'react-router-dom/server';
+
 
 const Login = () => {
     return (
@@ -186,24 +184,5 @@ const Login = () => {
     );
 }
 
-const handleClick = assync () => {
-    setIsLoading(true);
-    try {
-        const {data} = await axios.get('', {
-            headers: {
-                Accept: 'application/json'
-            },
-        });
-
-        console.log('data is: ', JSON.stringify(data, null, 4));
-        setData(data);
-    } catch (err) {
-        setErr(err.message);
-    } finally {
-        setIsLoading
-    }
-};
-
-console.log(data);
 
 export default Login;

@@ -20,16 +20,18 @@ const DashboardPenggunaBarang = () => {
       sx={{ ma: 3, border: 1, borderColor: '#29B6F6' }}
     >
       <Box height="60px"
-        sx={{ backgroundColor: '#29B6F6',
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center" }}
+        sx={{
+          backgroundColor: '#29B6F6',
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center"
+        }}
       >
         <Box>
           <Typography
             variant="h5"
             color="#FFFFFF"
-            sx={{ ml: 2}}>
+            sx={{ ml: 2 }}>
             Form Input
           </Typography>
         </Box>
@@ -115,7 +117,13 @@ const DashboardPenggunaBarang = () => {
               onClick={() => {
                 alert('clicked')
               }}
-              sx={{ mt: 2, backgroundColor: "#F2D424" }}>
+              sx={{
+                mt: 2, backgroundColor: "#F2D424",
+                '&:hover': {
+                  backgroundColor: '#F2D424',
+                }
+              }}
+            >
               <Typography variant="subtitle2" lowercase="true">Kirim Permintaan</Typography>
             </Button>
           </Box>
