@@ -48,20 +48,20 @@ const rows = [
 
 const headerRow = [
   "",
-  "No. Urut",
-  "Nama barang / Jenis barang",
-  "Merk/Model",
-  "No. Seri nokode",
-  "Ukuran",
+  "No",
+  "Kode Barang",
+  "Register",
+  "Jenis Barang / Nama Barang",
+  "Merk",
+  "No. Seri Pabrik",
   "Bahan",
-  "Tahun Pembuatan / Pembelian",
-  "Nomor kode Barang",
-  "Jumlah Barang / Register (X)",
-  "Harga Beli / Perolehan",
-  "Baik (B)",
-  "Kurang Baik (KB)",
-  "Rusak Berat (RB)",
-  "Keterangan Mutasi dll"
+  "Asal Usul",
+  "Tahun Perolehan",
+  "Satuan",
+  "Kondisi (B,KB,RB)",
+  "Jumlah Barang",
+  "Harga",
+  "Keterangan"
 ]
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -161,7 +161,7 @@ const PelaporanMutasiAset = () => {
               mb: 2
             }}
           >
-            <Typography>Kode Barang</Typography>
+            <Typography>No Register</Typography>
             <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
           </Box>
           <Box
@@ -337,11 +337,14 @@ const PelaporanMutasiAset = () => {
                 <TableRow
                   sx={{bgcolor:'#66BB6A'}}
                 >
-                  <TableCell sx={{ border: 0 }} align="center" colSpan={11} />
-                  <TableCell sx={{ border: 1, borderTop: 0 }} align="center" colSpan={3}>
-                    Keadaan Barang
-                  </TableCell>
                   <TableCell sx={{ border: 0 }} align="center" colSpan={1} />
+                  <TableCell sx={{ border: 1, borderTop: 0 }} align="center" colSpan={3}>
+                    Nomor
+                  </TableCell>
+                  <TableCell sx={{ border: 1, borderTop: 0 }} align="center" colSpan={4}>
+                    Spesifikasi Barang
+                  </TableCell>
+                  <TableCell sx={{ border: 0 }} align="center" colSpan={7} />
                 </TableRow>
                 <TableRow
                   sx={{bgcolor:'#66BB6A'}}
