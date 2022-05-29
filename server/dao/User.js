@@ -51,6 +51,20 @@ export const userLoginValidation = async (USERNAME, PASSWORD) => {
     }
 }
 
+export const getTotalLogin = async (USERNAME) => {
+    try {
+        const user = await User.findOne({
+            attributes: ['total_login'],
+            where: {
+                username: USERNAME
+            }
+        })
+        return user
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const countLogin = async (USERNAME, PASSWORD, TOTAL_LOGIN, updatedAt) => {
     try {
         // const jumlahLogin = await User.update({
