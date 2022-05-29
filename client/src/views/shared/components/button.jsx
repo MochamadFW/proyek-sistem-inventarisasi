@@ -1,8 +1,10 @@
 import { Button } from "@mui/material";
 
-const SubmitButton = ({sx = [], Label }) => {
+const SubmitButton = ({sx = [], Label, Types }) => {
+
     return (
         <Button
+            type={Types}
             sx={
                 [
                     {
