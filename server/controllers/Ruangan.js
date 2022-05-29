@@ -2,7 +2,7 @@ import * as RuanganDAO from '../dao/Ruangan.js'
 
 export const postNewRuangan = async (req, res, next) => {
     try {
-        const { nomor_registrasi, kode_ruangan, nama_ruangan, luas_lantai, kode_barang, nama_barang, tipe_barang, ukuran_barang, bahan_barang, tahun_perolehan, jumlah_barang, harga_barang, keterangan_barang } = req.body
+        const { nomor_registrasi, kode_ruangan, nama_ruangan, luas_lantai, kode_barang, nama_barang, tipe_barang, nomor_seri_pabrik, ukuran_barang, bahan_barang, tahun_perolehan, jumlah_barang, harga_barang, keadaan_barang, keterangan_barang } = req.body
         const ruangan = await RuanganDAO.newRuangan(
             nomor_registrasi,
             kode_ruangan,
@@ -11,11 +11,13 @@ export const postNewRuangan = async (req, res, next) => {
             kode_barang,
             nama_barang,
             tipe_barang,
+            nomor_seri_pabrik,
             ukuran_barang,
             bahan_barang,
             tahun_perolehan,
             jumlah_barang,
             harga_barang,
+            keadaan_barang,
             keterangan_barang
         )
 

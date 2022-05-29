@@ -2,9 +2,10 @@ import * as permintaanDAO from "../dao/Permintaan_Perbaikan"
 
 export const postNewPermintaan = async (req, res, next) => {
     try {
-        const { nama_pengaju, tanggal_permintaan, jumlah_barang, keterangan_barang, nama_barang, keberadaan_aset, jenis_kerusakan } = req.body
+        const { nama_pengaju, nama_ruangan, nama_barang, jumlah_barang, jenis_kerusakan, 
+            keterangan_barang } = req.body
         const permintaan = await permintaanDAO.newPermintaan(
-            nama_pengaju, tanggal_permintaan, jumlah_barang, keterangan_barang, nama_barang, keberadaan_aset, jenis_kerusakan
+            nama_pengaju, nama_ruangan, nama_barang, jumlah_barang, jenis_kerusakan, keterangan_barang
         )
         res.status(200).json({
             message: 'Permintaan perbaikan berhasil ditambahkan.',

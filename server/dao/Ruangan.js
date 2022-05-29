@@ -1,7 +1,7 @@
 import sequelize from '../db.js'
 import Ruangan from '../models/Ruangan.js'
 
-export const newRuangan = async (NOMOR_REGISTER, KODE_RUANGAN, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KETERANGAN_BARANG) => {
+export const newRuangan = async (NOMOR_REGISTER, KODE_RUANGAN, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, NOMOR_SERI_PABRIK, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KEADAAN_BARANG, KETERANGAN_BARANG) => {
     try {
         const ruangan = await Ruangan.create({
             nomor_register: NOMOR_REGISTER,
@@ -11,11 +11,13 @@ export const newRuangan = async (NOMOR_REGISTER, KODE_RUANGAN, NAMA_RUANGAN, LUA
             kode_barang: KODE_BARANG,
             nama_barang: NAMA_BARANG,
             tipe_barang: TIPE_BARANG,
+            nomor_seri_pabrik: NOMOR_SERI_PABRIK,
             ukuran_barang: UKURAN_BARANG,
             bahan_barang: BAHAN_BARANG,
             tahun_perolehan: TAHUN_PEROLEHAN,
             jumlah_barang: JUMLAH_BARANG,
             harga_barang: HARGA_BARANG,
+            keadaan_barang: KEADAAN_BARANG,
             keterangan_barang: KETERANGAN_BARANG
         })
         return ruangan
@@ -94,7 +96,7 @@ export const findJumlahBarangByNamaBarang = async (NAMA_RUANGAN, NAMA_BARANG) =>
     }
 }
 
-export const updateRuangan = async (ID, KODE_RUANGAN, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KETERANGAN_BARANG, UPDATEDAT) => {
+export const updateRuangan = async (ID, KODE_RUANGAN, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, NOMOR_SERI_PABRIK, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KEADAAN_BARANG, KETERANGAN_BARANG, UPDATEDAT) => {
     try {
         const ruangan = await Ruangan.update(
             {
@@ -104,11 +106,13 @@ export const updateRuangan = async (ID, KODE_RUANGAN, NAMA_RUANGAN, LUAS_LANTAI,
                 kode_barang: KODE_BARANG,
                 nama_barang: NAMA_BARANG,
                 tipe_barang: TIPE_BARANG,
+                nomor_seri_pabrik: NOMOR_SERI_PABRIK,
                 ukuran_barang: UKURAN_BARANG,
                 bahan_barang: BAHAN_BARANG,
                 tahun_perolehan: TAHUN_PEROLEHAN,
                 jumlah_barang: JUMLAH_BARANG,
                 harga_barang: HARGA_BARANG,
+                keadaan_barang: KEADAAN_BARANG,
                 keterangan_barang: KETERANGAN_BARANG,
                 updatedAt: UPDATEDAT
             },
