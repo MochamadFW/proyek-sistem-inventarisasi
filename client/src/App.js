@@ -59,10 +59,10 @@ function App() {
             <Route path="/pengguna/kir" element={<PenggunaKir />} />
             <Route path="/pencatatan">
               <Route path="kib">
-                <Route path="b" element={<Layout><div>asdas</div></Layout>} />
+                <Route path="b" element={<PencatatanKib/>} />
               </Route>
               <Route path="kir">
-                <Route path="staff-umum" element={<Layout><div>kir staf umum</div></Layout>} />
+                <Route path="staff-umum" element={<PencatatanKir/>} />
               </Route>
             </Route>
             <Route path="/pelaporan">
