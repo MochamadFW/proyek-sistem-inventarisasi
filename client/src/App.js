@@ -11,6 +11,7 @@ import PenggunaKib from './views/pengguna/pages/KIB'
 import PenggunaKir from './views/pengguna/pages/KIR'
 import PencatatanKib from './views/pencatatan/pages/KIB'
 import PencatatanKir from './views/pencatatan/pages/KIR'
+import PelaporanMutasiAset from "./views/pelaporan/pages/mutasiAset";
 import BukuInventarisBarang from "./views/pelaporan/pages/bukuinventarisbarang";
 
 import Layout from "./views/shared/components/layout";
@@ -67,7 +68,7 @@ function App() {
               </Route>
             </Route>
             <Route path="/pelaporan">
-              <Route path="mutasi" element={<Layout>mutasi</Layout>} />
+              <Route path="mutasi-aset" element={<PelaporanMutasiAset/>} />
               <Route path="buku-inventaris-barang" element={<BukuInventarisBarang/>} />
             </Route>
           </Routes>

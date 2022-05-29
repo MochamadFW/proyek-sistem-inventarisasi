@@ -17,8 +17,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
-import FormBox from '../../shared/components/formBox'
-import InputLabel from '@mui/material/InputLabel';
+import FormBox from '../../shared/components/formBox';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
