@@ -2,7 +2,7 @@ import Barang from '../models/Barang'
 
 export const newBarang = async (kode_barang, nama_barang, nomor_register, 
     tipe_barang, ukuran_barang, bahan_barang, tahun_pembelian, nomor_pabrik, 
-    nomor_rangka, nomor_mesin, nomor_polisi, nomor_bpkb, asal_usul, harga_barang, keadaan_barang, keterangan) => {
+    nomor_rangka, nomor_mesin, nomor_polisi, nomor_bpkb, asal_usul, harga_barang, keadaan_barang, keterangan_barang) => {
     try {
         const barang = await Barang.create({
             kode_barang: kode_barang, 
@@ -20,7 +20,7 @@ export const newBarang = async (kode_barang, nama_barang, nomor_register,
             asal_usul: asal_usul, 
             harga_barang: harga_barang,
             keadaan_barang: keadaan_barang,
-            keterangan: keterangan
+            keterangan_barang: keterangan_barang
         })
         return barang
     } catch (error) {
@@ -52,7 +52,7 @@ export const findBarangByKodebarang = async (kode_barang) => {
 
 export const updateBarang = async (id, kode_barang, nama_barang, nomor_register, 
     tipe_barang, ukuran_barang, bahan_barang, tahun_pembelian, nomor_pabrik, 
-    nomor_rangka, nomor_mesin, nomor_polisi, nomor_bpkb, asal_usul, harga_barang, keadaan_barang, keterangan, updatedAt) => {
+    nomor_rangka, nomor_mesin, nomor_polisi, nomor_bpkb, asal_usul, harga_barang, keadaan_barang, keterangan_barang, updatedAt) => {
     try {
         const barang = await Barang.update({
             kode_barang: kode_barang, 
@@ -70,7 +70,7 @@ export const updateBarang = async (id, kode_barang, nama_barang, nomor_register,
             asal_usul: asal_usul, 
             harga_barang: harga_barang,
             keadaan_barang: keadaan_barang,
-            keterangan: keterangan,
+            keterangan_barang: keterangan_barang,
             updatedAt: updatedAt
         },
         {

@@ -4,11 +4,11 @@ export const postNewBarang = async (req, res, next) => {
     try {
         const { kode_barang, nama_barang, nomor_register, 
             tipe_barang, ukuran_barang, bahan_barang, tahun_pembelian, nomor_pabrik, 
-            nomor_rangka, nomor_mesin, nomor_polisi, nomor_bpkb, asal_usul, harga_barang, keadaan_barang, keterangan } = req.body
+            nomor_rangka, nomor_mesin, nomor_polisi, nomor_bpkb, asal_usul, harga_barang, keadaan_barang, keterangan_barang } = req.body
         const barang = await BarangDAO.newBarang(
             kode_barang, nama_barang, nomor_register, 
             tipe_barang, ukuran_barang, bahan_barang, tahun_pembelian, nomor_pabrik, 
-            nomor_rangka, nomor_mesin, nomor_polisi, nomor_bpkb, asal_usul, harga_barang, keadaan_barang, keterangan
+            nomor_rangka, nomor_mesin, nomor_polisi, nomor_bpkb, asal_usul, harga_barang, keadaan_barang, keterangan_barang
         )
 
         res.status(200).json({
@@ -56,7 +56,7 @@ export const updateBarangById = async (req, res, next) => {
         const { id } = req.params
         const updateBarang = await BarangDAO.updateBarang(id, req.body.kode_barang, req.body.nama_barang, req.body.nomor_register, 
             req.body.tipe_barang, req.body.ukuran_barang, req.body.bahan_barang, req.body.tahun_pembelian, req.body.nomor_pabrik, 
-            req.body.nomor_rangka, req.body.nomor_mesin, req.body.nomor_polisi, req.body.nomor_bpkb, req.body.asal_usul, req.body.harga_barang, req.body.keadaan_barang, req.body.keterangan)
+            req.body.nomor_rangka, req.body.nomor_mesin, req.body.nomor_polisi, req.body.nomor_bpkb, req.body.asal_usul, req.body.harga_barang, req.body.keadaan_barang, req.body.keterangan_barang)
         if (updateBarang == 1){
             res.status(200).json({
                 message: 'Barang berhasil diupdate'
