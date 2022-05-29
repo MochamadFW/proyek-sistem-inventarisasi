@@ -68,7 +68,7 @@ const Barang = db.define('Barang', {
     type: Sequelize.STRING,
     allowNull: true
   },
-  keterangan: {
+  keterangan_barang: {
     type: Sequelize.STRING,
     allowNull: true
   }
