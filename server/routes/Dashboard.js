@@ -5,5 +5,6 @@ const router = express.Router()
 
 router.get('/totalaset', DashboardController.countTotalAset)
 router.get('/totalpermintaan', DashboardController.countTotalPermintaan)
+router.get('/:username', DashboardController.getTotalLogin)
 
 export default router
