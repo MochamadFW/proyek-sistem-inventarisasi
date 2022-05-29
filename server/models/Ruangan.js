@@ -32,6 +32,10 @@ const Ruangan = db.define('Ruangan', {
         type: Sequelize.STRING,
         allowNull: true
     },
+    nomor_seri_pabrik: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
     ukuran_barang: {
         type: Sequelize.STRING,
         allowNull: true
@@ -42,7 +46,7 @@ const Ruangan = db.define('Ruangan', {
     },
     tahun_perolehan: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: true,
     },
     jumlah_barang: {
         type: Sequelize.INTEGER,
@@ -52,14 +56,17 @@ const Ruangan = db.define('Ruangan', {
         type: Sequelize.REAL,
         allowNull: true
     },
+    keadaan_barang: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
     keterangan_barang: {
         type: Sequelize.STRING,
         allowNull: true
     },
-    nomor_register: {
-        type: Sequelize.INTEGER,
+    nomor_registrasi: {
+        type: Sequelize.STRING,
         allowNull: true
-        // autoIncrement: true
     }
 })
 

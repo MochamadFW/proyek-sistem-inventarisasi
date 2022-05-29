@@ -11,6 +11,8 @@ import PenggunaKib from './views/pengguna/pages/KIB'
 import PenggunaKir from './views/pengguna/pages/KIR'
 import PencatatanKib from './views/pencatatan/pages/KIB'
 import PencatatanKir from './views/pencatatan/pages/KIR'
+import PelaporanMutasiAset from "./views/pelaporan/pages/mutasiAset";
+import BukuInventarisBarang from "./views/pelaporan/pages/bukuinventarisbarang";
 
 import Layout from "./views/shared/components/layout";
 
@@ -66,15 +68,15 @@ function App() {
             <Route path="/pengguna/kir" element={<PenggunaKir />} />
             <Route path="/pencatatan">
               <Route path="kib">
-                <Route path="b" element={<Layout><div>asdas</div></Layout>} />
+                <Route path="b" element={<PencatatanKib/>} />
               </Route>
               <Route path="kir">
-                <Route path="staff-umum" element={<Layout><div>kir staf umum</div></Layout>} />
+                <Route path="staff-umum" element={<PencatatanKir/>} />
               </Route>
             </Route>
             <Route path="/pelaporan">
-              <Route path="mutasi" element={<Layout>mutasi</Layout>} />
-              <Route path="buku-inventaris-barang" element={<Layout>buku inventaris</Layout>} />
+              <Route path="mutasi-aset" element={<PelaporanMutasiAset/>} />
+              <Route path="buku-inventaris-barang" element={<BukuInventarisBarang/>} />
             </Route>
           </Routes>
         </KegiatanProvider>
