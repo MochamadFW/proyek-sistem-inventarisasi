@@ -81,7 +81,7 @@ const Sidebar = () => {
         }
     ];
     const subMenuPelaporan = [
-        { id: 1, name: 'Mutasi Barang', link: '/pelaporan/mutasi' },
+        { id: 1, name: 'Mutasi Barang', link: '/pelaporan/mutasi-aset' },
         { id: 2, name: 'Buku Inventaris Barang', link: '/pelaporan/buku-inventaris-barang' }
     ];
     const [isAdmin, setIsAdmin] = useState(true);
