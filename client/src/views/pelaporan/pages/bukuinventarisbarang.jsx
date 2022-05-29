@@ -150,7 +150,7 @@ const TableBIB = () => {
                     component={Paper}
                 >
                     <Table sx={{ minWidth: 650, border: 1 }} aria-label="simple table">
-                        <TableHead sx={{ border: 1, backgroundColor: '#9cd39e' }} align="center">
+                        <TableHead sx={{ border: 1, backgroundColor: '#66bb6a' }} align="center">
                             <TableRow>
                                 <TableCell sx={{ border: 1 }} />
                                 <TableCell sx={{ border: 1 }}>No</TableCell>
