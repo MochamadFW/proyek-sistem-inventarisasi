@@ -1,8 +1,6 @@
 import { Button, Container, Grid, Typography } from "@mui/material";
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import { MenuItem } from "@mui/material";
+import { TextField, MenuItem, styled} from "@mui/material";
 import Layout from "../../shared/components/layout";
 import { Box } from "@mui/material";
 import { createTheme, display } from "@mui/system";
@@ -134,7 +132,7 @@ const DashboardPenggunaBarang = () => {
 }
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(0),
@@ -158,7 +156,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const useStyle = makeStyles((theme) => ({
+const useStyle = styled((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(0),
