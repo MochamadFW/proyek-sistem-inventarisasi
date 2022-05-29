@@ -1,15 +1,14 @@
 import Permintaan_Perbaikan from "../models/Permintaan_Perbaikan"
 
-export const newPermintaan = async (nama_pengaju, tanggal_permintaan, jumlah_barang, keterangan_barang, nama_barang, keberadaan_aset, jenis_kerusakan) => {
+export const newPermintaan = async (nama_pengaju, nama_ruangan, nama_barang, jumlah_barang, jenis_kerusakan, keterangan_barang) => {
     try {
         const permintaan = await Permintaan_Perbaikan.create({
             nama_pengaju: nama_pengaju,
-            tanggal_permintaan: tanggal_permintaan,
-            jumlah_barang: jumlah_barang,
-            keterangan_barang: keterangan_barang,
+            nama_ruangan: nama_ruangan,
             nama_barang: nama_barang,
-            keberadaan_aset: keberadaan_aset,
-            jenis_kerusakan: jenis_kerusakan
+            jumlah_barang: jumlah_barang,
+            jenis_kerusakan: jenis_kerusakan,
+            keterangan_barang: keterangan_barang
         })
         return permintaan
     } catch (error) {
