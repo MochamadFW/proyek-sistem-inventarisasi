@@ -58,8 +58,8 @@ const Ruangan = db.define('Ruangan', {
     },
     nomor_register: {
         type: Sequelize.INTEGER,
-        allowNull: true,
-        autoIncrement: true
+        allowNull: true
+        // autoIncrement: true
     }
 })
 

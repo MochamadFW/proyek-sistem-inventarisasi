@@ -84,3 +84,12 @@ export const deletePermintaan = async (ID) => {
         console.log(error)
     }
 }
+
+export const countPermintaan = async () => {
+    try {
+        const jumlah = await Permintaan_Perbaikan.count()
+        return jumlah
+    } catch (error) {
+        console.log(error)
+    }
+}

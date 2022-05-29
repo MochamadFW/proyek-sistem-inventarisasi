@@ -3,7 +3,7 @@ import * as permintaanDAO from "../dao/Permintaan_Perbaikan"
 export const postNewPermintaan = async (req, res, next) => {
     try {
         const { nama_pengaju, tanggal_permintaan, jumlah_barang, keterangan_barang, nama_barang, keberadaan_aset, jenis_kerusakan } = req.body
-        const permintaan = await permintaanDAO.newBarang(
+        const permintaan = await permintaanDAO.newPermintaan(
             nama_pengaju, tanggal_permintaan, jumlah_barang, keterangan_barang, nama_barang, keberadaan_aset, jenis_kerusakan
         )
         res.status(200).json({
