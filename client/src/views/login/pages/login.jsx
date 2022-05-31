@@ -1,15 +1,46 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { Button, Container, FilledInput, FormControl, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
+import { Container, FormControl, TextField, Typography } from '@mui/material';
 
+import Button from '../../shared/components/button';
+
+import {
+    Navigate,
+    Link,
+    Routes,
+    Route,
+    useNavigate,
+    useLocation,
+} from 'react-router-dom';
+
+import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const auth = useAuth();
+
+    const from = location.state?.from?.pathname || "/";
+
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.currentTarget);
+        const username = formData.get("username");
+        const password = formData.get("password")
+
+        auth.signin(username, () => {
+            navigate(from, { replace: true });
+        });
+    }
+
+    const handleLogin = () => {
+        console.log()
+    }
     return (
-        <Container maxWidth="100vw" disableGlutters
-            style={{ backgroundImage: "url(" + process.env.PUBLIC_URL + "background.png" + ")", backgroundSize: 'cover', backgroundPosition: 'center' }}
-        // sx={{ backgroundImage: process.env.PUBLIC_URL + "background.png" }}
-        >
+        <Container maxWidth="100vw" disableGlutters style={{ backgroundImage: "url(" + process.env.PUBLIC_URL + "background.png" + ")", backgroundSize: 'cover', backgroundPosition: 'center' }}>
             <Grid
                 container
                 spacing={0}
@@ -81,103 +112,93 @@ const Login = () => {
                         alignItems: 'center',
                     }}
                 >
-                    <Box component="form" noValidate sx={{ width: "534px" }}>
-                        <Box sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            mt: 6
-                        }}>
-                            <Typography
-                                variant='h5'
-                                component="div"
-                                gutterBottom
-                                sx={{
-                                    mt: 2,
-                                    fontWeight: 600,
-                                }}
-                            >
-                                Username
-                            </Typography>
+                    <FormControl>
+                        <Box component="form" noValidate sx={{ width: "534px" }}>
                             <Box sx={{
-                                alignItems: "right",
-                                display: "flex",
-                                flexDirection: "row",
-                                width: "100%",
-                                justifyContent: "end"
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                mt: 6
                             }}>
-                                <TextField
-                                    
-                                    margin="normal"
-                                    fullWidth
-                                    id="username"
-                                    label="Username"
-                                    name="username"
-                                    autoComplete="username"
-                                    autoFocus
-                                    variant='filled'
-                                    sx={{ height: "56px", width: "330px" }}
-                                />
+                                <Typography
+                                    variant='h5'
+                                    component="div"
+                                    gutterBottom
+                                    sx={{
+                                        mt: 2,
+                                        fontWeight: 600,
+                                    }}
+                                >
+                                    Username
+                                </Typography>
+                                <Box sx={{
+                                    alignItems: "right",
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    width: "100%",
+                                    justifyContent: "end"
+                                }}>
+                                    <TextField
+
+                                        margin="normal"
+                                        fullWidth
+                                        id="username"
+                                        label="Username"
+                                        name="username"
+                                        autoComplete="username"
+                                        autoFocus
+                                        variant='filled'
+                                        sx={{ height: "56px", width: "330px" }}
+                                    />
+                                </Box>
+                            </Box>
+                            <Box sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                            }}>
+                                <Typography
+                                    variant='h5'
+                                    component="div"
+                                    gutterBottom
+                                    sx={{
+                                        mt: 2,
+                                        fontWeight: 600,
+                                    }}
+                                >
+                                    Password
+                                </Typography>
+                                <Box sx={{
+                                    alignItems: "right",
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    width: "100%",
+                                    justifyContent: "end"
+                                }}>
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="password"
+                                        label="Enter your password"
+                                        name="password"
+                                        autoComplete="password"
+                                        variant='filled'
+                                        helperText="At least 8 characters"
+                                        sx={{ mt: 4, height: "56px", width: "330px" }}
+                                    />
+                                </Box>
+                            </Box>
+                            <Box sx={{ alignItems: "right", display: "flex", flexDirection: "row", width: "100%", justifyContent: "end" }}>
+                                <Box onClick={handleLogin}>
+                                    <Button
+                                        Label="Login"
+                                        Types="submit"
+                                    />
+                                </Box>
                             </Box>
                         </Box>
-                        <Box sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                        }}>
-                            <Typography
-                                variant='h5'
-                                component="div"
-                                gutterBottom
-                                sx={{
-                                    mt: 2,
-                                    fontWeight: 600,
-                                }}
-                            >
-                                Password
-                            </Typography>
-                            <Box sx={{
-                                alignItems: "right",
-                                display: "flex",
-                                flexDirection: "row",
-                                width: "100%",
-                                justifyContent: "end"
-                            }}>
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="password"
-                                    label="Enter your password"
-                                    name="password"
-                                    autoComplete="password"
-                                    autoFocus
-                                    variant='filled'
-                                    helperText="At least 8 characters"
-                                    sx={{ mt: 4, height: "56px", width: "330px" }}
-                                />
-                            </Box>
-                        </Box>
-                        <Box sx={{ alignItems: "right", display: "flex", flexDirection: "row", width: "100%", justifyContent: "end" }}>
-                            
-                            <Button
-                                variant='contained'
-                                href="/"
-                                sx={{
-                                    backgroundColor: "#66BB6A",
-                                    borderRadius: "8px", 
-                                    mt: 5, mb: 6, 
-                                    width: "92px", 
-                                    height: "32px",
-                                    '&:hover': {
-                                        backgroundColor: '#66BB6A',
-                                    }
-                                }}
-                            >
-                                <Typography color="#FFFFFF">LOGIN</Typography>
-                            </Button>
-                        </Box>
-                    </Box>
+                    </FormControl>
                 </Box>
             </Grid>
         </Container>

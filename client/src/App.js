@@ -1,7 +1,8 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { DateProvider } from "./hooks/useDateContext";
 import { KegiatanProvider } from "./hooks/useKegiatanContext";
+import React from "react";
 
 import DashboardAdmin from './views/dashboard/pages/dashboard';
 import Pendataan from './views/pendataan/pages/pendataan';
@@ -14,8 +15,7 @@ import PencatatanKir from './views/pencatatan/pages/KIR'
 import PelaporanMutasiAset from "./views/pelaporan/pages/mutasiAset";
 import BukuInventarisBarang from "./views/pelaporan/pages/bukuinventarisbarang";
 
-import Layout from "./views/shared/components/layout";
-
+import useAuth from "./hooks/useAuth";
 
 const theme = createTheme({
   palette: {
@@ -49,40 +49,72 @@ const theme = createTheme({
   }
 })
 
+function PrivateRoute({ children }) {
+  const auth = useAuth();
+  const location = useLocation();
+
+  if (!auth.user) {
+    /** Redirect them to the /login page, but save the current location they were
+    trying to go to when they were redirected. This allows us to send them
+    along to that page after they login, which is a nicer user experience
+    than dropping them off on the home page. */
+    return <Navigate to="/login" state={{ from: location }} />;
+  }
+
+  return children;
+}
+
+const AuthContext = React.createContext(null);
+
+function AuthProvider({ children }) {
+  const [user, setUser] = React.useState(null);
+
+  const signin = (newUser, callback) => {
+    setUser(newUser);
+    callback();
+  };
+
+  const signout = (callback) => {
+    setUser(null);
+    callback();
+  };
+
+  const value = { user, signin, signout };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};
+
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      {/* <Routes>
-        <Route path="/pendataan" element={<Pendataan />} />
-        <Route path="/dashboard-admin" element={<DashboardAdmin />} />
-        <Route path="/" element={<DashboardPenggunaBarang />} />
-      </Routes> */}
-      <DateProvider>
-        <KegiatanProvider>
-          <Routes>
-            <Route path="/" element={<DashboardAdmin />} />
-            <Route path="/dashboard-pengguna-barang" element={<DashboardPenggunaBarang />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/pendataan" element={<Pendataan />} />
-            <Route path="/pengguna/kib" element={<PenggunaKib />} />
-            <Route path="/pengguna/kir" element={<PenggunaKir />} />
-            <Route path="/pencatatan">
-              <Route path="kib">
-                <Route path="b" element={<PencatatanKib/>} />
+    <AuthProvider>
+      <ThemeProvider theme={theme}>
+        <DateProvider>
+          <KegiatanProvider>
+            <Routes>
+              <Route path="/" element={<PrivateRoute><DashboardAdmin /></PrivateRoute>} />
+              <Route path="/dashboard-pengguna-barang" element={<DashboardPenggunaBarang />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/pendataan" element={<Pendataan />} />
+              <Route path="/pengguna/kib" element={<PenggunaKib />} />
+              <Route path="/pengguna/kir" element={<PenggunaKir />} />
+              <Route path="/pencatatan">
+                <Route path="kib">
+                  <Route path="b" element={<PencatatanKib />} />
+                </Route>
+                <Route path="kir">
+                  <Route path="staff-umum" element={<PencatatanKir />} />
+                </Route>
               </Route>
-              <Route path="kir">
-                <Route path="staff-umum" element={<PencatatanKir/>} />
+              <Route path="/pelaporan">
+                <Route path="mutasi-aset" element={<PelaporanMutasiAset />} />
+                <Route path="buku-inventaris-barang" element={<BukuInventarisBarang />} />
               </Route>
-            </Route>
-            <Route path="/pelaporan">
-              <Route path="mutasi-aset" element={<PelaporanMutasiAset/>} />
-              <Route path="buku-inventaris-barang" element={<BukuInventarisBarang/>} />
-            </Route>
-          </Routes>
-        </KegiatanProvider>
-      </DateProvider>
-    </ThemeProvider>
+            </Routes>
+          </KegiatanProvider>
+        </DateProvider>
+      </ThemeProvider>
+    </AuthProvider>
   );
-}
+};
 
 export default App;
