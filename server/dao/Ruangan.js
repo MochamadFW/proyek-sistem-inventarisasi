@@ -50,7 +50,7 @@ export const findRuanganById = async (ID) => {
 
 export const findRuanganByKoderuangan = async (KODE_RUANGAN) => {
     try {
-        const ruangan = await Ruangan.findOne({
+        const ruangan = await Ruangan.findAll({
             where:{
                 kode_ruangan: KODE_RUANGAN
             }
