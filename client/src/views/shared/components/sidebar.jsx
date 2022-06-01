@@ -71,7 +71,7 @@ const Sidebar = () => {
             id: 2,
             name: 'Kartu Inventaris Ruangan (KIR)',
             menu: [
-                { id: 1, name: 'R. Kepala Dinas', link: '#' },
+                { id: 1, name: 'R. Kepala Dinas', link: '/pencatatan/kir/ruang-kepala-dinas' },
                 { id: 2, name: 'R. Sekretaris Dinas', link: '#' },
                 { id: 3, name: 'R. Kasubag Umpegdatin', link: '#' },
                 { id: 4, name: 'R. Staff Umum', link: '/pencatatan/kir/staff-umum' },
