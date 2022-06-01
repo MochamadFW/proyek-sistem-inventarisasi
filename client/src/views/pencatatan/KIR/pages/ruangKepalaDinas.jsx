@@ -9,15 +9,15 @@ import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
-import Button from '../../shared/components/button';
-import Layout from '../../shared/components/layout';
+import Button from '../../../shared/components/button';
+import Layout from '../../../shared/components/layout';
 import InputBase from '@mui/material/InputBase';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
-import FormBox from '../../shared/components/formBox';
+import FormBox from '../../../shared/components/formBox';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -64,7 +64,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const PencatatanKib = () => {
+const PencatatanRKB = () => {
   const [keadaan, setKeadaan] = React.useState('');
 
   const handleChangeKeadaan = (event) => {
@@ -441,4 +441,4 @@ const PencatatanKib = () => {
   );
 }
 
-export default PencatatanKib;
+export default PencatatanRKB;
