@@ -116,7 +116,7 @@ const Sidebar = () => {
                         MozUserSelect: 'none'
                     }}>
                         <Typography variant="h4" textTransform="uppercase" fontWeight="bold" color="font.white">siinvent</Typography>
-                        <Box><img src={process.env.PUBLIC_URL + "/image/Lambang_Kota_Bandung.svg"} alt="Logo Kota Bandung" loading="lazy" height="auto" width="59px" /></Box>
+                        <Box><img src={process.env.PUBLIC_URL + "/Image/Lambang_Kota_Bandung.svg"} alt="Logo Kota Bandung" loading="lazy" height="auto" width="59px" /></Box>
                     </Box>
                     <Box
                         className="menu"
