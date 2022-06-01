@@ -2,7 +2,7 @@ import * as UserDAO from '../dao/User.js'
 
 export const getLoginValidation = async (req, res, next) => {
     try {
-        const { username, password } = req.body
+        const { username, password } = req.params
         const userValidation = await UserDAO.userLoginValidation(username, password)
         var TOTAL_LOGIN = userValidation.total_login + 1
         const updateTotalLogin = await UserDAO.countLogin(username, password, TOTAL_LOGIN)
