@@ -3,6 +3,6 @@ import * as LoginController from '../controllers/Login.js'
 
 const router = express.Router()
 
-router.get('/:username/:password', LoginController.getLoginValidation)
+router.post('/', LoginController.getLoginValidation)
 
 export default router
