@@ -94,13 +94,14 @@ const PencatatanRKB = () => {
   function defaultLabelDisplayedRows({ from, to, count }) { return ``; };
   return (
     <Layout>
+      
       <Box
         component="div"
         sx={{
           width: 686,
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'space-between',
+          justifyContent: 'flex-start',
           alignItems: 'center',
           mb: 2,
           ml: "auto",
@@ -119,9 +120,25 @@ const PencatatanRKB = () => {
           ActionsComponent={ActionsPagiantion}
           labelDisplayedRows={defaultLabelDisplayedRows}
         />
+        <FormControl variant="filled" sx={{ minWidth: 120 }}>
+          <InputLabel id="demo-simple-select-filled-label">Ruangan</InputLabel>
+          <Select
+            labelId="demo-simple-select-filled-label"
+            id="demo-simple-select-filled"
+            value={ruangan}
+            onChange={handleChangeRuangan}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>Staff Umum</MenuItem>
+            <MenuItem value={20}>R. Kepala Dinas</MenuItem>
+            <MenuItem value={30}>R. Sektretaris Dinas</MenuItem>
+          </Select>
+        </FormControl>
         <Paper
           component="form"
-          sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 237, bgcolor: "#E5E5E5" }}
+          sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 237, bgcolor: "#E5E5E5", ml: "auto" }}
         >
           <InputBase
             sx={{ ml: 1, flex: 1 }}
@@ -323,23 +340,6 @@ const PencatatanRKB = () => {
           title="Kartu Inventaris Ruangan Kepala Dinas"
           sx={{maxWidth:686}}
         >
-          
-          <FormControl variant="filled" sx={{ mb: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-filled-label">Ruangan</InputLabel>
-            <Select
-              labelId="demo-simple-select-filled-label"
-              id="demo-simple-select-filled"
-              value={ruangan}
-              onChange={handleChangeRuangan}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Staff Umum</MenuItem>
-              <MenuItem value={20}>R. Kepala Dinas</MenuItem>
-              <MenuItem value={30}>R. Sektretaris Dinas</MenuItem>
-            </Select>
-          </FormControl>
           <TableContainer 
             component={Paper}
           >
