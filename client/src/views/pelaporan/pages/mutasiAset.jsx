@@ -12,6 +12,7 @@ import TablePagination from '@mui/material/TablePagination';
 import Button from '../../shared/components/button';
 import Layout from '../../shared/components/layout';
 import InputBase from '@mui/material/InputBase';
+import InputLabel from '@mui/material/InputLabel';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -78,6 +79,12 @@ const PelaporanMutasiAset = () => {
 
   const [age, setAge] = React.useState('');
 
+  const [ruangan, setRuangan] = React.useState('');
+
+  const handleChangeRuangan = (event) => {
+    setRuangan(event.target.value);
+  };
+
   const handleChangeSelect = (event) => {
     setAge(event.target.value);
   };
@@ -105,7 +112,7 @@ const PelaporanMutasiAset = () => {
           width: 686,
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'space-between',
+          justifyContent: 'flex-start',
           alignItems: 'center',
           mb: 2,
           ml: "auto",
@@ -124,9 +131,25 @@ const PelaporanMutasiAset = () => {
           ActionsComponent={ActionsPagiantion}
           labelDisplayedRows={defaultLabelDisplayedRows}
         />
+        <FormControl variant="filled" sx={{ minWidth: 120 }}>
+          <InputLabel id="demo-simple-select-filled-label">Ruangan</InputLabel>
+          <Select
+            labelId="demo-simple-select-filled-label"
+            id="demo-simple-select-filled"
+            value={ruangan}
+            onChange={handleChangeRuangan}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>Staff Umum</MenuItem>
+            <MenuItem value={20}>R. Kepala Dinas</MenuItem>
+            <MenuItem value={30}>R. Sektretaris Dinas</MenuItem>
+          </Select>
+        </FormControl>
         <Paper
           component="form"
-          sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 237, bgcolor: "#E5E5E5" }}
+          sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 237, bgcolor: "#E5E5E5", ml: "auto" }}
         >
           <InputBase
             sx={{ ml: 1, flex: 1 }}
@@ -325,7 +348,7 @@ const PelaporanMutasiAset = () => {
           </Button>
         </FormBox>
         <FormBox
-          title="Kartu Inventaris Ruangan Staff Umum"
+          title="Mutasi Aset Ruangan Staff Umum"
           sx={{maxWidth:686}}
         >
 
