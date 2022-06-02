@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { Container, FormControl, TextField, Typography } from '@mui/material';
@@ -6,10 +6,6 @@ import { Container, FormControl, TextField, Typography } from '@mui/material';
 import Button from '../../shared/components/button';
 
 import {
-    Navigate,
-    Link,
-    Routes,
-    Route,
     useNavigate,
     useLocation,
 } from 'react-router-dom';
@@ -17,30 +13,48 @@ import {
 import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
+    const { setAuth } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
-    const auth = useAuth();
-
     const from = location.state?.from?.pathname || "/";
 
-    function handleSubmit(event) {
+    const [user, setUser] = useState('');
+    const [password, setPassword] = useState('');
+    useEffect(() => {
+        localStorage.removeItem('user');
+    }, [])
+
+    const handleLogin = async (event) => {
         event.preventDefault();
 
-        const formData = new FormData(event.currentTarget);
-        const username = formData.get("username");
-        const password = formData.get("password")
+        try {
+            const response = await fetch('http://localhost:8081/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: user,
+                    password: password
+                }),
+                withCredentials: true
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const role = data.data.user.user_role;
+                    setAuth({ user, password, role });
+                    localStorage.setItem("user", JSON.stringify({ user, password, role }));
+                })
+            setPassword('');
+            setUser('');
+            localStorage.getItem('user').role === "Pengguna_barang" ? navigate("/pengguna", { replace: true }) : navigate(from, { replace: true })
 
-        auth.signin(username, () => {
-            navigate(from, { replace: true });
-        });
-    }
-
-    const handleLogin = () => {
-        console.log()
-    }
+        }
+        catch (err) {
+            console.error(err);
+        }
+    };
     return (
-        <Container maxWidth="100vw" disableGlutters style={{ backgroundImage: "url(" + process.env.PUBLIC_URL + "background.png" + ")", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <Container maxWidth="100vw" style={{ backgroundImage: "url(" + process.env.PUBLIC_URL + "background.png" + ")", backgroundSize: 'cover', backgroundPosition: 'center' }}>
             <Grid
                 container
                 spacing={0}
@@ -112,7 +126,7 @@ const Login = () => {
                         alignItems: 'center',
                     }}
                 >
-                    <FormControl>
+                    <FormControl onSubmit={handleLogin}>
                         <Box component="form" noValidate sx={{ width: "534px" }}>
                             <Box sx={{
                                 display: 'flex',
@@ -139,7 +153,7 @@ const Login = () => {
                                     justifyContent: "end"
                                 }}>
                                     <TextField
-
+                                        error={user.length === 0}
                                         margin="normal"
                                         fullWidth
                                         id="username"
@@ -149,6 +163,7 @@ const Login = () => {
                                         autoFocus
                                         variant='filled'
                                         sx={{ height: "56px", width: "330px" }}
+                                        onChange={(event) => { setUser(event.target.value) }}
                                     />
                                 </Box>
                             </Box>
@@ -176,6 +191,7 @@ const Login = () => {
                                     justifyContent: "end"
                                 }}>
                                     <TextField
+                                        type="password"
                                         margin="normal"
                                         required
                                         fullWidth
@@ -186,11 +202,12 @@ const Login = () => {
                                         variant='filled'
                                         helperText="At least 8 characters"
                                         sx={{ mt: 4, height: "56px", width: "330px" }}
+                                        onChange={(event) => setPassword(event.target.value)}
                                     />
                                 </Box>
                             </Box>
                             <Box sx={{ alignItems: "right", display: "flex", flexDirection: "row", width: "100%", justifyContent: "end" }}>
-                                <Box onClick={handleLogin}>
+                                <Box onSubmit={handleLogin}>
                                     <Button
                                         Label="Login"
                                         Types="submit"
@@ -203,7 +220,7 @@ const Login = () => {
             </Grid>
         </Container>
     );
-}
+};
 
 
 export default Login;

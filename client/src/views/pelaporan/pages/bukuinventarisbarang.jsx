@@ -273,7 +273,7 @@ const BukuInventarisBarang = () => {
     const [value, setValue] = useState({ namaKegiatan: "", tanggalKegiatan: new Date() });
 
     return (
-        <Layout>
+        <React.Fragment>
             <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <Box sx={{ mb: 5 }}>
@@ -496,7 +496,7 @@ const BukuInventarisBarang = () => {
                     <TableBIB />
                 </Box>
             </Box>
-        </Layout >
+        </React.Fragment >
     )
 };
 

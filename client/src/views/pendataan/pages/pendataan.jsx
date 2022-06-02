@@ -124,7 +124,7 @@ const Pendataan = () => {
     const openNotification = Boolean(anchorNotification);
     const idNotification = openNotification ? 'notification-popover' : undefined;
     return (
-        <Layout>
+        <React.Fragment>
             <Box sx={{ py: 2, px: 3, mb: 3, backgroundColor: 'font.white', textTransform: 'uppercase', border: '1px solid #29B6F6' }}>
                 <Typography variant="h5" color="font.main" sx={{ fontWeight: 'medium' }}>sistem informasi inventarisasi aset</Typography>
             </Box>
@@ -182,7 +182,7 @@ const Pendataan = () => {
                     </Alert>
                 </Snackbar>
             </Box>
-        </Layout >
+        </React.Fragment >
     )
 }
 
