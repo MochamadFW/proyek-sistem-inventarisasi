@@ -22,7 +22,7 @@ const ChildModal = ({ url }) => {
                 aria-describedby="child-modal-description"
                 sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', p: 8, overflowY: 'scroll' }}>
 
-                <img src={url} />
+                <img src={url} style={{maxWidth:'80%', height:'auto' }}/>
             </Modal>
         </React.Fragment>
     )
@@ -44,7 +44,7 @@ const DashboardAdmin = () => {
         setOpenSOPMutasi(false);
     }
     return (
-        <Layout>
+        <React.Fragment>
             <Box>
                 <Box
                     variant="h5"
@@ -143,7 +143,7 @@ const DashboardAdmin = () => {
                 </Box>
             </Modal>
 
-        </Layout>
+        </React.Fragment>
     )
 }
 

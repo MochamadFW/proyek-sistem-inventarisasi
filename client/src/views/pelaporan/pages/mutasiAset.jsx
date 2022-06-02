@@ -105,7 +105,7 @@ const PelaporanMutasiAset = () => {
   const ActionsPagiantion = () => {return (<></>)};
   function defaultLabelDisplayedRows({ from, to, count }) { return ``; };
   return (
-    <Layout>
+    <React.Fragment>
       <Box
         component="div"
         sx={{
@@ -455,7 +455,7 @@ const PelaporanMutasiAset = () => {
           </Box>
         </FormBox>
       </Box>
-    </Layout>
+    </React.Fragment>
   );
 }
 

@@ -128,7 +128,7 @@ const PencatatanKib = () => {
   const ActionsPagiantion = () => {return (<></>)};
   function defaultLabelDisplayedRows({ from, to, count }) { return ``; };
   return (
-    <Layout>
+    <React.Fragment>
       <Box
         component="div"
         sx={{
@@ -506,7 +506,7 @@ const PencatatanKib = () => {
           </Box>
         </FormBox>
       </Box>
-    </Layout>
+    </React.Fragment>
   );
 }
 

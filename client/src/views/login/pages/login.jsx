@@ -1,15 +1,60 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { Button, Container, FilledInput, FormControl, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
+import { Container, FormControl, TextField, Typography } from '@mui/material';
 
+import Button from '../../shared/components/button';
+
+import {
+    useNavigate,
+    useLocation,
+} from 'react-router-dom';
+
+import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
+    const { setAuth } = useAuth();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+    const [user, setUser] = useState('');
+    const [password, setPassword] = useState('');
+    useEffect(() => {
+        localStorage.removeItem('user');
+    }, [])
+
+    const handleLogin = async (event) => {
+        event.preventDefault();
+
+        try {
+            const response = await fetch('http://localhost:8081/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: user,
+                    password: password
+                }),
+                withCredentials: true
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const role = data.data.user.user_role;
+                    setAuth({ user, password, role });
+                    localStorage.setItem("user", JSON.stringify({ user, password, role }));
+                })
+            setPassword('');
+            setUser('');
+            localStorage.getItem('user').role === "Pengguna_barang" ? navigate("/pengguna", { replace: true }) : navigate(from, { replace: true })
+
+        }
+        catch (err) {
+            console.error(err);
+        }
+    };
     return (
-        <Container maxWidth="100vw" disableGlutters
-            style={{ backgroundImage: "url(" + process.env.PUBLIC_URL + "background.png" + ")", backgroundSize: 'cover', backgroundPosition: 'center' }}
-        // sx={{ backgroundImage: process.env.PUBLIC_URL + "background.png" }}
-        >
+        <Container maxWidth="100vw" style={{ backgroundImage: "url(" + process.env.PUBLIC_URL + "background.png" + ")", backgroundSize: 'cover', backgroundPosition: 'center' }}>
             <Grid
                 container
                 spacing={0}
@@ -81,108 +126,101 @@ const Login = () => {
                         alignItems: 'center',
                     }}
                 >
-                    <Box component="form" noValidate sx={{ width: "534px" }}>
-                        <Box sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            mt: 6
-                        }}>
-                            <Typography
-                                variant='h5'
-                                component="div"
-                                gutterBottom
-                                sx={{
-                                    mt: 2,
-                                    fontWeight: 600,
-                                }}
-                            >
-                                Username
-                            </Typography>
+                    <FormControl onSubmit={handleLogin}>
+                        <Box component="form" noValidate sx={{ width: "534px" }}>
                             <Box sx={{
-                                alignItems: "right",
-                                display: "flex",
-                                flexDirection: "row",
-                                width: "100%",
-                                justifyContent: "end"
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                mt: 6
                             }}>
-                                <TextField
-                                    
-                                    margin="normal"
-                                    fullWidth
-                                    id="username"
-                                    label="Username"
-                                    name="username"
-                                    autoComplete="username"
-                                    autoFocus
-                                    variant='filled'
-                                    sx={{ height: "56px", width: "330px" }}
-                                />
+                                <Typography
+                                    variant='h5'
+                                    component="div"
+                                    gutterBottom
+                                    sx={{
+                                        mt: 2,
+                                        fontWeight: 600,
+                                    }}
+                                >
+                                    Username
+                                </Typography>
+                                <Box sx={{
+                                    alignItems: "right",
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    width: "100%",
+                                    justifyContent: "end"
+                                }}>
+                                    <TextField
+                                        error={user.length === 0}
+                                        margin="normal"
+                                        fullWidth
+                                        id="username"
+                                        label="Username"
+                                        name="username"
+                                        autoComplete="username"
+                                        autoFocus
+                                        variant='filled'
+                                        sx={{ height: "56px", width: "330px" }}
+                                        onChange={(event) => { setUser(event.target.value) }}
+                                    />
+                                </Box>
+                            </Box>
+                            <Box sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                            }}>
+                                <Typography
+                                    variant='h5'
+                                    component="div"
+                                    gutterBottom
+                                    sx={{
+                                        mt: 2,
+                                        fontWeight: 600,
+                                    }}
+                                >
+                                    Password
+                                </Typography>
+                                <Box sx={{
+                                    alignItems: "right",
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    width: "100%",
+                                    justifyContent: "end"
+                                }}>
+                                    <TextField
+                                        type="password"
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        id="password"
+                                        label="Enter your password"
+                                        name="password"
+                                        autoComplete="password"
+                                        variant='filled'
+                                        helperText="At least 8 characters"
+                                        sx={{ mt: 4, height: "56px", width: "330px" }}
+                                        onChange={(event) => setPassword(event.target.value)}
+                                    />
+                                </Box>
+                            </Box>
+                            <Box sx={{ alignItems: "right", display: "flex", flexDirection: "row", width: "100%", justifyContent: "end" }}>
+                                <Box onSubmit={handleLogin}>
+                                    <Button
+                                        Label="Login"
+                                        Types="submit"
+                                    />
+                                </Box>
                             </Box>
                         </Box>
-                        <Box sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                        }}>
-                            <Typography
-                                variant='h5'
-                                component="div"
-                                gutterBottom
-                                sx={{
-                                    mt: 2,
-                                    fontWeight: 600,
-                                }}
-                            >
-                                Password
-                            </Typography>
-                            <Box sx={{
-                                alignItems: "right",
-                                display: "flex",
-                                flexDirection: "row",
-                                width: "100%",
-                                justifyContent: "end"
-                            }}>
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="password"
-                                    label="Enter your password"
-                                    name="password"
-                                    autoComplete="password"
-                                    autoFocus
-                                    variant='filled'
-                                    helperText="At least 8 characters"
-                                    sx={{ mt: 4, height: "56px", width: "330px" }}
-                                />
-                            </Box>
-                        </Box>
-                        <Box sx={{ alignItems: "right", display: "flex", flexDirection: "row", width: "100%", justifyContent: "end" }}>
-                            
-                            <Button
-                                variant='contained'
-                                href="/"
-                                sx={{
-                                    backgroundColor: "#66BB6A",
-                                    borderRadius: "8px", 
-                                    mt: 5, mb: 6, 
-                                    width: "92px", 
-                                    height: "32px",
-                                    '&:hover': {
-                                        backgroundColor: '#66BB6A',
-                                    }
-                                }}
-                            >
-                                <Typography color="#FFFFFF">LOGIN</Typography>
-                            </Button>
-                        </Box>
-                    </Box>
+                    </FormControl>
                 </Box>
             </Grid>
         </Container>
     );
-}
+};
 
 
 export default Login;

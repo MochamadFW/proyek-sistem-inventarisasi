@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-    Button,
     Box,
     Collapse,
     FormControl,
@@ -18,9 +17,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useNavigate, useLocation } from "react-router-dom";
 import Icon from '@mui/material/Icon';
-
 import "../style/scrollbar.css"
 import { DateContext } from "../../../hooks/useDateContext";
+import AuthContext from "../../../context/AuthProvider";
+import useAuth from "../../../hooks/useAuth";
 
 const Sidebar = () => {
     const { selectedDate, setSelectedDate } = useContext(DateContext);
@@ -84,11 +84,19 @@ const Sidebar = () => {
         { id: 1, name: 'Mutasi Barang', link: '/pelaporan/mutasi-aset' },
         { id: 2, name: 'Buku Inventaris Barang', link: '/pelaporan/buku-inventaris-barang' }
     ];
-    const [isAdmin, setIsAdmin] = useState(true);
+
+    const {auth} = useAuth();
+    const [isAdmin, setIsAdmin] = useState(JSON.parse(auth?.role === "pengurus_barang"));
     const [age, setAge] = useState('');
     const handleChange = (event) => {
         setAge(event.target.value);
     };
+    const { setAuth } = useContext(AuthContext);
+    const logout = async () => {
+        setAuth({});
+        localStorage.removeItem("user")
+        navigate('/login')
+    }
     return (
         <Box
             sx={{
@@ -216,7 +224,7 @@ const Sidebar = () => {
                         </React.Fragment> :
                         <React.Fragment>
                             <List sx={{ color: "font.white" }} disablePadding>
-                                <ListItemButton key={1} sx={{ px: 3, py: 1 }} alignItems="center" onClick={() => { navigate('/') }}>
+                                <ListItemButton key={1} sx={{ px: 3, py: 1 }} alignItems="center" onClick={() => {setOpenFormPerbaikanCollapse(true); navigate('/pengguna') }}>
                                     <Icon sx={{ color: 'font.white', mr: 2 }}>edit_note</Icon>
                                     <ListItemText primary="Form Perbaikan & Pemeliharaan" />
                                 </ListItemButton>
@@ -226,27 +234,32 @@ const Sidebar = () => {
                                         <Typography variant="body1" marginRight={2}>Ruangan</Typography>
                                         <FormControl variant="filled" fullWidth>
                                             <Select
+                                            sx={{width:'200px'}}
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
                                                 value={age}
                                                 label="Age"
                                                 onChange={handleChange}>
-                                                <MenuItem value={10}>Ten</MenuItem>
-                                                <MenuItem value={20}>Twenty</MenuItem>
-                                                <MenuItem value={30}>Thirty</MenuItem>
+                                                <MenuItem value={10}>R. Kepala Dinas</MenuItem>
+                                                <MenuItem value={20}>R. Sekretaris Dinas</MenuItem>
+                                                <MenuItem value={30}>R. Kasubag Umpegdatin</MenuItem>
+                                                <MenuItem value={40}>R. Staff Umum</MenuItem>
+                                                <MenuItem value={50}>R. Kasubag Keuangan</MenuItem>
+                                                <MenuItem value={60}>R. Keuangan I</MenuItem>
+                                                <MenuItem value={70}>R. Keuangan II</MenuItem>
                                             </Select>
                                         </FormControl>
                                     </ListItem>
                                 </Collapse>
                             </List>
                             <List sx={{ color: "font.white" }} disablePadding>
-                                <ListItemButton key={1} sx={{ px: 3, py: 1 }} alignItems="center" onClick={() => { navigate('/') }}>
+                                <ListItemButton key={1} sx={{ px: 3, py: 1 }} alignItems="center" onClick={() => { navigate('/pengguna/kib') }}>
                                     <Icon sx={{ color: 'font.white', mr: 2 }}>credit_card</Icon>
                                     <ListItemText primary="Kartu Inventaris Barang" />
                                 </ListItemButton>
                             </List>
                             <List sx={{ color: "font.white" }} disablePadding>
-                                <ListItemButton key={1} sx={{ px: 3, py: 1 }} alignItems="center" onClick={() => { navigate('/') }}>
+                                <ListItemButton key={1} sx={{ px: 3, py: 1 }} alignItems="center" onClick={() => { navigate('/pengguna/kir') }}>
                                     <Icon sx={{ color: 'font.white', mr: 2 }}>style</Icon>
                                     <ListItemText primary="Kartu Inventaris Ruangan" />
                                 </ListItemButton>
@@ -280,7 +293,7 @@ const Sidebar = () => {
                         </Box>)}
 
                     <Box sx={{ borderTop: 1, borderColor: "font.white" }}>
-                        <ListItemButton sx={{ px: 3, py: 2 }} alignItems="center" dense>
+                        <ListItemButton sx={{ px: 3, py: 2 }} alignItems="center" dense onClick={logout}>
                             <Icon sx={{ color: 'font.white', mr: 2 }}>logout</Icon>
                             <ListItemText primary="Logout" sx={{ color: "font.white" }} />
                         </ListItemButton>
