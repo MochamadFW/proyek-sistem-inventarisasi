@@ -21,6 +21,7 @@ import FormBox from '../../shared/components/formBox';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
 import { Typography } from '@mui/material';
 
 function createData(no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, harga, baik, kbaik, rberat, ketmutasi) {
@@ -28,22 +29,11 @@ function createData(no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, 
 }
 
 const rows = [
-  createData(1, 159, 6.0, 24, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(2, 237, 9.0, 37, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(3, 262, 16.0, 24, 6.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(4, 305, 3.7, 67, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(5, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(6, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(7, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(8, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(9, 159, 6.0, 24, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(10, 237, 9.0, 37, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(11, 262, 16.0, 24, 6.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(12, 305, 3.7, 67, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(13, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(14, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(15, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(16, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(1, "Meja Kerja", "-", "-", "Biro", "Kayu", "2016", "02.06.04.01.008", 1, "4,505,533", 1, "-", "-", ""),
+  createData(2, "Meja Kerja Pejabat", "-", "-", "-", "Besi", "2013", "02.06.04.03.005", 1, "9,119,416", 1, "-", "-", ""),
+  createData(3, "Meja Rapat", "-", "-", "-", "Kayu", "2016", "02.06.04.02.014", 1, "10,747,000", 1, "-", "-", ""),
+  createData(4, "Kursi Rapat", "Informa", "-", "-", "Besi", "2015", "02.06.02.01.27", 8, "-", 8, "-", "-", ""),
+  createData(5, "Copy Board/Elektrik White Board", "-", "-", "-", "-", "2018", "02.06.01.05.03", 1, "19,662,500", 1, "-", "-", "")
 ];
 
 const headerRow = [
@@ -75,11 +65,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const PencatatanKib = () => {
+  const [keadaan, setKeadaan] = React.useState('');
 
-  const [age, setAge] = React.useState('');
+  const handleChangeKeadaan = (event) => {
+    setKeadaan(event.target.value);
+  };
 
-  const handleChangeSelect = (event) => {
-    setAge(event.target.value);
+  const [ruangan, setRuangan] = React.useState('');
+
+  const handleChangeRuangan = (event) => {
+    setRuangan(event.target.value);
   };
 
   const [page, setPage] = React.useState(0);
@@ -105,7 +100,7 @@ const PencatatanKib = () => {
           width: 686,
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'space-between',
+          justifyContent: 'flex-start',
           alignItems: 'center',
           mb: 2,
           ml: "auto",
@@ -124,9 +119,25 @@ const PencatatanKib = () => {
           ActionsComponent={ActionsPagiantion}
           labelDisplayedRows={defaultLabelDisplayedRows}
         />
+        <FormControl variant="filled" sx={{ minWidth: 120 }}>
+          <InputLabel id="demo-simple-select-filled-label">Ruangan</InputLabel>
+          <Select
+            labelId="demo-simple-select-filled-label"
+            id="demo-simple-select-filled"
+            value={ruangan}
+            onChange={handleChangeRuangan}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>Staff Umum</MenuItem>
+            <MenuItem value={20}>R. Kepala Dinas</MenuItem>
+            <MenuItem value={30}>R. Sektretaris Dinas</MenuItem>
+          </Select>
+        </FormControl>
         <Paper
           component="form"
-          sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 237, bgcolor: "#E5E5E5" }}
+          sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 237, bgcolor: "#E5E5E5", ml: "auto" }}
         >
           <InputBase
             sx={{ ml: 1, flex: 1 }}
@@ -284,8 +295,8 @@ const PencatatanKib = () => {
             <Typography>Keadaan Barang</Typography>
             <FormControl fullWidth sx={{bgcolor:"#E8E8E8", borderBottom: 1, borderColor: "#8D8D8D", borderRadius: 1}}>
               <Select
-                value={age}
-                onChange={handleChangeSelect}
+                value={keadaan}
+                onChange={handleChangeKeadaan}
                 displayEmpty
                 inputProps={{ 'aria-label': 'Without label' }}
               >
@@ -325,10 +336,9 @@ const PencatatanKib = () => {
           </Button>
         </FormBox>
         <FormBox
-          title="Mesin & Peralatan (KIB B)"
+          title="Kartu Inventaris Ruangan Kepala Dinas"
           sx={{maxWidth:686}}
         >
-
           <TableContainer 
             component={Paper}
           >

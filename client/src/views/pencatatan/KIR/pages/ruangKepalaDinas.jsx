@@ -9,19 +9,19 @@ import TableRow from '@mui/material/TableRow';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
-import Button from '../../shared/components/button';
-import Layout from '../../shared/components/layout';
+import Button from '../../../shared/components/button';
+import Layout from '../../../shared/components/layout';
 import InputBase from '@mui/material/InputBase';
-import InputLabel from '@mui/material/InputLabel';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
-import FormBox from '../../shared/components/formBox'
+import FormBox from '../../../shared/components/formBox';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
 import { Typography } from '@mui/material';
 
 function createData(no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, harga, baik, kbaik, rberat, ketmutasi) {
@@ -29,40 +29,29 @@ function createData(no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, 
 }
 
 const rows = [
-  createData(1, 159, 6.0, 24, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(2, 237, 9.0, 37, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(3, 262, 16.0, 24, 6.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(4, 305, 3.7, 67, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(5, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(6, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(7, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(8, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(9, 159, 6.0, 24, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(10, 237, 9.0, 37, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(11, 262, 16.0, 24, 6.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(12, 305, 3.7, 67, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(13, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(14, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(15, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-  createData(16, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
+  createData(1, "Meja Kerja", "-", "-", "Biro", "Kayu", "2016", "02.06.04.01.008", 1, "4,505,533", 1, "-", "-", ""),
+  createData(2, "Meja Kerja Pejabat", "-", "-", "-", "Besi", "2013", "02.06.04.03.005", 1, "9,119,416", 1, "-", "-", ""),
+  createData(3, "Meja Rapat", "-", "-", "-", "Kayu", "2016", "02.06.04.02.014", 1, "10,747,000", 1, "-", "-", ""),
+  createData(4, "Kursi Rapat", "Informa", "-", "-", "Besi", "2015", "02.06.02.01.27", 8, "-", 8, "-", "-", ""),
+  createData(5, "Copy Board/Elektrik White Board", "-", "-", "-", "-", "2018", "02.06.01.05.03", 1, "19,662,500", 1, "-", "-", "")
 ];
 
 const headerRow = [
   "",
-  "No",
-  "Kode Barang",
-  "Register",
-  "Jenis Barang / Nama Barang",
-  "Merk",
-  "No. Seri Pabrik",
+  "No. Urut",
+  "Nama barang / Jenis barang",
+  "Merk/Model",
+  "No. Seri nokode",
+  "Ukuran",
   "Bahan",
-  "Asal Usul",
-  "Tahun Perolehan",
-  "Satuan",
-  "Kondisi (B,KB,RB)",
-  "Jumlah Barang",
-  "Harga",
-  "Keterangan"
+  "Tahun Pembuatan / Pembelian",
+  "Nomor kode Barang",
+  "Jumlah Barang / Register (X)",
+  "Harga Beli / Perolehan",
+  "Baik (B)",
+  "Kurang Baik (KB)",
+  "Rusak Berat (RB)",
+  "Keterangan Mutasi dll"
 ]
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -75,18 +64,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const PelaporanMutasiAset = () => {
+const PencatatanRKB = () => {
+  const [keadaan, setKeadaan] = React.useState('');
 
-  const [age, setAge] = React.useState('');
+  const handleChangeKeadaan = (event) => {
+    setKeadaan(event.target.value);
+  };
 
   const [ruangan, setRuangan] = React.useState('');
 
   const handleChangeRuangan = (event) => {
     setRuangan(event.target.value);
-  };
-
-  const handleChangeSelect = (event) => {
-    setAge(event.target.value);
   };
 
   const [page, setPage] = React.useState(0);
@@ -105,7 +93,8 @@ const PelaporanMutasiAset = () => {
   const ActionsPagiantion = () => {return (<></>)};
   function defaultLabelDisplayedRows({ from, to, count }) { return ``; };
   return (
-    <React.Fragment>
+    <Layout>
+      
       <Box
         component="div"
         sx={{
@@ -184,7 +173,7 @@ const PelaporanMutasiAset = () => {
               mb: 2
             }}
           >
-            <Typography>No Register</Typography>
+            <Typography>Kode Barang</Typography>
             <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
           </Box>
           <Box
@@ -307,8 +296,8 @@ const PelaporanMutasiAset = () => {
             <Typography>Keadaan Barang</Typography>
             <FormControl fullWidth sx={{bgcolor:"#E8E8E8", borderBottom: 1, borderColor: "#8D8D8D", borderRadius: 1}}>
               <Select
-                value={age}
-                onChange={handleChangeSelect}
+                value={keadaan}
+                onChange={handleChangeKeadaan}
                 displayEmpty
                 inputProps={{ 'aria-label': 'Without label' }}
               >
@@ -348,10 +337,9 @@ const PelaporanMutasiAset = () => {
           </Button>
         </FormBox>
         <FormBox
-          title="Mutasi Aset Ruangan Staff Umum"
+          title="Kartu Inventaris Ruangan Kepala Dinas"
           sx={{maxWidth:686}}
         >
-
           <TableContainer 
             component={Paper}
           >
@@ -360,14 +348,11 @@ const PelaporanMutasiAset = () => {
                 <TableRow
                   sx={{bgcolor:'#66BB6A'}}
                 >
-                  <TableCell sx={{ border: 0 }} align="center" colSpan={1} />
+                  <TableCell sx={{ border: 0 }} align="center" colSpan={11} />
                   <TableCell sx={{ border: 1, borderTop: 0 }} align="center" colSpan={3}>
-                    Nomor
+                    Keadaan Barang
                   </TableCell>
-                  <TableCell sx={{ border: 1, borderTop: 0 }} align="center" colSpan={4}>
-                    Spesifikasi Barang
-                  </TableCell>
-                  <TableCell sx={{ border: 0 }} align="center" colSpan={7} />
+                  <TableCell sx={{ border: 0 }} align="center" colSpan={1} />
                 </TableRow>
                 <TableRow
                   sx={{bgcolor:'#66BB6A'}}
@@ -441,22 +426,19 @@ const PelaporanMutasiAset = () => {
           </TableContainer>
           <Box
             component="div"
-            sx={{width: 1, display: 'flex', justifyContent: 'flex-end', mt: 12}}
+            sx={{width: 1, display: 'flex', justifyContent: 'flex-end'}}
           >
             <Button
-              Label="Laporan Mutasi Barang"
+              Label="Laporan KIR"
               sx={{
-                mr: 3,
+                mt: 12,
               }}
-            />
-            <Button
-              Label="Berita Acara Mutasi Barang"
             />
           </Box>
         </FormBox>
       </Box>
-    </React.Fragment>
+    </Layout>
   );
 }
 
-export default PelaporanMutasiAset;
+export default PencatatanRKB;

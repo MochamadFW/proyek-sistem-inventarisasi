@@ -8,7 +8,6 @@ import { AuthProvider } from "./context/AuthProvider";
 import Layout from "./views/shared/components/layout";
 import DashboardAdmin from './views/dashboard/pages/dashboard';
 import Pendataan from './views/pendataan/pages/pendataan';
-import DashboardPenggunaBarang from './views/dashboard/pages/dashboardpenggunabarang';
 import Login from './views/login/pages/login';
 import PenggunaKib from './views/pengguna/pages/KIB'
 import PenggunaKir from './views/pengguna/pages/KIR'
@@ -17,6 +16,8 @@ import PencatatanKir from './views/pencatatan/pages/KIR'
 import PelaporanMutasiAset from "./views/pelaporan/pages/mutasiAset";
 import BukuInventarisBarang from "./views/pelaporan/pages/bukuinventarisbarang";
 import RequireAuth from "./views/shared/components/RequireAuth";
+import PencatatanRKB from "./views/pencatatan/KIR/pages/ruangKepalaDinas";
+import DashboardPenggunaBarang from "./views/dashboard/pages/dashboardpenggunabarang";
 
 import PDF from "./views/shared/components/pdf";
 
@@ -69,7 +70,8 @@ function App() {
                       <Route path="b" element={<PencatatanKib />} />
                     </Route>
                     <Route path="kir">
-                      <Route path="staff-umum" element={<PencatatanKir />} />
+                      <Route path="staff-umum" element={<PencatatanKir />} />                        
+                      <Route path="ruang-kepala-dinas" element={<PencatatanRKB/>} />
                     </Route>
                   </Route>
                   <Route path="/pelaporan">

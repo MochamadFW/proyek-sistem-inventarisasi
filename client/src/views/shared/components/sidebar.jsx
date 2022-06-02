@@ -71,7 +71,7 @@ const Sidebar = () => {
             id: 2,
             name: 'Kartu Inventaris Ruangan (KIR)',
             menu: [
-                { id: 1, name: 'R. Kepala Dinas', link: '#' },
+                { id: 1, name: 'R. Kepala Dinas', link: '/pencatatan/kir/ruang-kepala-dinas' },
                 { id: 2, name: 'R. Sekretaris Dinas', link: '#' },
                 { id: 3, name: 'R. Kasubag Umpegdatin', link: '#' },
                 { id: 4, name: 'R. Staff Umum', link: '/pencatatan/kir/staff-umum' },
@@ -124,7 +124,7 @@ const Sidebar = () => {
                         MozUserSelect: 'none'
                     }}>
                         <Typography variant="h4" textTransform="uppercase" fontWeight="bold" color="font.white">siinvent</Typography>
-                        <Box><img src={process.env.PUBLIC_URL + "/image/Lambang_Kota_Bandung.svg"} alt="Logo Kota Bandung" loading="lazy" height="auto" width="59px" /></Box>
+                        <Box><img src={process.env.PUBLIC_URL + "/Image/Lambang_Kota_Bandung.svg"} alt="Logo Kota Bandung" loading="lazy" height="auto" width="59px" /></Box>
                     </Box>
                     <Box
                         className="menu"
