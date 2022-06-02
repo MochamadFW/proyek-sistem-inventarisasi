@@ -56,7 +56,7 @@ const DashboardPenggunaBarang = () => {
 
   };
   return (
-    <Layout>
+    <React.Fragment>
       <Box
         maxHeight="497px"
         sx={{ ma: 3, border: 1, borderColor: '#29B6F6' }}
@@ -142,7 +142,7 @@ const DashboardPenggunaBarang = () => {
               flexDirection: 'column',
               width: '15%',
               ml: 3
-            
+
             }}>
               <Typography>Jumlah Barang</Typography>
               <TextField
@@ -174,11 +174,11 @@ const DashboardPenggunaBarang = () => {
             </Box>
           </Box>
           <Box
-          sx={{
-            m: 3
-          }}
+            sx={{
+              m: 3
+            }}
           >
-          <Box
+            <Box
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -192,7 +192,8 @@ const DashboardPenggunaBarang = () => {
         </Box>
 
       </Box>
-    </Layout>)
+    </React.Fragment>
+  )
 }
 
 export default DashboardPenggunaBarang

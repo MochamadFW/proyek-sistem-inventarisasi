@@ -70,7 +70,7 @@ const PenggunaKir = () => {
   function defaultLabelDisplayedRows({ from, to, count }) { return ``; };
   
   return (
-    <Layout>
+    <React.Fragment>
       
       <Box
         component="div"
@@ -212,7 +212,7 @@ const PenggunaKir = () => {
           }}
         />
       </Box>
-    </Layout>
+    </React.Fragment>
   );
 }
 
