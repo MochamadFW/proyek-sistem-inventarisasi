@@ -13,6 +13,7 @@ import PencatatanKir from './views/pencatatan/pages/KIR'
 import PelaporanMutasiAset from "./views/pelaporan/pages/mutasiAset";
 import BukuInventarisBarang from "./views/pelaporan/pages/bukuinventarisbarang";
 import PencatatanRKB from "./views/pencatatan/KIR/pages/ruangKepalaDinas";
+import DashboardPenggunaBarang from "./views/dashboard/pages/dashboardpenggunabarang";
 
 import Layout from "./views/shared/components/layout";
 
@@ -65,6 +66,7 @@ function App() {
             <Route path="/pendataan" element={<Pendataan />} />
             <Route path="/pengguna/kib" element={<PenggunaKib />} />
             <Route path="/pengguna/kir" element={<PenggunaKir />} />
+            <Route path="/pengguna-barang" element={<DashboardPenggunaBarang/>} />
             <Route path="/pencatatan">
               <Route path="kib">
                 <Route path="b" element={<PencatatanKib/>} />
