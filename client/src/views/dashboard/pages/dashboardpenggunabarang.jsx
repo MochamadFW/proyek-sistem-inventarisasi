@@ -10,8 +10,20 @@ import { create } from "@mui/material/styles/createTransitions";
 const DashboardPenggunaBarang = () => {
   const item = [
     {
-      value: 'RuanganA',
-      label: 'ruangan A',
+      value: 'Kursi',
+      label: 'kursi',
+    },
+    {
+      value: 'Meja',
+      label: 'meja',
+    },
+    {
+      value: 'Papan Tulis',
+      label: 'papan tulis',
+    },
+    {
+      value: 'Pulpen',
+      label: 'pulpen',
     },
   ]
 
@@ -19,6 +31,18 @@ const DashboardPenggunaBarang = () => {
     {
       value: '1',
       label: '1',
+    },
+    {
+      value: '2',
+      label: '2',
+    },
+    {
+      value: '3',
+      label: '3',
+    },
+    {
+      value: '4',
+      label: '4',
     }
   ]
   const [items, setItems] = React.useState('RuanganB');
@@ -83,7 +107,7 @@ const DashboardPenggunaBarang = () => {
               }}
             >
               <Typography>Keberadaan Aset</Typography>
-              <TextField id="filled-basic" label="keberadaan aset" variant="filled" disabled />
+              <TextField id="filled-basic" label="R. Kepala Dinas" variant="filled" disabled />
             </Box>
           </Box>
           <Box sx={{
