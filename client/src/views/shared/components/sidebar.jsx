@@ -85,7 +85,7 @@ const Sidebar = () => {
         { id: 2, name: 'Buku Inventaris Barang', link: '/pelaporan/buku-inventaris-barang' }
     ];
 
-    const {auth} = useAuth();
+    const { auth } = useAuth();
     const [isAdmin, setIsAdmin] = useState(JSON.parse(auth?.role === "pengurus_barang"));
     const [age, setAge] = useState('');
     const handleChange = (event) => {
@@ -224,9 +224,9 @@ const Sidebar = () => {
                         </React.Fragment> :
                         <React.Fragment>
                             <List sx={{ color: "font.white" }} disablePadding>
-                                <ListItemButton key={1} sx={{ px: 3, py: 1 }} alignItems="center" onClick={() => {setOpenFormPerbaikanCollapse(true); navigate('/pengguna') }}>
+                                <ListItemButton key={1} sx={{ px: 3, py: 1 }} alignItems="center" onClick={() => { setOpenFormPerbaikanCollapse(true); navigate('/pengguna') }}>
                                     <Icon sx={{ color: 'font.white', mr: 2 }}>edit_note</Icon>
-                                    <ListItemText primary="Form Perbaikan & Pemeliharaan" />
+                                    <ListItemText primary="Form Perbaikan" />
                                 </ListItemButton>
                                 <Collapse in={openFormPerbaikanCollapse}>
                                     <ListItem sx={{ px: 3, py: 1 }}>
@@ -234,7 +234,7 @@ const Sidebar = () => {
                                         <Typography variant="body1" marginRight={2}>Ruangan</Typography>
                                         <FormControl variant="filled" fullWidth>
                                             <Select
-                                            sx={{width:'200px'}}
+                                                sx={{ width: '200px' }}
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
                                                 value={age}
