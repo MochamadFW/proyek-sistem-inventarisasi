@@ -19,7 +19,8 @@ export const postNewRuangan = async (req, res, next) => {
             jumlah_barang,
             harga_barang,
             keadaan_barang,
-            keterangan_barang
+            keterangan_barang,
+            asal_usul
         )
         console.log(nomor_register)
 

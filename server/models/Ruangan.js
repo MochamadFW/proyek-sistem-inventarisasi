@@ -67,6 +67,10 @@ const Ruangan = db.define('Ruangan', {
     keterangan_barang: {
         type: Sequelize.STRING,
         allowNull: true
+    },
+    asal_usul: {
+        type: Sequelize.STRING,
+        allowNull: true
     }
 })
 

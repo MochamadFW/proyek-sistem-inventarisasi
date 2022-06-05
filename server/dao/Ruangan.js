@@ -1,7 +1,7 @@
 import sequelize from '../db.js'
 import Ruangan from '../models/Ruangan.js'
 
-export const newRuangan = async (KODE_RUANGAN, NOMOR_REGISTER, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, NOMOR_SERI_PABRIK, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KEADAAN_BARANG, KETERANGAN_BARANG) => {
+export const newRuangan = async (KODE_RUANGAN, NOMOR_REGISTER, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, NOMOR_SERI_PABRIK, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KEADAAN_BARANG, KETERANGAN_BARANG, ASAL_USUL) => {
     try {
         const ruangan = await Ruangan.create({
             kode_ruangan: KODE_RUANGAN,
@@ -18,7 +18,8 @@ export const newRuangan = async (KODE_RUANGAN, NOMOR_REGISTER, NAMA_RUANGAN, LUA
             jumlah_barang: JUMLAH_BARANG,
             harga_barang: HARGA_BARANG,
             keadaan_barang: KEADAAN_BARANG,
-            keterangan_barang: KETERANGAN_BARANG
+            keterangan_barang: KETERANGAN_BARANG,
+            asal_usul: ASAL_USUL
         })
         return ruangan
     } catch (error) {
