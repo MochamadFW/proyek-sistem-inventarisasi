@@ -164,3 +164,31 @@ export const countRuangan = async () => {
         console.log(error)
     }
 }
+
+export const countJumlahHargaByRuangan = async (NAMA_RUANGAN) => {
+    try {
+        const jumlah = await Ruangan.findAll({
+            attributes: ['nama_ruangan',[sequelize.fn('sum', sequelize.col('harga_barang')), 'Jumlah']],
+            raw: true,
+            where: {
+                nama_ruangan: NAMA_RUANGAN
+            },
+            group : ['Ruangan.nama_ruangan']
+        })
+        return jumlah
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const countJumlahHargaAllRuangan = async () => {
+    try {
+        const jumlah = await Ruangan.findAll({
+            attributes: [[sequelize.fn('sum', sequelize.col('harga_barang')), 'Jumlah']],
+            raw: true
+        })
+        return jumlah
+    } catch (error) {
+        
+    }
+}
