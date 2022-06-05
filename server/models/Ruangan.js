@@ -8,6 +8,10 @@ const Ruangan = db.define('Ruangan', {
         primaryKey: true,
         autoIncrement: true
     },
+    nomor_register: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
     kode_ruangan: {
         type: Sequelize.STRING,
         allowNull: true

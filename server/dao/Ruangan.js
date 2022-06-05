@@ -1,10 +1,11 @@
 import sequelize from '../db.js'
 import Ruangan from '../models/Ruangan.js'
 
-export const newRuangan = async (KODE_RUANGAN, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, NOMOR_SERI_PABRIK, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KEADAAN_BARANG, KETERANGAN_BARANG) => {
+export const newRuangan = async (KODE_RUANGAN, NOMOR_REGISTER, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, NOMOR_SERI_PABRIK, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KEADAAN_BARANG, KETERANGAN_BARANG) => {
     try {
         const ruangan = await Ruangan.create({
             kode_ruangan: KODE_RUANGAN,
+            nomor_register: NOMOR_REGISTER,
             nama_ruangan: NAMA_RUANGAN,
             luas_lantai: LUAS_LANTAI,
             kode_barang: KODE_BARANG,
@@ -95,11 +96,12 @@ export const findJumlahBarangByNamaBarang = async (NAMA_RUANGAN, NAMA_BARANG) =>
     }
 }
 
-export const updateRuangan = async (ID, KODE_RUANGAN, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, NOMOR_SERI_PABRIK, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KEADAAN_BARANG, KETERANGAN_BARANG, UPDATEDAT) => {
+export const updateRuangan = async (ID, KODE_RUANGAN, NOMOR_REGISTER, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, NOMOR_SERI_PABRIK, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KEADAAN_BARANG, KETERANGAN_BARANG, UPDATEDAT) => {
     try {
         const ruangan = await Ruangan.update(
             {
                 kode_ruangan: KODE_RUANGAN,
+                nomor_register: NOMOR_REGISTER,
                 nama_ruangan: NAMA_RUANGAN,
                 luas_lantai: LUAS_LANTAI,
                 kode_barang: KODE_BARANG,
