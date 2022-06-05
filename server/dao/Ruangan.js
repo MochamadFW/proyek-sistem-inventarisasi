@@ -1,10 +1,9 @@
 import sequelize from '../db.js'
 import Ruangan from '../models/Ruangan.js'
 
-export const newRuangan = async (NOMOR_REGISTER, KODE_RUANGAN, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, NOMOR_SERI_PABRIK, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KEADAAN_BARANG, KETERANGAN_BARANG) => {
+export const newRuangan = async (KODE_RUANGAN, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, NOMOR_SERI_PABRIK, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KEADAAN_BARANG, KETERANGAN_BARANG) => {
     try {
         const ruangan = await Ruangan.create({
-            nomor_register: NOMOR_REGISTER,
             kode_ruangan: KODE_RUANGAN,
             nama_ruangan: NAMA_RUANGAN,
             luas_lantai: LUAS_LANTAI,
@@ -64,7 +63,7 @@ export const findRuanganByKoderuangan = async (KODE_RUANGAN) => {
 export const findNamaBarangByNamaRuangan = async (NAMA_RUANGAN) => {
     try {
         const namaBarang = await Ruangan.findAll({
-            attributes: ['nama_barang'],
+            // attributes: ['nama_barang'],
             where: {
                 nama_ruangan: NAMA_RUANGAN
             }

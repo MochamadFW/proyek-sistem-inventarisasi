@@ -63,10 +63,6 @@ const Ruangan = db.define('Ruangan', {
     keterangan_barang: {
         type: Sequelize.STRING,
         allowNull: true
-    },
-    nomor_registrasi: {
-        type: Sequelize.STRING,
-        allowNull: true
     }
 })
 

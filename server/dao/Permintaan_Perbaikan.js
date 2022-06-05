@@ -1,9 +1,10 @@
 import Permintaan_Perbaikan from "../models/Permintaan_Perbaikan"
 
-export const newPermintaan = async (nama_pengaju, nama_ruangan, nama_barang, jumlah_barang, jenis_kerusakan, keterangan_barang) => {
+export const newPermintaan = async (nama_pengaju, tanggal_permintaan, nama_ruangan, nama_barang, jumlah_barang, jenis_kerusakan, keterangan_barang) => {
     try {
         const permintaan = await Permintaan_Perbaikan.create({
             nama_pengaju: nama_pengaju,
+            tanggal_permintaan,
             nama_ruangan: nama_ruangan,
             nama_barang: nama_barang,
             jumlah_barang: jumlah_barang,
@@ -40,7 +41,7 @@ export const findPermintaanById = async (ID) => {
 
 export const findPermintaanByPengaju = async (NAMA_PENGAJU) => {
     try {
-        const permintaan = await Permintaan_Perbaikan.findOne({
+        const permintaan = await Permintaan_Perbaikan.findAll({
             where:{
                 nama_pengaju: NAMA_PENGAJU
             }
