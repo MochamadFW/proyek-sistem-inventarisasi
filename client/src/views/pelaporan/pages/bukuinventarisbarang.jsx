@@ -35,6 +35,7 @@ import { KegiatanContext } from '../../../hooks/useKegiatanContext';
 import Button from '../../shared/components/button';
 import Layout from '../../shared/components/layout';
 import FormBox from '../../shared/components/formBox';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
@@ -242,12 +243,14 @@ const TableBIB = () => {
                     component="div"
                     sx={{ width: 1, display: 'flex', justifyContent: 'flex-end' }}
                 >
-                    <Button
-                        Label="Buku Inventaris Barang"
-                        sx={{
-                            mt: 12,
-                        }}
-                    />
+                    <Box onClick={() => { Navigate("/pdf", { state: { type: 'bib' } }) }}>
+                        <Button
+                            Label="Buku Inventaris Barang"
+                            sx={{
+                                mt: 12,
+                            }}
+                        />
+                    </Box>
                 </Box>
             </FormBox>
         </React.Fragment>
@@ -271,7 +274,7 @@ const BukuInventarisBarang = () => {
         setAge(event.target.value);
     };
     const [value, setValue] = useState({ namaKegiatan: "", tanggalKegiatan: new Date() });
-
+    const navigate = useNavigate();
     return (
         <React.Fragment>
             <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
