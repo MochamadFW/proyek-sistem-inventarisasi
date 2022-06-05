@@ -19,6 +19,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
 import FormBox from '../../shared/components/formBox';
 import { Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 // import async from 'asyncawait/async';
 // import await from 'asyncawait/await';
 
@@ -83,7 +84,7 @@ const PencatatanKib = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     })
-    .then(response => response.json());
+      .then(response => response.json());
   };
 
   const handleAddData = (event) => {
@@ -105,28 +106,29 @@ const PencatatanKib = () => {
   };
 
   const [dataTable, setDataTable] = React.useState([]);
-  
+
   React.useEffect(() => {
     fetch("http://localhost:8081/barang/allbarang")
-    .then((data) => data.json())
-    .then((data) => setDataTable(data.data.barang))
+      .then((data) => data.json())
+      .then((data) => setDataTable(data.data.barang))
   }, []);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-  
+
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - dataTable.length) : 0;
-  const ActionsPagiantion = () => {return (<></>)};
+  const ActionsPagiantion = () => { return (<></>) };
   function defaultLabelDisplayedRows({ from, to, count }) { return ``; };
+  const navigate = useNavigate();
   return (
     <React.Fragment>
       <Box
@@ -142,7 +144,7 @@ const PencatatanKib = () => {
         }}
       >
         <TablePagination
-          sx={{ml: -4}}
+          sx={{ ml: -4 }}
           rowsPerPageOptions={[5, 10, 15, 25, 100]}
           component="div"
           count={dataTable.length}
@@ -180,7 +182,7 @@ const PencatatanKib = () => {
       >
         <FormBox
           title="Form Input"
-          sx={{width:366, mr:2}}
+          sx={{ width: 366, mr: 2 }}
         >
           <form
             onSubmit={HandleSubmit}
@@ -195,7 +197,7 @@ const PencatatanKib = () => {
               }}
             >
               <Typography>No</Typography>
-              <TextField hiddenLabel name="id" variant="filled" sx={{width:83}} />
+              <TextField hiddenLabel name="id" variant="filled" sx={{ width: 83 }} />
             </Box>
             <Box
               component="div"
@@ -207,7 +209,7 @@ const PencatatanKib = () => {
               }}
             >
               <Typography>Nomor Register</Typography>
-              <TextField hiddenLabel name="nomor_register" label="" variant="filled" sx={{width:83}} />
+              <TextField hiddenLabel name="nomor_register" label="" variant="filled" sx={{ width: 83 }} />
             </Box>
             <Box
               component="div"
@@ -219,7 +221,7 @@ const PencatatanKib = () => {
               }}
             >
               <Typography>Kode Barang</Typography>
-              <TextField hiddenLabel name="kode_barang" label="" variant="filled" sx={{width:1}} />
+              <TextField hiddenLabel name="kode_barang" label="" variant="filled" sx={{ width: 1 }} />
             </Box>
             <Box
               component="div"
@@ -231,7 +233,7 @@ const PencatatanKib = () => {
               }}
             >
               <Typography>Jenis / Nama Barang</Typography>
-              <TextField hiddenLabel name="nama_barang" label="" variant="filled" sx={{width:1}} />
+              <TextField hiddenLabel name="nama_barang" label="" variant="filled" sx={{ width: 1 }} />
             </Box>
             <Box
               component="div"
@@ -250,7 +252,7 @@ const PencatatanKib = () => {
                 }}
               >
                 <Typography>Merk/Type</Typography>
-                <TextField hiddenLabel name="tipe_barang" label="" variant="filled" sx={{width:144}} />
+                <TextField hiddenLabel name="tipe_barang" label="" variant="filled" sx={{ width: 144 }} />
               </Box>
               <Box
                 component="div"
@@ -260,7 +262,7 @@ const PencatatanKib = () => {
                 }}
               >
                 <Typography>Ukuran/CC</Typography>
-                <TextField name="ukuran_barang" label="" variant="filled" sx={{width:155}} />
+                <TextField name="ukuran_barang" label="" variant="filled" sx={{ width: 155 }} />
               </Box>
             </Box>
             <Box
@@ -280,7 +282,7 @@ const PencatatanKib = () => {
                 }}
               >
                 <Typography>Tahun Pembelian</Typography>
-                <TextField hiddenLabel name="tahun_pembelian" label="" variant="filled" sx={{width:144}} />
+                <TextField hiddenLabel name="tahun_pembelian" label="" variant="filled" sx={{ width: 144 }} />
               </Box>
               <Box
                 component="div"
@@ -290,7 +292,7 @@ const PencatatanKib = () => {
                 }}
               >
                 <Typography>Bahan</Typography>
-                <TextField name="bahan_barang" label="" variant="filled" sx={{width:155}} />
+                <TextField name="bahan_barang" label="" variant="filled" sx={{ width: 155 }} />
               </Box>
             </Box>
             <Box
@@ -310,7 +312,7 @@ const PencatatanKib = () => {
                 }}
               >
                 <Typography>No. Pabrik</Typography>
-                <TextField hiddenLabel name="nomor_pabrik" label="" variant="filled" sx={{width:144}} />
+                <TextField hiddenLabel name="nomor_pabrik" label="" variant="filled" sx={{ width: 144 }} />
               </Box>
               <Box
                 component="div"
@@ -320,7 +322,7 @@ const PencatatanKib = () => {
                 }}
               >
                 <Typography>No. Rangka</Typography>
-                <TextField name="nomor_rangka" label="" variant="filled" sx={{width:155}} />
+                <TextField name="nomor_rangka" label="" variant="filled" sx={{ width: 155 }} />
               </Box>
             </Box>
             <Box
@@ -340,7 +342,7 @@ const PencatatanKib = () => {
                 }}
               >
                 <Typography>No. Mesin</Typography>
-                <TextField hiddenLabel name="nomor_mesin" label="" variant="filled" sx={{width:144}} />
+                <TextField hiddenLabel name="nomor_mesin" label="" variant="filled" sx={{ width: 144 }} />
               </Box>
               <Box
                 component="div"
@@ -350,7 +352,7 @@ const PencatatanKib = () => {
                 }}
               >
                 <Typography>No. Polisi</Typography>
-                <TextField name="nomor_polisi" label="" variant="filled" sx={{width:155}} />
+                <TextField name="nomor_polisi" label="" variant="filled" sx={{ width: 155 }} />
               </Box>
             </Box>
             <Box
@@ -363,7 +365,7 @@ const PencatatanKib = () => {
               }}
             >
               <Typography>No. BPKB</Typography>
-              <TextField hiddenLabel name="nomor_bpkb" label="" variant="filled" sx={{width:1}} />
+              <TextField hiddenLabel name="nomor_bpkb" label="" variant="filled" sx={{ width: 1 }} />
             </Box>
             <Box
               component="div"
@@ -375,7 +377,7 @@ const PencatatanKib = () => {
               }}
             >
               <Typography>Asal Usul</Typography>
-              <TextField hiddenLabel name="asal_usul" label="" variant="filled" sx={{width:1}} />
+              <TextField hiddenLabel name="asal_usul" label="" variant="filled" sx={{ width: 1 }} />
             </Box>
             <Box
               component="div"
@@ -387,13 +389,13 @@ const PencatatanKib = () => {
               }}
             >
               <Typography>Harga</Typography>
-              <TextField name="harga_barang" label="Rp" variant="filled" sx={{width:1}} />
+              <TextField name="harga_barang" label="Rp" variant="filled" sx={{ width: 1 }} />
             </Box>
             <Button
               Label="Submit"
               Types="submit"
               sx={[
-                {width: 1, bgcolor: "#66BB6A", color: "font.white"},
+                { width: 1, bgcolor: "#66BB6A", color: "font.white" },
                 {
                   '&:hover': {
                     bgcolor: "#4D8A4F",
@@ -405,16 +407,16 @@ const PencatatanKib = () => {
         </FormBox>
         <FormBox
           title="Mesin & Peralatan (KIB B)"
-          sx={{maxWidth:686}}
+          sx={{ maxWidth: 686 }}
         >
 
-          <TableContainer 
+          <TableContainer
             component={Paper}
           >
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow
-                  sx={{bgcolor:'#66BB6A'}}
+                  sx={{ bgcolor: '#66BB6A' }}
                 >
                   <TableCell sx={{ border: 0 }} align="center" colSpan={9} />
                   <TableCell sx={{ border: 1, borderTop: 0 }} align="center" colSpan={5}>
@@ -423,64 +425,64 @@ const PencatatanKib = () => {
                   <TableCell sx={{ border: 0 }} align="center" colSpan={2} />
                 </TableRow>
                 <TableRow
-                  sx={{bgcolor:'#66BB6A'}}
+                  sx={{ bgcolor: '#66BB6A' }}
                 >
                   {headerRow.map((htxt, index) => (
-                    <TableCell sx={{ border: 1, '&:first-child': {borderLeft: 0, borderTop: 0}, '&:last-child': {borderRight: 0} }} align="center">{htxt}</TableCell>
+                    <TableCell sx={{ border: 1, '&:first-child': { borderLeft: 0, borderTop: 0 }, '&:last-child': { borderRight: 0 } }} align="center">{htxt}</TableCell>
                   ))}
                 </TableRow>
               </TableHead>
               <TableBody>
                 {dataTable.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => (
-                  <StyledTableRow
-                    key={row.id}
-                  >
-                    <TableCell sx={{ border: 1, borderTop:0, borderLeft: 0 }} size="small" component="th" scope="row" align="left">
-                      <Box
-                        sx={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}
-                      >
-                        <IconButton 
-                          color="primary" 
-                          aria-label="edit" 
-                          sx={[
-                            {bgcolor: "#FFA726", borderRadius: 2, mr:1},
-                            { '&:hover': {bgcolor: "#CB841B"} }
-                          ]}
+                  .map((row, index) => (
+                    <StyledTableRow
+                      key={row.id}
+                    >
+                      <TableCell sx={{ border: 1, borderTop: 0, borderLeft: 0 }} size="small" component="th" scope="row" align="left">
+                        <Box
+                          sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}
                         >
-                          <EditIcon />
-                        </IconButton>
-                        <IconButton
-                          color="primary" 
-                          aria-label="delete" 
-                          sx={[
-                            {bgcolor: "#F44336", borderRadius: 2},
-                            { '&:hover': {bgcolor: "#B83229"} }
-                          ]}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </Box>
-                    </TableCell>
-                    <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">
-                      {row.id}
-                    </TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.kode_barang}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.nama_barang}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.nomor_register}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.tipe_barang}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.ukuran_barang}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.bahan_barang}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.tahun_pembelian}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.nomor_pabrik}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.nomor_rangka}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.nomor_mesin}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.nomor_polisi}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.nomor_bpkb}</TableCell>
-                    <TableCell sx={{ border: 1 }} align="center">{row.asal_usul}</TableCell>
-                    <TableCell sx={{ border: 1, borderRight: 0 }} align="center">{row.harga_barang}</TableCell>
-                  </StyledTableRow>
-                ))}
+                          <IconButton
+                            color="primary"
+                            aria-label="edit"
+                            sx={[
+                              { bgcolor: "#FFA726", borderRadius: 2, mr: 1 },
+                              { '&:hover': { bgcolor: "#CB841B" } }
+                            ]}
+                          >
+                            <EditIcon />
+                          </IconButton>
+                          <IconButton
+                            color="primary"
+                            aria-label="delete"
+                            sx={[
+                              { bgcolor: "#F44336", borderRadius: 2 },
+                              { '&:hover': { bgcolor: "#B83229" } }
+                            ]}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </Box>
+                      </TableCell>
+                      <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">
+                        {row.id}
+                      </TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.kode_barang}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.nama_barang}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.nomor_register}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.tipe_barang}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.ukuran_barang}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.bahan_barang}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.tahun_pembelian}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.nomor_pabrik}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.nomor_rangka}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.nomor_mesin}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.nomor_polisi}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.nomor_bpkb}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.asal_usul}</TableCell>
+                      <TableCell sx={{ border: 1, borderRight: 0 }} align="center">{row.harga_barang}</TableCell>
+                    </StyledTableRow>
+                  ))}
                 {emptyRows > 0 && (
                   <TableRow
                     style={{
@@ -495,14 +497,16 @@ const PencatatanKib = () => {
           </TableContainer>
           <Box
             component="div"
-            sx={{width: 1, display: 'flex', justifyContent: 'flex-end'}}
+            sx={{ width: 1, display: 'flex', justifyContent: 'flex-end' }}
           >
-            <Button
-              Label="Laporan KIB"
-              sx={{
-                mt: 12,
-              }}
-            />
+            <Box onClick={() => { navigate("/pdf", { state: { type: 'kib' } }) }}>
+              <Button
+                Label="Laporan KIB"
+                sx={{
+                  mt: 12,
+                }}
+              />
+            </Box>
           </Box>
         </FormBox>
       </Box>
