@@ -3,7 +3,7 @@ import Ruangan from '../models/Ruangan.js'
 
 export const postNewRuangan = async (req, res, next) => {
     try {
-        const { kode_ruangan, nomor_register, nama_ruangan, luas_lantai, kode_barang, nama_barang, tipe_barang, nomor_seri_pabrik, ukuran_barang, bahan_barang, tahun_perolehan, jumlah_barang, harga_barang, keadaan_barang, keterangan_barang } = req.body
+        const { kode_ruangan, nomor_register, nama_ruangan, luas_lantai, kode_barang, nama_barang, tipe_barang, nomor_seri_pabrik, ukuran_barang, bahan_barang, tahun_perolehan, jumlah_barang, harga_barang, keadaan_barang, keterangan_barang, asal_usul } = req.body
         const ruangan = await RuanganDAO.newRuangan(
             kode_ruangan,
             nomor_register,
@@ -103,7 +103,7 @@ export const getJumlahBarangByNamaBarang = async (req, res, next) => {
             }
         })
     } catch (error) {
-        
+        next(error)
     }
 }
 
@@ -157,6 +157,35 @@ export const deleteRuanganByKoderuangan = async (req, res, next) => {
             const error = new Error('Delete ruangan By kode ruangan gagal')
             throw error
         }
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const jumlahHargaByNamaRuangan = async (req, res, next) => {
+    try {
+        const { nama_ruangan } = req.params
+        const jumlahHargaByNamaRuangan = await RuanganDAO.countJumlahHargaByRuangan(nama_ruangan)
+        console.log(jumlahHargaByNamaRuangan)
+        res.status(200).json({
+            data: {
+                jumlahHargaByNamaRuangan
+            }
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const jumlahHargaAllRuangan = async (req, res, next) => {
+    try {
+        const jumlahHargaAllRuangan = await RuanganDAO.countJumlahHargaAllRuangan()
+        console.log(jumlahHargaAllRuangan)
+        res.status(200).json({
+            data: {
+                jumlahHargaAllRuangan
+            }
+        })
     } catch (error) {
         next(error)
     }
