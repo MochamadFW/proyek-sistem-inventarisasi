@@ -31,7 +31,8 @@ const theme = createTheme({
     },
     font: {
       main: "#263238",
-      white: "#FFFFFF"
+      white: "#FFFFFF",
+      gray:'#EEEEEE',
     },
     button: {
       main: '#F2D424',
