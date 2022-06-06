@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 
-const SubmitButton = ({sx = [], Label, Types }) => {
+const SubmitButton = ({sx = [], Label, Types, Click }) => {
 
     return (
         <Button
@@ -22,7 +22,9 @@ const SubmitButton = ({sx = [], Label, Types }) => {
                     ...(Array.isArray(sx) ? sx : [sx]),
                 ]
             }
-            variant="contained">
+            variant="contained"
+            onClick={Click}
+            >
             {Label}
         </Button>
     )
