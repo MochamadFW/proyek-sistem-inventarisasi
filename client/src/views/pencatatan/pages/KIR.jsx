@@ -93,7 +93,7 @@ const PencatatanKib = () => {
   const ActionsPagiantion = () => {return (<></>)};
   function defaultLabelDisplayedRows({ from, to, count }) { return ``; };
   return (
-    <Layout>
+    <React.Fragment>
       <Box
         sx={{
           maxWidth: 1,
@@ -354,23 +354,6 @@ const PencatatanKib = () => {
           title="Kartu Inventaris Ruangan Kepala Dinas"
           sx={{maxWidth:686}}
         >
-          
-          <FormControl variant="filled" sx={{ mb: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-filled-label">Ruangan</InputLabel>
-            <Select
-              labelId="demo-simple-select-filled-label"
-              id="demo-simple-select-filled"
-              value={ruangan}
-              onChange={handleChangeRuangan}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Staff Umum</MenuItem>
-              <MenuItem value={20}>R. Kepala Dinas</MenuItem>
-              <MenuItem value={30}>R. Sektretaris Dinas</MenuItem>
-            </Select>
-          </FormControl>
           <TableContainer 
             component={Paper}
           >
@@ -468,7 +451,7 @@ const PencatatanKib = () => {
           </Box>
         </FormBox>
       </Box>
-    </Layout>
+    </React.Fragment>
   );
 }
 

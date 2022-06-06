@@ -107,6 +107,20 @@ export const countLogin = async (USERNAME, PASSWORD, TOTAL_LOGIN, updatedAt) => 
 //     }
 // }
 
+export const findUserById = async (ID) => {
+    try {
+        const user = await User.findOne({
+            where: {
+                id: ID
+            }
+        })
+        if (user)
+            return user
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const findUserByUsername = async (USERNAME) => {
     try {
         const user = await User.findOne({
@@ -116,6 +130,27 @@ export const findUserByUsername = async (USERNAME) => {
         })
         if (user)
             return user
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const updateUser = async (ID, USERNAME, PASSWORD, ROLE, updatedAt) => {
+    try {
+        const user = await User.update(
+            {
+                username: USERNAME,
+                password: PASSWORD,
+                user_role: ROLE,
+                updatedAt: updatedAt
+            },
+            {
+                where: {
+                    id: ID
+                }
+            }
+        )
+        return user
     } catch (error) {
         console.log(error)
     }
@@ -135,6 +170,19 @@ export const updatePassword = async (USERNAME, PASSWORD, updatedAt) => {
             }
         )
         return user
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const deleteUserById = async (ID) => {
+    try {
+        const result = await User.destroy({
+            where: {
+                id: ID
+            }
+        })
+        return result
     } catch (error) {
         console.log(error)
     }

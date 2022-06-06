@@ -14,6 +14,10 @@ import InputBase from '@mui/material/InputBase';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
 
 function createData(no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, harga, baik, kbaik, rberat, ketmutasi) {
   return { no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, harga, baik, kbaik, rberat, ketmutasi};
@@ -45,6 +49,12 @@ const PenggunaKir = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   
+  const [ruangan, setRuangan] = React.useState('');
+
+  const handleChangeRuangan = (event) => {
+    setRuangan(event.target.value);
+  };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -55,19 +65,27 @@ const PenggunaKir = () => {
   };
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  
+  const ActionsPagiantion = () => {return (<></>)};
+  function defaultLabelDisplayedRows({ from, to, count }) { return ``; };
+  
   return (
-    <Layout>
+    <React.Fragment>
+      
       <Box
         component="div"
         sx={{
+          width: 1,
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'space-between',
+          justifyContent: 'flex-start',
           alignItems: 'center',
-          mb: 3
+          mb: 2,
+          ml: "auto",
         }}
       >
         <TablePagination
+          sx={{ml: -4}}
           rowsPerPageOptions={[5, 10, 15, 25, 100]}
           component="div"
           count={rows.length}
@@ -76,15 +94,34 @@ const PenggunaKir = () => {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
           labelRowsPerPage=""
+          ActionsComponent={ActionsPagiantion}
+          labelDisplayedRows={defaultLabelDisplayedRows}
         />
+        <FormControl variant="filled" sx={{ minWidth: 120 }}>
+          <InputLabel id="demo-simple-select-filled-label">Ruangan</InputLabel>
+          <Select
+            labelId="demo-simple-select-filled-label"
+            id="demo-simple-select-filled"
+            value={ruangan}
+            onChange={handleChangeRuangan}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>Staff Umum</MenuItem>
+            <MenuItem value={20}>R. Kepala Dinas</MenuItem>
+            <MenuItem value={30}>R. Sektretaris Dinas</MenuItem>
+          </Select>
+        </FormControl>
         <Paper
           component="form"
-          sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 237 }}
+          sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 237, bgcolor: "#E5E5E5", ml: "auto" }}
         >
           <InputBase
             sx={{ ml: 1, flex: 1 }}
             placeholder="Search"
             inputProps={{ 'aria-label': 'search' }}
+            variant="filled"
           />
           <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
             <SearchIcon />
@@ -175,7 +212,7 @@ const PenggunaKir = () => {
           }}
         />
       </Box>
-    </Layout>
+    </React.Fragment>
   );
 }
 

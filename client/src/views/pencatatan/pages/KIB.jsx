@@ -25,6 +25,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
 import FormBox from '../../shared/components/formBox';
 import CloseIcon from '@mui/icons-material/Close';
+import { Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const headerRow = [
   "",
@@ -194,7 +196,7 @@ const PencatatanKib = () => {
   };
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - dataTable.length) : 0;
-  const ActionsPagiantion = () => {return (<></>)};
+  const ActionsPagiantion = () => { return (<></>) };
   function defaultLabelDisplayedRows({ from, to, count }) { return ``; };
 
   // refresh page function for updating data after submit
@@ -203,7 +205,7 @@ const PencatatanKib = () => {
   };
 
   return (
-    <Layout>
+    <React.Fragment>
       <Box
         sx={{
           maxWidth: 1,
@@ -503,14 +505,14 @@ const PencatatanKib = () => {
           sx={{maxWidth:1, height: 919}}
         >
 
-          <TableContainer 
+          <TableContainer
             component={Paper}
             sx={{ maxHeight: 672, overflow: 'auto' }}
           >
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow
-                  sx={{bgcolor:'#66BB6A'}}
+                  sx={{ bgcolor: '#66BB6A' }}
                 >
                   <TableCell sx={{ border: 0 }} align="center" colSpan={9} />
                   <TableCell sx={{ border: 1, borderTop: 0 }} align="center" colSpan={5}>
@@ -519,7 +521,7 @@ const PencatatanKib = () => {
                   <TableCell sx={{ border: 0 }} align="center" colSpan={2} />
                 </TableRow>
                 <TableRow
-                  sx={{bgcolor:'#66BB6A'}}
+                  sx={{ bgcolor: '#66BB6A' }}
                 >
                   {headerRow.map((htxt, index) => (
                     <TableCell sx={{ border: 1, '&:first-of-type': {borderLeft: 0, borderTop: 0}, '&:last-child': {borderRight: 0} }} align="center">{htxt}</TableCell>
@@ -889,7 +891,7 @@ const PencatatanKib = () => {
           </Box>
         </FormBox>
       </Box>
-    </Layout>
+    </React.Fragment>
   );
 }
 

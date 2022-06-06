@@ -56,7 +56,7 @@ const PenggunaKib = () => {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
   return (
-    <Layout>
+    <React.Fragment>
       <Box
         component="div"
         sx={{
@@ -173,7 +173,7 @@ const PenggunaKib = () => {
           }}
         />
       </Box>
-    </Layout>
+    </React.Fragment>
   );
 }
 

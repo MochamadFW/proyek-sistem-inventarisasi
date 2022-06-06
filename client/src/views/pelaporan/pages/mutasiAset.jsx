@@ -10,7 +10,6 @@ import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
 import Button from '../../shared/components/button';
-import Layout from '../../shared/components/layout';
 import InputBase from '@mui/material/InputBase';
 import InputLabel from '@mui/material/InputLabel';
 import Box from '@mui/material/Box';
@@ -26,9 +25,10 @@ import { Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import Modal from '@mui/material/Modal';
 
+import { useNavigate } from 'react-router-dom';
 
 function createData(no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, harga, baik, kbaik, rberat, ketmutasi) {
-  return { no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, harga, baik, kbaik, rberat, ketmutasi};
+  return { no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, harga, baik, kbaik, rberat, ketmutasi };
 }
 
 const rows = [
@@ -111,21 +111,22 @@ const PelaporanMutasiAset = () => {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-  
+
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-  const ActionsPagiantion = () => {return (<></>)};
+  const ActionsPagiantion = () => { return (<></>) };
   function defaultLabelDisplayedRows({ from, to, count }) { return ``; };
+  const navigate = useNavigate();
   return (
-    <Layout>
+    <React.Fragment>
       <Box
         sx={{
           maxWidth: 1,
@@ -220,7 +221,7 @@ const PelaporanMutasiAset = () => {
             }}
           >
             <Typography>No Register</Typography>
-            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
           </Box>
           <Box
             component="div"
@@ -232,7 +233,7 @@ const PelaporanMutasiAset = () => {
             }}
           >
             <Typography>Jenis / Nama Barang</Typography>
-            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
           </Box>
           <Box
             component="div"
@@ -244,7 +245,7 @@ const PelaporanMutasiAset = () => {
             }}
           >
             <Typography>Merk/Model</Typography>
-            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
           </Box>
           <Box
             component="div"
@@ -256,7 +257,7 @@ const PelaporanMutasiAset = () => {
             }}
           >
             <Typography>No. Seri Pabrik</Typography>
-            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
           </Box>
           <Box
             component="div"
@@ -268,7 +269,7 @@ const PelaporanMutasiAset = () => {
             }}
           >
             <Typography>Ukuran</Typography>
-            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
           </Box>
           <Box
             component="div"
@@ -280,7 +281,7 @@ const PelaporanMutasiAset = () => {
             }}
           >
             <Typography>Bahan</Typography>
-            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
           </Box>
           <Box
             component="div"
@@ -292,7 +293,7 @@ const PelaporanMutasiAset = () => {
             }}
           >
             <Typography>Tahun Perolehan</Typography>
-            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
           </Box>
           <Box
             component="div"
@@ -304,7 +305,7 @@ const PelaporanMutasiAset = () => {
             }}
           >
             <Typography>Nomor Kode</Typography>
-            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
           </Box>
           <Box
             component="div"
@@ -316,7 +317,7 @@ const PelaporanMutasiAset = () => {
             }}
           >
             <Typography>Jumlah Barang</Typography>
-            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
           </Box>
           <Box
             component="div"
@@ -328,7 +329,7 @@ const PelaporanMutasiAset = () => {
             }}
           >
             <Typography>Harga</Typography>
-            <TextField hiddenLabel id="filled-basic" label="Rp" variant="filled" sx={{width:1}} />
+            <TextField hiddenLabel id="filled-basic" label="Rp" variant="filled" sx={{ width: 1 }} />
           </Box>
           <Box
             component="div"
@@ -340,7 +341,7 @@ const PelaporanMutasiAset = () => {
             }}
           >
             <Typography>Keadaan Barang</Typography>
-            <FormControl fullWidth sx={{bgcolor:"#E8E8E8", borderBottom: 1, borderColor: "#8D8D8D", borderRadius: 1}}>
+            <FormControl fullWidth sx={{ bgcolor: "#E8E8E8", borderBottom: 1, borderColor: "#8D8D8D", borderRadius: 1 }}>
               <Select
                 value={age}
                 onChange={handleChangeSelect}
@@ -366,12 +367,12 @@ const PelaporanMutasiAset = () => {
             }}
           >
             <Typography>Keterangan</Typography>
-            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+            <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
           </Box>
           <Button
             Label="Submit"
             sx={[
-              {width: 1, bgcolor: "#66BB6A", color: "font.white"},
+              { width: 1, bgcolor: "#66BB6A", color: "font.white" },
               {
                 '&:hover': {
                   bgcolor: "#4D8A4F",
@@ -387,13 +388,13 @@ const PelaporanMutasiAset = () => {
           sx={{maxWidth:1}}
         >
 
-          <TableContainer 
+          <TableContainer
             component={Paper}
           >
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow
-                  sx={{bgcolor:'#66BB6A'}}
+                  sx={{ bgcolor: '#66BB6A' }}
                 >
                   <TableCell sx={{ border: 0 }} align="center" colSpan={1} />
                   <TableCell sx={{ border: 1, borderTop: 0 }} align="center" colSpan={3}>
@@ -405,10 +406,10 @@ const PelaporanMutasiAset = () => {
                   <TableCell sx={{ border: 0 }} align="center" colSpan={7} />
                 </TableRow>
                 <TableRow
-                  sx={{bgcolor:'#66BB6A'}}
+                  sx={{ bgcolor: '#66BB6A' }}
                 >
                   {headerRow.map((htxt, index) => (
-                    <TableCell sx={{ border: 1, '&:first-child': {borderLeft: 0, borderTop: 0}, '&:last-child': {borderRight: 0} }} align="center">{htxt}</TableCell>
+                    <TableCell sx={{ border: 1, '&:first-child': { borderLeft: 0, borderTop: 0 }, '&:last-child': { borderRight: 0 } }} align="center">{htxt}</TableCell>
                   ))}
                 </TableRow>
               </TableHead>
@@ -670,21 +671,25 @@ const PelaporanMutasiAset = () => {
           </TableContainer>
           <Box
             component="div"
-            sx={{width: 1, display: 'flex', justifyContent: 'flex-end', mt: 12}}
+            sx={{ width: 1, display: 'flex', justifyContent: 'flex-end', mt: 12 }}
           >
-            <Button
-              Label="Laporan Mutasi Barang"
-              sx={{
-                mr: 3,
-              }}
-            />
-            <Button
-              Label="Berita Acara Mutasi Barang"
-            />
+            <Box onClick={() => { navigate('/pdf', { state: { type: 'mutasi' } }) }}>
+              <Button
+                Label="Laporan Mutasi Barang"
+                sx={{
+                  mr: 3,
+                }}
+              />
+            </Box>
+            <Box onClick={() => { navigate('/pdf', { state: { type: 'bam' } }) }}>
+              <Button
+                Label="Berita Acara Mutasi Barang"
+              />
+            </Box>
           </Box>
         </FormBox>
       </Box>
-    </Layout>
+    </React.Fragment>
   );
 }
 

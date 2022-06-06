@@ -37,6 +37,19 @@ export const findAllBarang = async () => {
     }
 }
 
+export const findBarangById = async (id) => {
+    try {
+        const barang = await Barang.findOne({
+            where: {
+                id: id
+            }
+        })
+        return barang
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const findBarangByKodebarang = async (kode_barang) => {
     try {
         const barang = await Barang.findOne({
@@ -84,11 +97,11 @@ export const updateBarang = async (id, kode_barang, nama_barang, nomor_register,
     }
 }
 
-export const deleteBarang = async (kode_barang) => {
+export const deleteBarang = async (id) => {
     try {
         const result = await Barang.destroy({
             where: {
-                kode_barang: kode_barang
+                id: id
             }
         })
         return result
