@@ -57,7 +57,7 @@ const Ruangan = db.define('Ruangan', {
         allowNull: true
     },
     harga_barang: {
-        type: Sequelize.REAL,
+        type: Sequelize.INTEGER,
         allowNull: true
     },
     keadaan_barang: {
