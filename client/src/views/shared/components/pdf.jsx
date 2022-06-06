@@ -691,7 +691,6 @@ const PDF = () => {
     if (state.type === null) { return <h1>LOADING</h1> }
     const type = state.type;
     const data = state.data;
-    console.log(data)
     return (
         <Box sx={{ width: '100vw', height: '100vh', display: 'flex' }}>
             <PDFViewer style={{ p: 0, m: 0, border: 0 }} showToolbar={true} width="100%" height="100%">
