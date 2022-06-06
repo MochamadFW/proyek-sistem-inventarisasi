@@ -128,10 +128,10 @@ const PencatatanKib = () => {
     .then(response => console.log(response));
 
     // wait for adding data done & update data in table
-    setTimeout(function() { //After 3 second, set render to true
-      console.log("wait for 1 second to push data.")
-    }.bind(this), 3000)
-    getDataFromAPI();
+    setTimeout(function() { //After 1 second, set render to true
+      console.log("wait for 1 second to push data.");
+      getDataFromAPI();
+    }.bind(this), 1000)
 
     // reset form
     const resetFormData = {
@@ -163,7 +163,12 @@ const PencatatanKib = () => {
     })
     .then(response => response.json())
     .then(response => console.log(response));
-    refreshPage();
+
+    // wait for removing data done & update data in table
+    setTimeout(function() { //After 1 second, set render to true
+      console.log("wait for 1 second to push data.");
+      getDataFromAPI();
+    }.bind(this), 1000)
   };
 
   // convert integer to money for price column in table
@@ -197,11 +202,6 @@ const PencatatanKib = () => {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - dataTable.length) : 0;
   const ActionsPagiantion = () => { return (<></>) };
   function defaultLabelDisplayedRows({ from, to, count }) { return ``; };
-
-  // refresh page function for updating data after submit
-  function refreshPage() {
-    window.location.reload(false);
-  };
 
   return (
     <React.Fragment>
@@ -528,7 +528,9 @@ const PencatatanKib = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {dataTable.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                {(rowsPerPage > 0
+                ? dataTable.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                : dataTable)
                 .map((row, index) => (
                   <StyledTableRow
                     key={row.id}
