@@ -19,11 +19,18 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Icon from '@mui/material/Icon';
 import "../style/scrollbar.css"
 import { DateContext } from "../../../hooks/useDateContext";
+import { RoomContext } from "../../../hooks/useRoomContext";
 import AuthContext from "../../../context/AuthProvider";
 import useAuth from "../../../hooks/useAuth";
+import axios from "axios";
 
+const getRoom = () => {
+    axios.get("")
+}
 const Sidebar = () => {
     const { selectedDate, setSelectedDate } = useContext(DateContext);
+    const { selectedRoom, setSelectedRoom } = useContext(RoomContext);
+    const room = ["R. Kepala Dinas", "R. Sekretaris Dinas", "R. Kasubag Umpegdatin", "R. Staff Umum", "R. Kasubag Keuangan", "R. Keuangan I", "R. Keuangan II"]
     const navigate = useNavigate();
     let currentPath = useLocation();
     const [openPendataanCollapse, setOpenPendataanCollapse] = useState(false);
@@ -89,7 +96,7 @@ const Sidebar = () => {
     const [isAdmin, setIsAdmin] = useState(JSON.parse(auth?.role === "pengurus_barang"));
     const [age, setAge] = useState('');
     const handleChange = (event) => {
-        setAge(event.target.value);
+        setSelectedRoom(event.target.value)
     };
     const { setAuth } = useContext(AuthContext);
     const logout = async () => {
@@ -237,16 +244,13 @@ const Sidebar = () => {
                                                 sx={{ width: '200px' }}
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
-                                                value={age}
+                                                value={selectedRoom}
                                                 label="Age"
                                                 onChange={handleChange}>
-                                                <MenuItem value={10}>R. Kepala Dinas</MenuItem>
-                                                <MenuItem value={20}>R. Sekretaris Dinas</MenuItem>
-                                                <MenuItem value={30}>R. Kasubag Umpegdatin</MenuItem>
-                                                <MenuItem value={40}>R. Staff Umum</MenuItem>
-                                                <MenuItem value={50}>R. Kasubag Keuangan</MenuItem>
-                                                <MenuItem value={60}>R. Keuangan I</MenuItem>
-                                                <MenuItem value={70}>R. Keuangan II</MenuItem>
+                                                
+                                                {room.map((data, index) =>
+                                                    <MenuItem key={index} value={data}>{data}</MenuItem>
+                                                )}
                                             </Select>
                                         </FormControl>
                                     </ListItem>

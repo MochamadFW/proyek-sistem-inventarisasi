@@ -1,60 +1,44 @@
-import { Button, Container, Grid, Typography } from "@mui/material";
-import React from 'react';
-import { TextField, MenuItem, styled } from "@mui/material";
-import Layout from "../../shared/components/layout";
+import { Button, Container, Grid, ListItemSecondaryAction, Typography } from "@mui/material";
+import React, { useContext } from 'react';
+import { TextField, InputLabel, MenuItem, FormControl, Select } from "@mui/material";
 import { Box } from "@mui/material";
 import { createTheme, display } from "@mui/system";
 import { create } from "@mui/material/styles/createTransitions";
+import SubmitButton from "../../shared/components/button"
+import { RoomContext } from "../../../hooks/useRoomContext";
+import fetch from "node-fetch"
+
+
+// import sidebar from "../../shared/components/sidebar.jsx"
 
 
 const DashboardPenggunaBarang = () => {
-  const item = [
-    {
-      value: 'Kursi',
-      label: 'kursi',
-    },
-    {
-      value: 'Meja',
-      label: 'meja',
-    },
-    {
-      value: 'Papan Tulis',
-      label: 'papan tulis',
-    },
-    {
-      value: 'Pulpen',
-      label: 'pulpen',
-    },
-  ]
+  // const item = [
+  //   {
+  //     value: 'Kursi',
+  //     label: 'kursi',
+  //   },
+  //   {
+  //     value: 'Meja',
+  //     label: 'meja',
+  //   },
+  //   {
+  //     value: 'Papan Tulis',
+  //     label: 'papan tulis',
+  //   },
+  //   {
+  //     value: 'Pulpen',
+  //     label: 'pulpen',
+  //   },
+  // ]
 
-  const jumlah = [
-    {
-      value: '1',
-      label: '1',
-    },
-    {
-      value: '2',
-      label: '2',
-    },
-    {
-      value: '3',
-      label: '3',
-    },
-    {
-      value: '4',
-      label: '4',
-    }
-  ]
-  const [items, setItems] = React.useState('RuanganB');
-  const [jumlahbarang, setJumlahBarang] = React.useState('1');
+
+  const [items, setItems] = React.useState('Kursi');
   const handleChangeItems = (event) => {
     setItems(event.target.value);
-
   };
-  const handleChangeJumlah = (event) => {
-    setJumlahBarang(event.target.value);
-
-  };
+  const { selectedRoom, setSelectedRoom } = useContext(RoomContext)
+  console.log(selectedRoom)
   return (
     <React.Fragment>
       <Box
@@ -107,7 +91,16 @@ const DashboardPenggunaBarang = () => {
               }}
             >
               <Typography>Keberadaan Aset</Typography>
-              <TextField id="filled-basic" label="R. Kepala Dinas" variant="filled" disabled />
+              <TextField
+                id="filled-basic"
+                value={selectedRoom}
+                variant="filled"
+                disabled
+              >
+
+              </TextField>
+
+
             </Box>
           </Box>
           <Box sx={{
@@ -122,20 +115,21 @@ const DashboardPenggunaBarang = () => {
               width: '50%'
             }}>
               <Typography>Jenis / Nama Barang</Typography>
-              <TextField
-                id="filled-select"
-                select
-                label="Select Item"
-                value={items}
-                onChange={handleChangeItems}
-                variant="filled"
-              >
-                {item.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label"></InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={items}
+                  label="nama barang"
+                  onChange={handleChangeItems}
+                  variant="filled"
+                >
+                  <MenuItem value={10}>Kursi</MenuItem>
+                  <MenuItem value={20}>Meja</MenuItem>
+                  <MenuItem value={30}>Papan Tulis</MenuItem>
+                </Select>
+              </FormControl>
             </Box>
             <Box sx={{
               display: 'flex',
@@ -146,19 +140,15 @@ const DashboardPenggunaBarang = () => {
             }}>
               <Typography>Jumlah Barang</Typography>
               <TextField
-                id="filled-select"
-                select
-                label="Select Item"
-                value={jumlahbarang}
-                onChange={handleChangeJumlah}
+                id="filled-number"
+                label="Jumlah"
                 variant="filled"
-              >
-                {jumlah.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
+                type="number"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+
             </Box>
             <Box
               sx={{
@@ -189,8 +179,10 @@ const DashboardPenggunaBarang = () => {
               <TextField id="filled-basic" label="keterangan" variant="filled" />
             </Box>
           </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'row-reverse', mr: 3, mb: 3 }}>
+            <SubmitButton Label="Kirim Permintaan" Types='submit' sx={{ backgroundColor: '#F2D424' }} />
+          </Box>
         </Box>
-
       </Box>
     </React.Fragment>
   )
