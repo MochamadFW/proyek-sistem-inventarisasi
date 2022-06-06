@@ -22,11 +22,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import { Typography } from '@mui/material';
-<<<<<<< HEAD
 import Modal from '@mui/material/Modal';
-=======
 import { useNavigate } from 'react-router-dom';
->>>>>>> main
 
 function createData(no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, harga, baik, kbaik, rberat, ketmutasi) {
   return { no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, harga, baik, kbaik, rberat, ketmutasi };
@@ -114,7 +111,6 @@ const PencatatanRKB = () => {
     <React.Fragment>
       <Box
         sx={{
-<<<<<<< HEAD
           maxWidth: 1,
           display: "flex",
           flexDirection: "row",
@@ -125,49 +121,6 @@ const PencatatanRKB = () => {
         <Box
           component="div"
           sx={{width:366, flexShrink: 0, mr:2}}
-=======
-          width: 686,
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-          mb: 2,
-          ml: "auto",
-        }}
-      >
-        <TablePagination
-          sx={{ ml: -4 }}
-          rowsPerPageOptions={[5, 10, 15, 25, 100]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          labelRowsPerPage=""
-          ActionsComponent={ActionsPagiantion}
-          labelDisplayedRows={defaultLabelDisplayedRows}
-        />
-        <FormControl variant="filled" sx={{ minWidth: 120 }}>
-          <InputLabel id="demo-simple-select-filled-label">Ruangan</InputLabel>
-          <Select
-            labelId="demo-simple-select-filled-label"
-            id="demo-simple-select-filled"
-            value={ruangan}
-            onChange={handleChangeRuangan}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Staff Umum</MenuItem>
-            <MenuItem value={20}>R. Kepala Dinas</MenuItem>
-            <MenuItem value={30}>R. Sektretaris Dinas</MenuItem>
-          </Select>
-        </FormControl>
-        <Paper
-          component="form"
-          sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 237, bgcolor: "#E5E5E5", ml: "auto" }}
->>>>>>> main
         >
         </Box>
         <Box
@@ -238,11 +191,7 @@ const PencatatanRKB = () => {
       >
         <FormBox
           title="Form Input"
-<<<<<<< HEAD
           sx={{width:366, flexShrink: 0, mr:2}}
-=======
-          sx={{ width: 366, mr: 2 }}
->>>>>>> main
         >
           <Box
             component="div"
@@ -418,15 +367,9 @@ const PencatatanRKB = () => {
         </FormBox>
         <FormBox
           title="Kartu Inventaris Ruangan Kepala Dinas"
-<<<<<<< HEAD
           sx={{maxWidth:1}}
         >
           <TableContainer 
-=======
-          sx={{ maxWidth: 686 }}
-        >
-          <TableContainer
->>>>>>> main
             component={Paper}
           >
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -450,7 +393,6 @@ const PencatatanRKB = () => {
               </TableHead>
               <TableBody>
                 {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-<<<<<<< HEAD
                 .map((row, index) => (
                   <StyledTableRow
                     key={row.name}
@@ -656,42 +598,15 @@ const PencatatanRKB = () => {
                           </Box>
                         </Modal>
                         <IconButton
-                          color="primary" 
-                          aria-label="delete" 
+                          color="primary"
+                          aria-label="delete"
                           sx={[
-                            {bgcolor: "#F44336", borderRadius: 2},
-                            { '&:hover': {bgcolor: "#B83229"} }
+                            { bgcolor: "#F44336", borderRadius: 2 },
+                            { '&:hover': { bgcolor: "#B83229" } }
                           ]}
-=======
-                  .map((row, index) => (
-                    <StyledTableRow
-                      key={row.name}
-                    >
-                      <TableCell sx={{ border: 1, borderTop: 0, borderLeft: 0 }} size="small" component="th" scope="row" align="left">
-                        <Box
-                          sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}
->>>>>>> main
                         >
-                          <IconButton
-                            color="primary"
-                            aria-label="edit"
-                            sx={[
-                              { bgcolor: "#FFA726", borderRadius: 2, mr: 1 },
-                              { '&:hover': { bgcolor: "#CB841B" } }
-                            ]}
-                          >
-                            <EditIcon />
-                          </IconButton>
-                          <IconButton
-                            color="primary"
-                            aria-label="delete"
-                            sx={[
-                              { bgcolor: "#F44336", borderRadius: 2 },
-                              { '&:hover': { bgcolor: "#B83229" } }
-                            ]}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
+                          <DeleteIcon />
+                        </IconButton>
                         </Box>
                       </TableCell>
                       <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">
