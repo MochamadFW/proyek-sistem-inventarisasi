@@ -12,10 +12,6 @@ const Permintaan_Perbaikan = db.define('Permintaan_Perbaikan', {
      type: Sequelize.STRING,
      allowNull: true
  },
- tanggal_permintaan: {
-     type: Sequelize.DATE,
-     allowNull: true
- },
  keterangan_barang: {
      type: Sequelize.STRING,
      allowNull: true
