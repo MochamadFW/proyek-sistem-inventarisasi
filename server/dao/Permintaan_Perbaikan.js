@@ -40,7 +40,7 @@ export const findPermintaanById = async (ID) => {
 
 export const findPermintaanByPengaju = async (NAMA_PENGAJU) => {
     try {
-        const permintaan = await Permintaan_Perbaikan.findOne({
+        const permintaan = await Permintaan_Perbaikan.findAll({
             where:{
                 nama_pengaju: NAMA_PENGAJU
             }

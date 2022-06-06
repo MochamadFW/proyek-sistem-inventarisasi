@@ -36,6 +36,21 @@ export const getAllBarang = async (req, res, next) => {
     }
 }
 
+export const getBarangById = async (req, res, next) => {
+    try {
+        const { id } = req.params
+        const barang = await BarangDAO.findBarangById(id)
+        res.status(200).json({
+            message: 'Get Barang by Id succcess',
+            data: {
+                barang
+            }
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
 export const getBarangByKodebarang = async (req, res, next) => {
     try {
         const { kode_barang } = req.params
@@ -58,8 +73,10 @@ export const updateBarangById = async (req, res, next) => {
             req.body.tipe_barang, req.body.ukuran_barang, req.body.bahan_barang, req.body.tahun_pembelian, req.body.nomor_pabrik, 
             req.body.nomor_rangka, req.body.nomor_mesin, req.body.nomor_polisi, req.body.nomor_bpkb, req.body.asal_usul, req.body.harga_barang, req.body.keadaan_barang, req.body.keterangan_barang)
         if (updateBarang == 1){
+            const barang = await BarangDAO.findBarangById(id)
             res.status(200).json({
-                message: 'Barang berhasil diupdate'
+                message: 'Barang berhasil diupdate',
+                data: barang
             })
         } else {
             const error = new Error('Barang gagal diupdate')
@@ -70,10 +87,10 @@ export const updateBarangById = async (req, res, next) => {
     }
 }
 
-export const deleteBarangByKodebarang = async (req, res, next) => {
+export const deleteBarangById = async (req, res, next) => {
     try {
-        const { kode_barang } = req.params
-        const result = await BarangDAO.deleteBarang(kode_barang)
+        const { id } = req.params
+        const result = await BarangDAO.deleteBarang(id)
         if (result == 1) {
             res.status(200).json({
                 message: 'Delete barang berhasil'

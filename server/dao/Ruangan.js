@@ -1,11 +1,11 @@
 import sequelize from '../db.js'
 import Ruangan from '../models/Ruangan.js'
 
-export const newRuangan = async (NOMOR_REGISTER, KODE_RUANGAN, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, NOMOR_SERI_PABRIK, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KEADAAN_BARANG, KETERANGAN_BARANG) => {
+export const newRuangan = async (KODE_RUANGAN, NOMOR_REGISTER, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, NOMOR_SERI_PABRIK, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KEADAAN_BARANG, KETERANGAN_BARANG, ASAL_USUL) => {
     try {
         const ruangan = await Ruangan.create({
-            nomor_register: NOMOR_REGISTER,
             kode_ruangan: KODE_RUANGAN,
+            nomor_register: NOMOR_REGISTER,
             nama_ruangan: NAMA_RUANGAN,
             luas_lantai: LUAS_LANTAI,
             kode_barang: KODE_BARANG,
@@ -18,7 +18,8 @@ export const newRuangan = async (NOMOR_REGISTER, KODE_RUANGAN, NAMA_RUANGAN, LUA
             jumlah_barang: JUMLAH_BARANG,
             harga_barang: HARGA_BARANG,
             keadaan_barang: KEADAAN_BARANG,
-            keterangan_barang: KETERANGAN_BARANG
+            keterangan_barang: KETERANGAN_BARANG,
+            asal_usul: ASAL_USUL
         })
         return ruangan
     } catch (error) {
@@ -64,7 +65,7 @@ export const findRuanganByKoderuangan = async (KODE_RUANGAN) => {
 export const findNamaBarangByNamaRuangan = async (NAMA_RUANGAN) => {
     try {
         const namaBarang = await Ruangan.findAll({
-            attributes: ['nama_barang'],
+            // attributes: ['nama_barang'],
             where: {
                 nama_ruangan: NAMA_RUANGAN
             }
@@ -96,11 +97,12 @@ export const findJumlahBarangByNamaBarang = async (NAMA_RUANGAN, NAMA_BARANG) =>
     }
 }
 
-export const updateRuangan = async (ID, KODE_RUANGAN, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, NOMOR_SERI_PABRIK, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KEADAAN_BARANG, KETERANGAN_BARANG, UPDATEDAT) => {
+export const updateRuangan = async (ID, KODE_RUANGAN, NOMOR_REGISTER, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, NOMOR_SERI_PABRIK, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KEADAAN_BARANG, KETERANGAN_BARANG, UPDATEDAT) => {
     try {
         const ruangan = await Ruangan.update(
             {
                 kode_ruangan: KODE_RUANGAN,
+                nomor_register: NOMOR_REGISTER,
                 nama_ruangan: NAMA_RUANGAN,
                 luas_lantai: LUAS_LANTAI,
                 kode_barang: KODE_BARANG,
@@ -160,5 +162,33 @@ export const countRuangan = async () => {
         return jumlah
     } catch (error) {
         console.log(error)
+    }
+}
+
+export const countJumlahHargaByRuangan = async (NAMA_RUANGAN) => {
+    try {
+        const jumlah = await Ruangan.findAll({
+            attributes: ['nama_ruangan',[sequelize.fn('sum', sequelize.col('harga_barang')), 'Jumlah']],
+            raw: true,
+            where: {
+                nama_ruangan: NAMA_RUANGAN
+            },
+            group : ['Ruangan.nama_ruangan']
+        })
+        return jumlah
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const countJumlahHargaAllRuangan = async () => {
+    try {
+        const jumlah = await Ruangan.findAll({
+            attributes: [[sequelize.fn('sum', sequelize.col('harga_barang')), 'Jumlah']],
+            raw: true
+        })
+        return jumlah
+    } catch (error) {
+        
     }
 }
