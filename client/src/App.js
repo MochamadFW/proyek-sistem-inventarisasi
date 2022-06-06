@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { DateProvider } from "./hooks/useDateContext";
 import { KegiatanProvider } from "./hooks/useKegiatanContext";
@@ -19,7 +19,6 @@ import BukuInventarisBarang from "./views/pelaporan/pages/bukuinventarisbarang";
 import RequireAuth from "./views/shared/components/RequireAuth";
 import PencatatanRKB from "./views/pencatatan/KIR/pages/ruangKepalaDinas";
 import DashboardPenggunaBarang from "./views/dashboard/pages/dashboardpenggunabarang";
-
 import PDF from "./views/shared/components/pdf";
 
 const theme = createTheme({
@@ -63,7 +62,6 @@ function App() {
           <KegiatanProvider>
             <Routes>
               <Route path="/" element={<Layout />}>
-
                 <Route element={<RequireAuth allowedRole="pengurus_barang" />}>
                   <Route path="/" element={<DashboardAdmin />} />
                   <Route path="/pendataan" element={<Pendataan />} />
@@ -72,8 +70,8 @@ function App() {
                       <Route path="b" element={<PencatatanKib />} />
                     </Route>
                     <Route path="kir">
-                      <Route path="staff-umum" element={<PencatatanKir />} />                        
-                      <Route path="ruang-kepala-dinas" element={<PencatatanRKB/>} />
+                      <Route path="staff-umum" element={<PencatatanKir />} />
+                      <Route path="ruang-kepala-dinas" element={<PencatatanRKB />} />
                     </Route>
                   </Route>
                   <Route path="/pelaporan">
@@ -87,7 +85,7 @@ function App() {
                   <Route path="/pengguna/kir" element={<PenggunaKir />} />
                 </Route>
               </Route>
-              <Route path="/pp" element={<PDF />} />
+              <Route path="/pdf" element={<PDF />} />
               <Route path="/login" element={<Login />} />
             </Routes>
           </KegiatanProvider>
