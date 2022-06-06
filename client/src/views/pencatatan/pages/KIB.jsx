@@ -499,7 +499,7 @@ const PencatatanKib = () => {
             component="div"
             sx={{ width: 1, display: 'flex', justifyContent: 'flex-end' }}
           >
-            <Box onClick={() => { navigate("/pdf", { state: { type: 'kib' } }) }}>
+            <Box onClick={() => { navigate("/pdf", { state: { type: 'kib', data: dataTable } }) }}>
               <Button
                 Label="Laporan KIB"
                 sx={{
