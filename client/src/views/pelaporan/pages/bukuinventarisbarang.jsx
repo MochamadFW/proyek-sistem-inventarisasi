@@ -156,22 +156,22 @@ const TableBIB = ({ data, changed, setChange }) => {
     const EditRowModal = () => {
         function getEditData() { return data.filter(function (el) { return el.id === selectedID }) };
         const [dataFormBuku, setDataFormBuku] = useState(selectedID === undefined ? {
-            kode_ruangan: " ",
-            nomor_register: " ",
-            nama_ruangan: " ",
-            luas_lantai: " ",
-            kode_barang: " ",
-            nama_barang: " ",
-            tipe_barang: " ",
-            nomor_seri_pabrik: " ",
-            asal_usul: " ",
-            ukuran_barang: " ",
-            bahan_barang: " ",
-            tahun_perolehan: " ",
+            kode_ruangan: "",
+            nomor_register: "",
+            nama_ruangan: "",
+            luas_lantai: "",
+            kode_barang: "",
+            nama_barang: "",
+            tipe_barang: "",
+            nomor_seri_pabrik: "",
+            asal_usul: "",
+            ukuran_barang: "",
+            bahan_barang: "",
+            tahun_perolehan: "",
             jumlah_barang: 1,
             harga_barang: 0,
-            keadaan_barang: " ",
-            keterangan_barang: " "
+            keadaan_barang: "",
+            keterangan_barang: ""
         } : getEditData()[0]);
         const handleCloseEdit = () => {
             setEditToggle(false);
