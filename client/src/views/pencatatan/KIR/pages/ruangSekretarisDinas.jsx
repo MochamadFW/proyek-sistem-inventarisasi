@@ -768,13 +768,18 @@ const PencatatanRSD = () => {
           </Collapse>
           <Box
             component="div"
-            sx={{width: 1,  display: 'flex', justifyContent: 'flex-end', mt: 6}}
+            sx={{ width: 1, display: 'flex', justifyContent: 'flex-end', mt: 6, gap: 2 }}
           >
-            <Box onClick={() => (navigate('/pdf', { state: { type: 'label' } }))}>
-              <Button
-                Label="Laporan KIR"
-              />
-            </Box>
+            <Button
+              Label="Laporan KIR"
+              Click={() => (navigate('/pdf', { state: { type: 'kir', data: dataTable, } }))}
+              Disabled={dataTable.length > 0 ? false : true}
+            />
+            <Button
+              Label="Label"
+              Click={() => (navigate('/pdf', { state: { type: 'label', data: dataTable, } }))}
+              Disabled={dataTable.length > 0 ? false : true}
+            />
           </Box>
         </FormBox>
       </Box>

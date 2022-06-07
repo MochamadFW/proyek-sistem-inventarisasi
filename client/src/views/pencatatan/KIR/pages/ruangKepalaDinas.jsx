@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import { 
+import {
   Typography,
   Table,
   TableBody,
@@ -74,11 +74,11 @@ const PencatatanRKD = () => {
   const [dataTable, setDataTable] = React.useState([]);
   const getDataFromAPI = () => {
     fetch("http://localhost:8081/ruangan/barang/KEPALA%20DINAS%20PEKERJAAN%20UMUM")
-    .then((data) => data.json())
-    .then((data) => {
-      setDataTable(data.data.namaBarang);
-      console.log(data.data.namaBarang);
-    });
+      .then((data) => data.json())
+      .then((data) => {
+        setDataTable(data.data.namaBarang);
+        console.log(data.data.namaBarang);
+      });
   }
 
   // mount data at first loading page
@@ -110,13 +110,13 @@ const PencatatanRKD = () => {
   const handleOnChangeInput = (e) => {
     const { name, value } = e.target;
     setAddFormData(prevState => ({
-        ...prevState,
-        [name]: value
+      ...prevState,
+      [name]: value
     }));
   };
 
   // handle submit form for adding data
-  const HandleSubmit =  (event) => {
+  const HandleSubmit = (event) => {
     event.preventDefault();
     console.log(addFormData);
     fetch("http://localhost:8081/ruangan/newruangan", {
@@ -124,11 +124,11 @@ const PencatatanRKD = () => {
       body: JSON.stringify(addFormData),
       headers: { 'Content-Type': 'application/json' },
     })
-    .then(response => response.json())
-    .then(response => console.log(response));
+      .then(response => response.json())
+      .then(response => console.log(response));
 
     // wait for adding data done & update data in table
-    setTimeout(function() { //After 1 second, set render to true
+    setTimeout(function () { //After 1 second, set render to true
       console.log("wait for 1 second to push data.");
       getDataFromAPI();
     }.bind(this), 1000)
@@ -154,7 +154,7 @@ const PencatatanRKD = () => {
     }
     setAddFormData(resetFormData);
     setSuccessAlert(true);
-    setTimeout(function() { //After 8 second, set render to true
+    setTimeout(function () { //After 8 second, set render to true
       setSuccessAlert(false);
     }.bind(this), 8000)
   };
@@ -215,7 +215,7 @@ const PencatatanRKD = () => {
       >
         <Box
           component="div"
-          sx={{width:366, flexShrink: 0, mr:2}}
+          sx={{ width: 366, flexShrink: 0, mr: 2 }}
         >
         </Box>
         <Box
@@ -231,8 +231,8 @@ const PencatatanRKD = () => {
           }}
         >
           <TablePagination
-            sx={{ml: -4}}
-            rowsPerPageOptions={[10, 50, 75, {label: 'All', value: -1}]}
+            sx={{ ml: -4 }}
+            rowsPerPageOptions={[10, 50, 75, { label: 'All', value: -1 }]}
             component="div"
             count={dataTable.length}
             rowsPerPage={rowsPerPage}
@@ -286,11 +286,11 @@ const PencatatanRKD = () => {
       >
         <FormBox
           title="Form Input"
-          sx={{width:366, maxHeight: 919, flexShrink: 0, mr:2}}
+          sx={{ width: 366, maxHeight: 919, flexShrink: 0, mr: 2 }}
         >
           <Box
             component="div"
-            sx={{pr: 1, pb: 2, m: 0, width: 1, maxHeight: 800, overflow: 'auto'}}
+            sx={{ pr: 1, pb: 2, m: 0, width: 1, maxHeight: 800, overflow: 'auto' }}
           >
             <form
               onSubmit={HandleSubmit}
@@ -473,9 +473,9 @@ const PencatatanRKD = () => {
         </FormBox>
         <FormBox
           title="Kartu Inventaris Ruangan Kepala Dinas"
-          sx={{maxWidth:1, height: 919}}
+          sx={{ maxWidth: 1, height: 919 }}
         >
-          <TableContainer 
+          <TableContainer
             component={Paper}
             sx={{ maxHeight: 672, overflow: 'auto' }}
           >
@@ -500,222 +500,222 @@ const PencatatanRKD = () => {
               </TableHead>
               <TableBody>
                 {(rowsPerPage > 0
-                ? dataTable.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                : dataTable)
-                .map((row, index) => (
-                  <StyledTableRow
-                    key={row.id}
-                  >
-                    <TableCell sx={{ border: 1, borderTop:0, borderLeft: 0 }} size="small" component="th" scope="row" align="left">
-                      <Box
-                        sx={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}
-                      >
-                        <IconButton
-                          onClick={handleOpen}
-                          color="primary" 
-                          aria-label="edit" 
-                          sx={[
-                            {bgcolor: "#FFA726", borderRadius: 2, mr:1},
-                            { '&:hover': {bgcolor: "#CB841B"} }
-                          ]}
+                  ? dataTable.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : dataTable)
+                  .map((row, index) => (
+                    <StyledTableRow
+                      key={row.id}
+                    >
+                      <TableCell sx={{ border: 1, borderTop: 0, borderLeft: 0 }} size="small" component="th" scope="row" align="left">
+                        <Box
+                          sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}
                         >
-                          <EditIcon />
-                        </IconButton>
-                        <Modal
-                          open={open}
-                          onClose={handleClose}
-                          aria-labelledby="modal-modal-title"
-                          aria-describedby="modal-modal-description"
-                        >
-                          <Box sx={[
-                            style
-                          ]}>
-                            <FormBox
-                              title="Edit Form"
-                              sx={{width:366, maxHeight: 600, flexShrink: 0, overflow: 'auto'}}
-                            >
-                              <Box
-                                component="div"
-                                sx={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  justifyContent: "flex-start",
-                                  mb: 2
-                                }}
+                          <IconButton
+                            onClick={handleOpen}
+                            color="primary"
+                            aria-label="edit"
+                            sx={[
+                              { bgcolor: "#FFA726", borderRadius: 2, mr: 1 },
+                              { '&:hover': { bgcolor: "#CB841B" } }
+                            ]}
+                          >
+                            <EditIcon />
+                          </IconButton>
+                          <Modal
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                          >
+                            <Box sx={[
+                              style
+                            ]}>
+                              <FormBox
+                                title="Edit Form"
+                                sx={{ width: 366, maxHeight: 600, flexShrink: 0, overflow: 'auto' }}
                               >
-                                <Typography>Kode Barang</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
-                              </Box>
-                              <Box
-                                component="div"
-                                sx={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  justifyContent: "flex-start",
-                                  mb: 2
-                                }}
-                              >
-                                <Typography>Jenis / Nama Barang</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
-                              </Box>
-                              <Box
-                                component="div"
-                                sx={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  justifyContent: "flex-start",
-                                  mb: 2
-                                }}
-                              >
-                                <Typography>Merk/Model</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
-                              </Box>
-                              <Box
-                                component="div"
-                                sx={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  justifyContent: "flex-start",
-                                  mb: 2
-                                }}
-                              >
-                                <Typography>No. Seri Pabrik</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
-                              </Box>
-                              <Box
-                                component="div"
-                                sx={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  justifyContent: "flex-start",
-                                  mb: 2
-                                }}
-                              >
-                                <Typography>Ukuran</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
-                              </Box>
-                              <Box
-                                component="div"
-                                sx={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  justifyContent: "flex-start",
-                                  mb: 2
-                                }}
-                              >
-                                <Typography>Bahan</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
-                              </Box>
-                              <Box
-                                component="div"
-                                sx={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  justifyContent: "flex-start",
-                                  mb: 2
-                                }}
-                              >
-                                <Typography>Tahun Perolehan</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
-                              </Box>
-                              <Box
-                                component="div"
-                                sx={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  justifyContent: "flex-start",
-                                  mb: 2
-                                }}
-                              >
-                                <Typography>Nomor Kode</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
-                              </Box>
-                              <Box
-                                component="div"
-                                sx={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  justifyContent: "flex-start",
-                                  mb: 2
-                                }}
-                              >
-                                <Typography>Jumlah Barang</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
-                              </Box>
-                              <Box
-                                component="div"
-                                sx={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  justifyContent: "flex-start",
-                                  mb: 2
-                                }}
-                              >
-                                <Typography>Harga</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="Rp" variant="filled" sx={{width:1}} />
-                              </Box>
-                              <Box
-                                component="div"
-                                sx={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  justifyContent: "flex-start",
-                                  mb: 2
-                                }}
-                              >
-                                <Typography>Keadaan Barang</Typography>
-                                <FormControl fullWidth sx={{bgcolor:"#E8E8E8", borderBottom: 1, borderColor: "#8D8D8D", borderRadius: 1}}>
-                                  <Select
-                                    value={addFormData.keadaan_barang}
-                                    onChange={handleOnChangeInput}
-                                    displayEmpty
-                                    inputProps={{ 'aria-label': 'Without label' }}
-                                  >
-                                    <MenuItem value="">
-                                      <em>None</em>
-                                    </MenuItem>
-                                    <MenuItem value={10}>Baik</MenuItem>
-                                    <MenuItem value={20}>Kurang Baik</MenuItem>
-                                    <MenuItem value={30}>Rusak Berat</MenuItem>
-                                  </Select>
-                                </FormControl>
-                              </Box>
-                              <Box
-                                component="div"
-                                sx={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  justifyContent: "flex-start",
-                                  mb: 2
-                                }}
-                              >
-                                <Typography>Keterangan</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
-                              </Box>
-                              <Button
-                                Label="Submit Edit"
-                                sx={[
-                                  {width: 1, bgcolor: "#66BB6A", color: "font.white"},
-                                  {
-                                    '&:hover': {
-                                      bgcolor: "#4D8A4F",
-                                    },
-                                  }
-                                ]}
-                              />
-                            </FormBox>
-                          </Box>
-                        </Modal>
-                        <IconButton
-                          color="primary"
-                          aria-label="delete"
-                          sx={[
-                            { bgcolor: "#F44336", borderRadius: 2 },
-                            { '&:hover': { bgcolor: "#B83229" } }
-                          ]}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
+                                <Box
+                                  component="div"
+                                  sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "flex-start",
+                                    mb: 2
+                                  }}
+                                >
+                                  <Typography>Kode Barang</Typography>
+                                  <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                </Box>
+                                <Box
+                                  component="div"
+                                  sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "flex-start",
+                                    mb: 2
+                                  }}
+                                >
+                                  <Typography>Jenis / Nama Barang</Typography>
+                                  <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                </Box>
+                                <Box
+                                  component="div"
+                                  sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "flex-start",
+                                    mb: 2
+                                  }}
+                                >
+                                  <Typography>Merk/Model</Typography>
+                                  <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                </Box>
+                                <Box
+                                  component="div"
+                                  sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "flex-start",
+                                    mb: 2
+                                  }}
+                                >
+                                  <Typography>No. Seri Pabrik</Typography>
+                                  <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                </Box>
+                                <Box
+                                  component="div"
+                                  sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "flex-start",
+                                    mb: 2
+                                  }}
+                                >
+                                  <Typography>Ukuran</Typography>
+                                  <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                </Box>
+                                <Box
+                                  component="div"
+                                  sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "flex-start",
+                                    mb: 2
+                                  }}
+                                >
+                                  <Typography>Bahan</Typography>
+                                  <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                </Box>
+                                <Box
+                                  component="div"
+                                  sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "flex-start",
+                                    mb: 2
+                                  }}
+                                >
+                                  <Typography>Tahun Perolehan</Typography>
+                                  <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                </Box>
+                                <Box
+                                  component="div"
+                                  sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "flex-start",
+                                    mb: 2
+                                  }}
+                                >
+                                  <Typography>Nomor Kode</Typography>
+                                  <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                </Box>
+                                <Box
+                                  component="div"
+                                  sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "flex-start",
+                                    mb: 2
+                                  }}
+                                >
+                                  <Typography>Jumlah Barang</Typography>
+                                  <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                </Box>
+                                <Box
+                                  component="div"
+                                  sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "flex-start",
+                                    mb: 2
+                                  }}
+                                >
+                                  <Typography>Harga</Typography>
+                                  <TextField hiddenLabel id="filled-basic" label="Rp" variant="filled" sx={{ width: 1 }} />
+                                </Box>
+                                <Box
+                                  component="div"
+                                  sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "flex-start",
+                                    mb: 2
+                                  }}
+                                >
+                                  <Typography>Keadaan Barang</Typography>
+                                  <FormControl fullWidth sx={{ bgcolor: "#E8E8E8", borderBottom: 1, borderColor: "#8D8D8D", borderRadius: 1 }}>
+                                    <Select
+                                      value={addFormData.keadaan_barang}
+                                      onChange={handleOnChangeInput}
+                                      displayEmpty
+                                      inputProps={{ 'aria-label': 'Without label' }}
+                                    >
+                                      <MenuItem value="">
+                                        <em>None</em>
+                                      </MenuItem>
+                                      <MenuItem value={10}>Baik</MenuItem>
+                                      <MenuItem value={20}>Kurang Baik</MenuItem>
+                                      <MenuItem value={30}>Rusak Berat</MenuItem>
+                                    </Select>
+                                  </FormControl>
+                                </Box>
+                                <Box
+                                  component="div"
+                                  sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "flex-start",
+                                    mb: 2
+                                  }}
+                                >
+                                  <Typography>Keterangan</Typography>
+                                  <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                </Box>
+                                <Button
+                                  Label="Submit Edit"
+                                  sx={[
+                                    { width: 1, bgcolor: "#66BB6A", color: "font.white" },
+                                    {
+                                      '&:hover': {
+                                        bgcolor: "#4D8A4F",
+                                      },
+                                    }
+                                  ]}
+                                />
+                              </FormBox>
+                            </Box>
+                          </Modal>
+                          <IconButton
+                            color="primary"
+                            aria-label="delete"
+                            sx={[
+                              { bgcolor: "#F44336", borderRadius: 2 },
+                              { '&:hover': { bgcolor: "#B83229" } }
+                            ]}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
                         </Box>
                       </TableCell>
                       <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">
@@ -768,13 +768,18 @@ const PencatatanRKD = () => {
           </Collapse>
           <Box
             component="div"
-            sx={{width: 1,  display: 'flex', justifyContent: 'flex-end', mt: 6}}
+            sx={{ width: 1, display: 'flex', justifyContent: 'flex-end', mt: 6, gap: 2 }}
           >
-            <Box onClick={() => (navigate('/pdf', { state: { type: 'label' } }))}>
-              <Button
-                Label="Laporan KIR"
-              />
-            </Box>
+            <Button
+              Label="Laporan KIR"
+              Click={() => (navigate('/pdf', { state: { type: 'kir', data: dataTable, } }))}
+              Disabled={dataTable.length > 0 ? false : true}
+            />
+            <Button
+              Label="Label"
+              Click={() => (navigate('/pdf', { state: { type: 'label', data: dataTable, } }))}
+              Disabled={dataTable.length > 0 ? false : true}
+            />
           </Box>
         </FormBox>
       </Box>

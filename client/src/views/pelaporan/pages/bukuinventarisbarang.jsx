@@ -23,6 +23,7 @@ import {
     Snackbar,
     Alert,
     Modal,
+    CircularProgress,
 } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -56,12 +57,16 @@ const NotificationKegiatan = ({ data }) => {
                 <Typography variant="h6" color="font.white">Notifikasi</Typography>
             </Box>
             <Box className="menu" sx={{ width: '320px', maxHeight: '100%', gap: 2, display: 'flex', flexDirection: 'column', px: 3, py: 2, overflowX: 'hidden', overflowY: 'scroll', userSelect: "none", MozUserSelect: "none" }}>
-                {data.map((datas, index) => (
-                    <Box sx={{ width: '100%', borderBottom: index === (data.length - 1) ? '' : '1px solid rgba(0,0,0,.1)', wordBreak: 'break-all' }} key={index}>
-                        <Typography variant="subtitle2">{moment(datas.tanggalKegiatan).format("DD MMMM YYYY")}</Typography>
-                        <Typography variant="body1">{datas.namaKegiatan}</Typography>
-                    </Box>)
-                )}
+                {data === undefined ?
+                    <Box sx={{ width: '100%', wordBreak: 'break-all' }}>
+                        <Typography variant="body1" color="#CCCCCC">Tidak terdapat kegiatan</Typography>
+                    </Box>
+                    : data.map((datas, index) => (
+                        <Box sx={{ width: '100%', borderBottom: index === (data.length - 1) ? '' : '1px solid rgba(0,0,0,.1)', wordBreak: 'break-all' }} key={index}>
+                            <Typography variant="subtitle2">{moment(new Date(datas.tanggal_kegiatan)).format("DD MMMM YYYY")}</Typography>
+                        <Typography variant="body1">{datas.nama_kegiatan}</Typography>
+                        </Box>)
+                    )}
             </Box>
         </Box >
     )
@@ -187,7 +192,7 @@ const TableBIB = ({ data, changed, setChange }) => {
                     body: JSON.stringify(
                         {
                             nomor_register: "",
-                            kode_ruangan: "",                            
+                            kode_ruangan: "",
                             nama_ruangan: "",
                             luas_lantai: "",
                             kode_barang: dataFormBuku.kode_barang,
@@ -236,7 +241,12 @@ const TableBIB = ({ data, changed, setChange }) => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={[style]}>
+                <Box sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                }}>
                     <FormBox
                         title="Form Input"
                         sx={{ maxHeight: '80vh', overflowY: 'scroll' }}
@@ -588,6 +598,7 @@ const TableBIB = ({ data, changed, setChange }) => {
                         sx={{
                             mt: 12,
                         }}
+                        Disabled={data.length > 0 ? false : true}
                         Click={() => { navigate("/pdf", { state: { type: 'bib', data: data } }) }}
                     />
                 </Box>
@@ -700,6 +711,7 @@ const BukuInventarisBarang = () => {
         setOpenSnackBar(false);
     };
     if (dataAllRuangan === undefined) { return <h1>Loading</h1> }
+    console.log(selectedKegiatan)
     return (
         <React.Fragment>
             <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
