@@ -16,9 +16,14 @@ import PencatatanKir from './views/pencatatan/pages/KIR'
 import PelaporanMutasiAset from "./views/pelaporan/pages/mutasiAset";
 import BukuInventarisBarang from "./views/pelaporan/pages/bukuinventarisbarang";
 import RequireAuth from "./views/shared/components/RequireAuth";
-import PencatatanRKB from "./views/pencatatan/KIR/pages/ruangKepalaDinas";
 import DashboardPenggunaBarang from "./views/dashboard/pages/dashboardpenggunabarang";
 import PDF from "./views/shared/components/pdf";
+import PencatatanRKD from "./views/pencatatan/KIR/pages/ruangKepalaDinas";
+import PencatatanRSD from "./views/pencatatan/KIR/pages/ruangSekretarisDinas";
+import PencatatanRKU from "./views/pencatatan/KIR/pages/ruangKasubagUmpegdatin";
+import PencatatanRSU from "./views/pencatatan/KIR/pages/ruangStaffUmum";
+import PencatatanRKK from "./views/pencatatan/KIR/pages/ruangKasubagKeuangan";
+import PencatatanRKI from "./views/pencatatan/KIR/pages/ruangKeuanganI";
 
 const theme = createTheme({
   palette: {
@@ -70,7 +75,12 @@ function App() {
                     </Route>
                     <Route path="kir">
                       <Route path="staff-umum" element={<PencatatanKir />} />
-                      <Route path="ruang-kepala-dinas" element={<PencatatanRKB />} />
+                      <Route path="ruang-kepala-dinas" element={<PencatatanRKD />} />
+                      <Route path="ruang-sekretaris-dinas" element={<PencatatanRSD />} />
+                      <Route path="ruang-kasubag-umpegdatin" element={<PencatatanRKU />} />
+                      <Route path="ruang-staff-umum" element={<PencatatanRSU />} />
+                      <Route path="ruang-kasubag-keuangan" element={<PencatatanRKK />} />
+                      <Route path="ruang-keuangan-i" element={<PencatatanRKI />} />
                     </Route>
                   </Route>
                   <Route path="/pelaporan">

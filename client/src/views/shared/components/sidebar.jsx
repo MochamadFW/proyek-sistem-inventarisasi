@@ -74,11 +74,11 @@ const Sidebar = () => {
             name: 'Kartu Inventaris Ruangan (KIR)',
             menu: [
                 { id: 1, name: 'R. Kepala Dinas', link: '/pencatatan/kir/ruang-kepala-dinas' },
-                { id: 2, name: 'R. Sekretaris Dinas', link: '#' },
-                { id: 3, name: 'R. Kasubag Umpegdatin', link: '#' },
-                { id: 4, name: 'R. Staff Umum', link: '/pencatatan/kir/staff-umum' },
-                { id: 5, name: 'R. Kasubag Keuangan', link: '#' },
-                { id: 6, name: 'R. Keuangan I', link: '#' },
+                { id: 2, name: 'R. Sekretaris Dinas', link: '/pencatatan/kir/ruang-sekretaris-dinas' },
+                { id: 3, name: 'R. Kasubag Umpegdatin', link: '/pencatatan/kir/ruang-kasubag-umpegdatin' },
+                { id: 4, name: 'R. Staff Umum', link: '/pencatatan/kir/ruang-staff-umum' },
+                { id: 5, name: 'R. Kasubag Keuangan', link: '/pencatatan/kir/ruang-kasubag-keuangan' },
+                { id: 6, name: 'R. Keuangan I', link: '/pencatatan/kir/ruang-keuangan-i' },
             ]
         }
     ];
