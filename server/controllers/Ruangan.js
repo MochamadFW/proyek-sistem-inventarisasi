@@ -110,8 +110,8 @@ export const updateRuanganById = async (req, res, next) => {
     try {
         const { id } = req.params
         const updateRuangan = await RuanganDAO.updateRuangan(id, req.body.kode_ruangan, req.body.nomor_resgister, req.body.nama_ruangan, req.body.luas_lantai, req.body.kode_barang, 
-            req.body.nama_barang, req.body.tipe_barang, req.body.ukuran_barang, req.body.bahan_barang, req.body.tahun_perolehan, req.body.jumlah_barang, 
-            req.body.harga_barang, req.body. keterangan_barang)
+            req.body.nama_barang, req.body.tipe_barang, req.nomor_seri_pabrik, req.body.ukuran_barang, req.body.bahan_barang, req.body.tahun_perolehan, req.body.jumlah_barang, 
+            req.body.harga_barang, req.body.keadaan_barang, req.body.keterangan_barang, req.body.asal_usul)
         if (updateRuangan == 1 ) {
             const ruangan = await RuanganDAO.findRuanganById(id)
             res.status(200).json({
