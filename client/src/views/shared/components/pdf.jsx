@@ -202,7 +202,7 @@ const KIR = ({ data }) => {
                     <View style={[{ width: '7%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.tahun_perolehan} </Text></View>
                     <View style={[{ width: '9%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.kode_barang} </Text></View>
                     <View style={[{ width: '9%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.jumlah_barang} </Text></View>
-                    <View style={[{ width: '9%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>Rp{toCurrency.format(data.harga_barang)} </Text></View>
+                    <View style={[{ width: '9%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{toCurrency.format(data.harga_barang)} </Text></View>
                     <View style={{ width: '15%', display: "flex", flexDirection: 'column', alignItems: 'center' }}>
                         <View style={{ display: 'flex', flexDirection: 'row' }}>
                             <View style={[{ width: "33%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.keadaan_barang === "Baik" ? data.jumlah_barang : "-"} </Text></View>
@@ -341,7 +341,7 @@ const KIB = ({ data }) => {
                         </View>
                     </View>
                     <View style={[{ width: "7%", borderLeft: '1 solid #000000' }, styles.tableCell]}>{data.asal_usul === "" || data.asal_usul === null ? null : <Text>{data.asal_usul}</Text>}</View>
-                    <View style={[{ width: "7%", borderLeft: '1 solid #000000' }, styles.tableCell]}>{data.harga_barang === "" || data.harga_barang === null ? null : <Text>Rp{toCurrency.format(data.harga_barang)}</Text>}</View>
+                    <View style={[{ width: "7%", borderLeft: '1 solid #000000' }, styles.tableCell]}>{data.harga_barang === "" || data.harga_barang === null ? null : <Text>{toCurrency.format(data.harga_barang)}</Text>}</View>
                 </View>
             )}
             <View style={{
@@ -513,7 +513,7 @@ const BukuInventarisBarang = ({ data }) => {
                     <View style={[{ width: '6%', borderRight: '1 solid #000000' }, styles.tableCell]}>{data.asal_usul === "" || data.asal_usul === null ? null : <Text>{data.asal_usul}</Text>}</View>
                     <View style={[{ width: '7%', borderRight: '1 solid #000000' }, styles.tableCell]}>{data.tahun_perolehan === null ? null : <Text>{data.tahun_perolehan}</Text>}</View>
                     <View style={[{ width: '6%', borderRight: '1 solid #000000' }, styles.tableCell]}>{data.jumlah_barang === "" || data.jumlah_barang === null ? null : <Text>{data.jumlah_barang}</Text>}</View>
-                    <View style={[{ width: '7%', borderRight: '1 solid #000000' }, styles.tableCell]}>{data.harga_barang === null ? null : <Text>Rp{toCurrency.format(data.harga_barang)}</Text>}</View>
+                    <View style={[{ width: '7%', borderRight: '1 solid #000000' }, styles.tableCell]}>{data.harga_barang === null ? null : <Text>{toCurrency.format(data.harga_barang)}</Text>}</View>
                     <View style={{ width: '15%', display: "flex", flexDirection: 'column', alignItems: 'center' }}>
                         <View style={{ display: 'flex', flexDirection: 'row' }}>
                             <View style={[{ width: "33%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.keadaan_barang === "Baik" ? data.jumlah_barang : "-"}</Text></View>

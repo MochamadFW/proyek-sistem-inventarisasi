@@ -568,7 +568,7 @@ const TableBIB = ({ data, changed, setChange }) => {
                                     <TableCell sx={{ border: 1 }} align="center">{row.asal_usul}</TableCell>
                                     <TableCell sx={{ border: 1 }} align="center">{row.tahun_perolehan}</TableCell>
                                     <TableCell sx={{ border: 1 }} align="center">{row.jumlah_barang}</TableCell>
-                                    <TableCell sx={{ border: 1 }} align="center">Rp{Intl.NumberFormat('en-US').format(row.harga_barang)}</TableCell>
+                                    <TableCell sx={{ border: 1 }} align="center">{Intl.NumberFormat('en-US').format(row.harga_barang)}</TableCell>
                                     <TableRow sx={{ display: 'flex', }}>
                                         <TableCell sx={{ borderRight: 1, borderBottom: 1 }} align="center"><Box sx={{ width: '28px', height: '100%' }}>{row.keadaan_barang === "Baik" ? row.jumlah_barang : "-"}</Box></TableCell>
                                         <TableCell sx={{ borderRight: 1, borderBottom: 1 }} align="center"><Box sx={{ width: '48px', height: '100%' }}>{row.keadaan_barang === "Kurang Baik" ? row.jumlah_barang : "-"}</Box></TableCell>
@@ -623,22 +623,22 @@ const BukuInventarisBarang = () => {
     const [dataAllRuangan, setDataAllRuangan] = useState();
     const [dataFormBuku, setDataFormBuku] = useState(
         {
-            kode_ruangan: " ",
-            nomor_register: " ",
-            nama_ruangan: " ",
-            luas_lantai: " ",
-            kode_barang: " ",
-            nama_barang: " ",
-            tipe_barang: " ",
-            nomor_seri_pabrik: " ",
-            asal_usul: " ",
-            ukuran_barang: " ",
-            bahan_barang: " ",
-            tahun_perolehan: " ",
+            kode_ruangan: "",
+            nomor_register: "",
+            nama_ruangan: "",
+            luas_lantai: "",
+            kode_barang: "",
+            nama_barang: "",
+            tipe_barang: "",
+            nomor_seri_pabrik: "",
+            asal_usul: "",
+            ukuran_barang: "",
+            bahan_barang: "",
+            tahun_perolehan: "",
             jumlah_barang: 1,
             harga_barang: 0,
-            keadaan_barang: " ",
-            keterangan_barang: " "
+            keadaan_barang: "",
+            keterangan_barang: ""
         }
     );
     const [deletedData, setDeletedData] = useState(false);
