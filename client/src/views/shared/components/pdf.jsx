@@ -499,7 +499,7 @@ const BukuInventarisBarang = ({ data }) => {
                     borderLeft: '1 solid #000000',
                     borderBottom: '1 solid #000000'
                 }}>
-                    <View style={[{ width: '4%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.id}</Text></View>
+                    <View style={[{ width: '4%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{index+1}</Text></View>
                     <View style={[{ width: '12%', borderRight: '1 solid #000000' }, styles.tableCell]}>{data.kode_barang === "" || data.kode_barang === null ? null : <Text>{data.kode_barang}</Text>}</View>
                     <View style={[{ width: '13%', borderRight: '1 solid #000000' }, styles.tableCell]}>{data.nama_barang === "" || data.nama_barang === null ? null : <Text>{data.nama_barang}</Text>}</View>
                     <View style={[{ width: '7%', borderRight: '1 solid #000000' }, styles.tableCell]}>{data.tipe_barang === "" || data.tipe_barang === null ? null : <Text>{data.tipe_barang}</Text>}</View>
