@@ -504,7 +504,7 @@ const PencatatanRKI = () => {
                 : dataTable)
                 .map((row, index) => (
                   <StyledTableRow
-                    key={row.id}
+                    key={index + 1}
                   >
                     <TableCell sx={{ border: 1, borderTop:0, borderLeft: 0 }} size="small" component="th" scope="row" align="left">
                       <Box
@@ -719,7 +719,7 @@ const PencatatanRKI = () => {
                         </Box>
                       </TableCell>
                       <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">
-                        {row.id}
+                        {index + 1}
                       </TableCell>
                       <TableCell sx={{ border: 1 }} align="center">{row.nama_barang}</TableCell>
                       <TableCell sx={{ border: 1 }} align="center">{row.tipe_barang}</TableCell>

@@ -64,7 +64,7 @@ const NotificationKegiatan = ({ data }) => {
                     : data.map((datas, index) => (
                         <Box sx={{ width: '100%', borderBottom: index === (data.length - 1) ? '' : '1px solid rgba(0,0,0,.1)', wordBreak: 'break-all' }} key={index}>
                             <Typography variant="subtitle2">{moment(new Date(datas.tanggal_kegiatan)).format("DD MMMM YYYY")}</Typography>
-                        <Typography variant="body1">{datas.nama_kegiatan}</Typography>
+                            <Typography variant="body1">{datas.nama_kegiatan}</Typography>
                         </Box>)
                     )}
             </Box>
@@ -449,160 +449,171 @@ const TableBIB = ({ data, changed, setChange }) => {
             </Modal>
         )
     }
-
+    const [searchedTable, setSearchedTable] = useState(data);
+    const [searchValue, setSearchValue] = useState("");
+    function handleSearch(event) {
+        setSearchValue(event.target.value);
+        let result = [];
+        result = data.filter((data) => { return data.nama_barang.toLowerCase().search(searchValue.toLowerCase()) != -1; });
+        if (event.target.value.length <= 0) { setSearchedTable(data) };
+        setSearchedTable(result);
+    };
     return (
         <React.Fragment>
-            <Box
-                component="div"
-                sx={{
-                    width: 686,
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    mb: 2,
-                    ml: "auto",
-                }}
-            >
-                <TablePagination
-                    sx={{ ml: -4 }}
-                    rowsPerPageOptions={[5, 10, 15, 25, 100]}
-                    component="div"
-                    count={data.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                    labelRowsPerPage=""
-                    ActionsComponent={ActionsPagination}
-                    labelDisplayedRows={defaultLabelDisplayedRows}
-                />
-                <Paper
-                    component="form"
-                    sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 237, bgcolor: "#E5E5E5" }}
-                >
-                    <InputBase
-                        sx={{ ml: 1, flex: 1 }}
-                        placeholder="Search"
-                        inputProps={{ 'aria-label': 'search' }}
-                        variant="filled"
-                    />
-                    <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
-                        <SearchIcon />
-                    </IconButton>
-                </Paper>
-            </Box>
-            <FormBox
-                title="Buku Inventaris Barang"
-                sx={{ maxWidth: 686 }}
-            >
-                <TableContainer
-                    component={Paper}
-                >
-                    <Table sx={{ minWidth: 650, border: 1 }} aria-label="simple table">
-                        <TableHead sx={{ border: 1, backgroundColor: '#66bb6a' }} align="center">
-                            <TableRow>
-                                <TableCell sx={{ border: 1 }} />
-                                <TableCell sx={{ border: 1 }}>No</TableCell>
-                                <TableCell sx={{ border: 1 }}>Kode Barang</TableCell>
-                                <TableCell sx={{ border: 1 }}>Jenis/Nama Barang</TableCell>
-                                <TableCell sx={{ border: 1 }}>Merk</TableCell>
-                                <TableCell sx={{ border: 1 }}>No. Seri Pabrik</TableCell>
-                                <TableCell sx={{ border: 1 }}>Mutasi</TableCell>
-                                <TableCell sx={{ border: 1 }}>Asal-Usul</TableCell>
-                                <TableCell sx={{ border: 1 }}>Tahun Perolehan</TableCell>
-                                <TableCell sx={{ border: 1 }}>Jumlah Barang</TableCell>
-                                <TableCell sx={{ border: 1 }}>Nilai(Rp)</TableCell>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                    <TableCell >Kondisi barang</TableCell>
-                                    <TableRow>
-                                        <TableCell sx={{ borderRight: 1, borderTop: 1 }}><Box sx={{ width: '28px' }}>Baik</Box></TableCell>
-                                        <TableCell sx={{ borderRight: 1, borderTop: 1 }}><Box sx={{ width: '48px' }}>Kurang Baik</Box></TableCell>
-                                        <TableCell sx={{ borderTop: 1 }}><Box sx={{ width: '42px' }}>Rusak Berat</Box></TableCell>
-                                    </TableRow>
-                                </Box>
-                                <TableCell sx={{ border: 1 }}>Keterangan</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
-                                <StyledTableRow
-                                    key={index}
-                                >
-                                    <TableCell sx={{ border: 1, borderTop: 0, borderLeft: 0 }} size="small" component="th" scope="row" align="left">
-                                        <Box
-                                            sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}
-                                        >
-                                            <IconButton
-                                                color="primary"
-                                                aria-label="edit"
-                                                sx={[
-                                                    { bgcolor: "#FFA726", borderRadius: 2, mr: 1 },
-                                                    { '&:hover': { bgcolor: "#CB841B" } }
-                                                ]}
-                                                onClick={() => handleEditRow(row.id)}
-                                            >
-                                                <EditIcon />
-                                            </IconButton>
-                                            <IconButton
-                                                color="primary"
-                                                aria-label="delete"
-                                                sx={[
-                                                    { bgcolor: "#F44336", borderRadius: 2 },
-                                                    { '&:hover': { bgcolor: "#B83229" } }
-                                                ]}
-                                                onClick={() => handleDeleteRow(row.id)}
-                                            >
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </Box>
-                                    </TableCell>
-                                    <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">
-                                        {index + 1}
-                                    </TableCell>
-                                    <TableCell sx={{ border: 1 }} align="center">{row.kode_barang}</TableCell>
-                                    <TableCell sx={{ border: 1 }} align="center">{row.nama_barang}</TableCell>
-                                    <TableCell sx={{ border: 1 }} align="center">{row.tipe_barang}</TableCell>
-                                    <TableCell sx={{ border: 1 }} align="center">{row.nomor_seri_pabrik}</TableCell>
-                                    <TableCell sx={{ border: 1 }} align="center">{row.ukuran_barang}</TableCell>
-                                    <TableCell sx={{ border: 1 }} align="center">{row.asal_usul}</TableCell>
-                                    <TableCell sx={{ border: 1 }} align="center">{row.tahun_perolehan}</TableCell>
-                                    <TableCell sx={{ border: 1 }} align="center">{row.jumlah_barang}</TableCell>
-                                    <TableCell sx={{ border: 1 }} align="center">{Intl.NumberFormat('en-US').format(row.harga_barang)}</TableCell>
-                                    <TableRow sx={{ display: 'flex', }}>
-                                        <TableCell sx={{ borderRight: 1, borderBottom: 1 }} align="center"><Box sx={{ width: '28px', height: '100%' }}>{row.keadaan_barang === "Baik" ? row.jumlah_barang : "-"}</Box></TableCell>
-                                        <TableCell sx={{ borderRight: 1, borderBottom: 1 }} align="center"><Box sx={{ width: '48px', height: '100%' }}>{row.keadaan_barang === "Kurang Baik" ? row.jumlah_barang : "-"}</Box></TableCell>
-                                        <TableCell sx={{ borderBottom: 1 }} align="center"><Box sx={{ width: '42px', height: '100%' }}>{row.keadaan_barang === "Rusak Berat" ? row.jumlah_barang : "-"}</Box></TableCell>
-                                    </TableRow>
-                                    <TableCell sx={{ border: 1, borderRight: 0 }} align="center">{row.keterangan_barang}</TableCell>
-                                </StyledTableRow>
-                            ))}
-                            {emptyRows > 0 && (
-                                <TableRow
-                                    style={{
-                                        height: 53 * emptyRows,
-                                    }}
-                                >
-                                    <TableCell colSpan={6} />
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+            <Box sx={{ display: 'flex', flexDirection: 'column', maxWidth:689 }}>
                 <Box
                     component="div"
-                    sx={{ width: 1, display: 'flex', justifyContent: 'flex-end' }}
+                    sx={{
+                        width: 1,
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        mb: 2,
+                    }}
                 >
-                    <ButtonMUI
-                        Label="Buku Inventaris Barang"
-                        sx={{
-                            mt: 12,
-                        }}
-                        Disabled={data.length > 0 ? false : true}
-                        Click={() => { navigate("/pdf", { state: { type: 'bib', data: data } }) }}
+                    <TablePagination
+                        sx={{ ml: -4 }}
+                        rowsPerPageOptions={[5, 10, 15, 25, 100]}
+                        component="div"
+                        count={data.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                        labelRowsPerPage=""
+                        ActionsComponent={ActionsPagination}
+                        labelDisplayedRows={defaultLabelDisplayedRows}
                     />
+                    <Paper
+                        component="form"
+                        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 237, bgcolor: "#E5E5E5" }}
+                    >
+                        <InputBase
+                            sx={{ ml: 1, flex: 1 }}
+                            placeholder="Search"
+                            inputProps={{ 'aria-label': 'search' }}
+                            variant="filled"
+                            value={searchValue}
+                            onChange={(event) => handleSearch(event)}
+                        />
+                        <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+                            <SearchIcon />
+                        </IconButton>
+                    </Paper>
                 </Box>
-            </FormBox>
+                <FormBox
+                    title="Buku Inventaris Barang"
+                    sx={{ height: 1 }}
+                >
+                    <TableContainer
+                        component={Paper}
+                    >
+                        <Table sx={{ minWidth: 650, border: 1 }} aria-label="simple table">
+                            <TableHead sx={{ border: 1, backgroundColor: '#66bb6a' }} align="center">
+                                <TableRow>
+                                    <TableCell sx={{ border: 1 }} />
+                                    <TableCell sx={{ border: 1 }}>No</TableCell>
+                                    <TableCell sx={{ border: 1 }}>Kode Barang</TableCell>
+                                    <TableCell sx={{ border: 1 }}>Jenis/Nama Barang</TableCell>
+                                    <TableCell sx={{ border: 1 }}>Merk</TableCell>
+                                    <TableCell sx={{ border: 1 }}>No. Seri Pabrik</TableCell>
+                                    <TableCell sx={{ border: 1 }}>Mutasi</TableCell>
+                                    <TableCell sx={{ border: 1 }}>Asal-Usul</TableCell>
+                                    <TableCell sx={{ border: 1 }}>Tahun Perolehan</TableCell>
+                                    <TableCell sx={{ border: 1 }}>Jumlah Barang</TableCell>
+                                    <TableCell sx={{ border: 1 }}>Nilai(Rp)</TableCell>
+                                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                        <TableCell >Kondisi barang</TableCell>
+                                        <TableRow>
+                                            <TableCell sx={{ borderRight: 1, borderTop: 1 }}><Box sx={{ width: '28px' }}>Baik</Box></TableCell>
+                                            <TableCell sx={{ borderRight: 1, borderTop: 1 }}><Box sx={{ width: '48px' }}>Kurang Baik</Box></TableCell>
+                                            <TableCell sx={{ borderTop: 1 }}><Box sx={{ width: '42px' }}>Rusak Berat</Box></TableCell>
+                                        </TableRow>
+                                    </Box>
+                                    <TableCell sx={{ border: 1 }}>Keterangan</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {searchedTable.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
+                                    <StyledTableRow
+                                        key={index}
+                                    >
+                                        <TableCell sx={{ border: 1, borderTop: 0, borderLeft: 0 }} size="small" component="th" scope="row" align="left">
+                                            <Box
+                                                sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}
+                                            >
+                                                <IconButton
+                                                    color="primary"
+                                                    aria-label="edit"
+                                                    sx={[
+                                                        { bgcolor: "#FFA726", borderRadius: 2, mr: 1 },
+                                                        { '&:hover': { bgcolor: "#CB841B" } }
+                                                    ]}
+                                                    onClick={() => handleEditRow(row.id)}
+                                                >
+                                                    <EditIcon />
+                                                </IconButton>
+                                                <IconButton
+                                                    color="primary"
+                                                    aria-label="delete"
+                                                    sx={[
+                                                        { bgcolor: "#F44336", borderRadius: 2 },
+                                                        { '&:hover': { bgcolor: "#B83229" } }
+                                                    ]}
+                                                    onClick={() => handleDeleteRow(row.id)}
+                                                >
+                                                    <DeleteIcon />
+                                                </IconButton>
+                                            </Box>
+                                        </TableCell>
+                                        <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">
+                                            {index + 1}
+                                        </TableCell>
+                                        <TableCell sx={{ border: 1 }} align="center">{row.kode_barang}</TableCell>
+                                        <TableCell sx={{ border: 1 }} align="center">{row.nama_barang}</TableCell>
+                                        <TableCell sx={{ border: 1 }} align="center">{row.tipe_barang}</TableCell>
+                                        <TableCell sx={{ border: 1 }} align="center">{row.nomor_seri_pabrik}</TableCell>
+                                        <TableCell sx={{ border: 1 }} align="center">{row.ukuran_barang}</TableCell>
+                                        <TableCell sx={{ border: 1 }} align="center">{row.asal_usul}</TableCell>
+                                        <TableCell sx={{ border: 1 }} align="center">{row.tahun_perolehan}</TableCell>
+                                        <TableCell sx={{ border: 1 }} align="center">{row.jumlah_barang}</TableCell>
+                                        <TableCell sx={{ border: 1 }} align="center">{Intl.NumberFormat('en-US').format(row.harga_barang)}</TableCell>
+                                        <TableRow sx={{ display: 'flex', }}>
+                                            <TableCell sx={{ borderRight: 1, borderBottom: 1 }} align="center"><Box sx={{ width: '28px', height: '100%' }}>{row.keadaan_barang === "Baik" ? row.jumlah_barang : "-"}</Box></TableCell>
+                                            <TableCell sx={{ borderRight: 1, borderBottom: 1 }} align="center"><Box sx={{ width: '48px', height: '100%' }}>{row.keadaan_barang === "Kurang Baik" ? row.jumlah_barang : "-"}</Box></TableCell>
+                                            <TableCell sx={{ borderBottom: 1 }} align="center"><Box sx={{ width: '42px', height: '100%' }}>{row.keadaan_barang === "Rusak Berat" ? row.jumlah_barang : "-"}</Box></TableCell>
+                                        </TableRow>
+                                        <TableCell sx={{ border: 1, borderRight: 0 }} align="center">{row.keterangan_barang}</TableCell>
+                                    </StyledTableRow>
+                                ))}
+                                {emptyRows > 0 && (
+                                    <TableRow
+                                        style={{
+                                            height: 53 * emptyRows,
+                                        }}
+                                    >
+                                        <TableCell colSpan={6} />
+                                    </TableRow>
+                                )}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <Box
+                        component="div"
+                        sx={{ width: 1, display: 'flex', justifyContent: 'flex-end' }}
+                    >
+                        <ButtonMUI
+                            Label="Buku Inventaris Barang"
+                            sx={{
+                                mt: 12,
+                            }}
+                            Disabled={data.length > 0 ? false : true}
+                            Click={() => { navigate("/pdf", { state: { type: 'bib', data: data } }) }}
+                        />
+                    </Box>
+                </FormBox>
+            </Box>
             <DeleteRowModal />
             <EditRowModal />
         </React.Fragment>
@@ -711,10 +722,16 @@ const BukuInventarisBarang = () => {
         setOpenSnackBar(false);
     };
     if (dataAllRuangan === undefined) { return <h1>Loading</h1> }
-    console.log(selectedKegiatan)
     return (
         <React.Fragment>
-            <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
+            <Box component="div"
+                sx={{
+                    maxWidth: 1,
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "start",
+                    alignItems: "start",
+                }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <Box sx={{ mb: 5 }}>
                         <IconButton sx={{ p: 0.5 }} aria-describedby={idNotification} onClick={handleClickNotification}>
@@ -740,6 +757,7 @@ const BukuInventarisBarang = () => {
                     <Box>
                         <FormBox
                             title="Form Input"
+                            sx={{ width: 366, maxHeight: 919, flexShrink: 0, mr: 2 }}
                         >
                             <form onSubmit={handleSubmit}>
                                 <Box
@@ -951,9 +969,7 @@ const BukuInventarisBarang = () => {
                         </FormBox>
                     </Box>
                 </Box>
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <TableBIB data={dataAllRuangan} changed={deletedData} setChange={setDeletedData} />
-                </Box>
+                <TableBIB data={dataAllRuangan} changed={deletedData} setChange={setDeletedData} />
             </Box>
             <Snackbar open={openSnackBar} autoHideDuration={6000} onClose={handleCloseSnackBar} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
                 <Alert onClose={handleCloseSnackBar} severity="success" sx={{ width: '100%' }}>

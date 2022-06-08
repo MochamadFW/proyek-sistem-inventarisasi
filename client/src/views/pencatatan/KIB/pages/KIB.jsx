@@ -1017,6 +1017,7 @@ const PencatatanKib = () => {
             sx={{ width: 1, display: 'flex', justifyContent: 'flex-end', mt: 6 }}
           >
             <Button
+              Click={()=>{navigate('/pdf', {state:{type:'kib', data : dataTable}})}}
               Label="Laporan KIB"
             />
           </Box>

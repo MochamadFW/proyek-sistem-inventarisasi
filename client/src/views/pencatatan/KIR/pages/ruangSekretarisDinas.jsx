@@ -719,7 +719,7 @@ const PencatatanRSD = () => {
                         </Box>
                       </TableCell>
                       <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">
-                        {row.id}
+                        {index + 1}
                       </TableCell>
                       <TableCell sx={{ border: 1 }} align="center">{row.nama_barang}</TableCell>
                       <TableCell sx={{ border: 1 }} align="center">{row.tipe_barang}</TableCell>
