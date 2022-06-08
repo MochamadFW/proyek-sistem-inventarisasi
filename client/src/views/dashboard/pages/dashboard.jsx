@@ -1,8 +1,8 @@
 import { Box, Typography, Modal } from "@mui/material";
 import React, { useState } from "react";
+import { useEffect } from "react";
 
 import Button from "../../shared/components/button"
-import Layout from "../../shared/components/layout";
 
 const ChildModal = ({ url }) => {
     const [openDetailSOPInventaris, setDetailOpenSOPInventaris] = useState(false);
@@ -22,7 +22,7 @@ const ChildModal = ({ url }) => {
                 aria-describedby="child-modal-description"
                 sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', p: 8, overflowY: 'scroll' }}>
 
-                <img src={url} style={{maxWidth:'80%', height:'auto' }}/>
+                <img src={url} style={{ maxWidth: '80%', height: 'auto' }} />
             </Modal>
         </React.Fragment>
     )
@@ -43,6 +43,24 @@ const DashboardAdmin = () => {
     const handleCloseSOPMutasi = () => {
         setOpenSOPMutasi(false);
     }
+    const [totalAsset, setTotalAsset] = useState();
+    const [totalPermintaan, setTotalPermintaan] = useState();
+    const [totalLogin, setTotalLogin] = useState();
+    useEffect(() => {
+        fetch("http://localhost:8081/dashboard/totalaset")
+            .then(response => response.json())
+            .then(json => setTotalAsset(json.data));
+        fetch("http://localhost:8081/dashboard/totalpermintaan")
+            .then(response => response.json())
+            .then(json => setTotalPermintaan(json.data));
+        const user = JSON.parse(localStorage.getItem("user"));
+        console.log(user);
+        fetch("http://localhost:8081/dashboard/" + user.user)
+            .then(response => response.json())
+            .then(json => setTotalLogin(json.data.totalLogin));
+    }, [])
+
+    if (totalAsset === undefined || totalPermintaan === undefined || totalLogin === undefined) { return <h1>Loading</h1> }
     return (
         <React.Fragment>
             <Box>
@@ -80,7 +98,7 @@ const DashboardAdmin = () => {
                             <Box sx={{ my: 'auto' }}><img src={process.env.PUBLIC_URL + 'logo_total_aset.png'}></img></Box>
                             <Box textAlign="center" sx={{ ml: 10 }}>
                                 <Typography variant="subtitle2">TOTAL ASET</Typography>
-                                <Typography variant="h3">25</Typography>
+                                <Typography variant="h3">{totalAsset.totalAset}</Typography>
                             </Box>
                         </Box>
                     </Box>
@@ -94,7 +112,7 @@ const DashboardAdmin = () => {
                             <Box textAlign="center" sx={{ ml: 5 }}>
                                 <Typography variant="subtitle2">TOTAL PERMINTAAN</Typography>
                                 <Typography variant="subtitle2">PERBAIKAN/PEMELIHARAAN</Typography>
-                                <Typography variant="h3">25</Typography>
+                                <Typography variant="h3">{totalPermintaan.totalPermintaan}</Typography>
                             </Box>
                         </Box>
                     </Box>
@@ -107,7 +125,7 @@ const DashboardAdmin = () => {
                             <Box sx={{ my: 'auto' }}><img src={process.env.PUBLIC_URL + 'total_login.png'}></img></Box>
                             <Box textAlign="center" sx={{ ml: 10 }}>
                                 <Typography variant="subtitle2">TOTAL LOGIN</Typography>
-                                <Typography variant="h3">25</Typography>
+                                <Typography variant="h3">{totalLogin.total_login}</Typography>
                             </Box>
                         </Box>
                     </Box>
