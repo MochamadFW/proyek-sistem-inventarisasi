@@ -538,18 +538,6 @@ const PelaporanMutasiAset = () => {
                   mb: 2
                 }}
               >
-                <Typography>No Register</Typography>
-                <TextField hiddenLabel name="nomor_register" onChange={handleOnChangeInput} value={addFormData.nomor_register} variant="filled" sx={{ width: 1 }} />
-              </Box>
-              <Box
-                component="div"
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-start",
-                  mb: 2
-                }}
-              >
                 <Typography>Jenis / Nama Barang</Typography>
                 <TextField hiddenLabel name="nama_barang" onChange={handleOnChangeInput} value={addFormData.nama_barang} variant="filled" sx={{ width: 1 }} />
               </Box>
@@ -774,18 +762,6 @@ const PelaporanMutasiAset = () => {
                               title="Edit Form"
                               sx={{width:366, maxHeight: 600, flexShrink: 0, overflow: 'auto'}}
                             >
-                              <Box
-                                component="div"
-                                sx={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  justifyContent: "flex-start",
-                                  mb: 2
-                                }}
-                              >
-                                <Typography>No Register</Typography>
-                                <TextField hiddenLabel name="nomor_register" onChange={handleOnChangeInputEdit} value={editFormData.nomor_register} variant="filled" sx={{width:1}} />
-                              </Box>
                               <Box
                                 component="div"
                                 sx={{
