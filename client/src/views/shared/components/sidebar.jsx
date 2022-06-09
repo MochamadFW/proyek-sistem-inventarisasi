@@ -99,8 +99,11 @@ const Sidebar = () => {
         localStorage.removeItem("user")
         navigate('/login')
     }
-    const loggedin = JSON.parse(localStorage.getItem('user'));
-    const loggedInAccount = account.filter(function (el) { return el.id === loggedin.user });
+    var loggedInAccount = "";
+    if (localStorage.getItem('user') != null) {
+        const loggedin = JSON.parse(localStorage.getItem('user'));
+        loggedInAccount = account.filter(function (el) { return el.id === loggedin.user });
+    }
     return (
         <Box
             sx={{
