@@ -598,6 +598,18 @@ const PelaporanMutasiAset = () => {
                   mb: 2
                 }}
               >
+                <Typography>Asal Usul</Typography>
+                <TextField hiddenLabel name="asal_usul" onChange={handleOnChangeInput} value={addFormData.asal_usul} variant="filled" sx={{ width: 1 }} />
+              </Box>
+              <Box
+                component="div"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  mb: 2
+                }}
+              >
                 <Typography>Tahun Perolehan</Typography>
                 <TextField hiddenLabel name="tahun_perolehan" onChange={handleOnChangeInput} value={addFormData.tahun_perolehan} variant="filled" sx={{ width: 1 }} />
               </Box>
@@ -821,6 +833,18 @@ const PelaporanMutasiAset = () => {
                                   >
                                     <Typography>Bahan</Typography>
                                     <TextField hiddenLabel name="bahan_barang" onChange={handleOnChangeInputEdit} value={editFormData.bahan_barang} variant="filled" sx={{ width: 1 }} />
+                                  </Box>
+                                  <Box
+                                    component="div"
+                                    sx={{
+                                      display: "flex",
+                                      flexDirection: "column",
+                                      justifyContent: "flex-start",
+                                      mb: 2
+                                    }}
+                                  >
+                                    <Typography>Asal Usul</Typography>
+                                    <TextField hiddenLabel name="asal_usul" onChange={handleOnChangeInputEdit} value={editFormData.asal_usul} variant="filled" sx={{ width: 1 }} />
                                   </Box>
                                   <Box
                                     component="div"
