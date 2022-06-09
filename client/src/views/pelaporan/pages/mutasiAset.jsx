@@ -906,6 +906,7 @@ const PelaporanMutasiAset = () => {
                                 <Typography>Keadaan Barang</Typography>
                                 <FormControl fullWidth sx={{bgcolor:"#E8E8E8", borderBottom: 1, borderColor: "#8D8D8D", borderRadius: 1}}>
                                   <Select
+                                    name="keadaan_barang"
                                     value={editFormData.keadaan_barang}
                                     onChange={handleOnChangeInputEdit}
                                     displayEmpty
