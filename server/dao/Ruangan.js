@@ -97,7 +97,7 @@ export const findJumlahBarangByNamaBarang = async (NAMA_RUANGAN, NAMA_BARANG) =>
     }
 }
 
-export const updateRuangan = async (ID, KODE_RUANGAN, NOMOR_REGISTER, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, NOMOR_SERI_PABRIK, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KEADAAN_BARANG, KETERANGAN_BARANG, UPDATEDAT) => {
+export const updateRuangan = async (ID, KODE_RUANGAN, NOMOR_REGISTER, NAMA_RUANGAN, LUAS_LANTAI, KODE_BARANG, NAMA_BARANG, TIPE_BARANG, NOMOR_SERI_PABRIK, UKURAN_BARANG, BAHAN_BARANG, TAHUN_PEROLEHAN, JUMLAH_BARANG, HARGA_BARANG, KEADAAN_BARANG, KETERANGAN_BARANG, ASAL_USUL, UPDATEDAT) => {
     try {
         const ruangan = await Ruangan.update(
             {
@@ -116,6 +116,7 @@ export const updateRuangan = async (ID, KODE_RUANGAN, NOMOR_REGISTER, NAMA_RUANG
                 harga_barang: HARGA_BARANG,
                 keadaan_barang: KEADAAN_BARANG,
                 keterangan_barang: KETERANGAN_BARANG,
+                asal_usul: ASAL_USUL,
                 updatedAt: UPDATEDAT
             },
             {
