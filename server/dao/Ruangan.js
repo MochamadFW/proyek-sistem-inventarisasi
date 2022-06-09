@@ -116,7 +116,7 @@ export const updateRuangan = async (ID, KODE_RUANGAN, NOMOR_REGISTER, NAMA_RUANG
                 harga_barang: HARGA_BARANG,
                 keadaan_barang: KEADAAN_BARANG,
                 keterangan_barang: KETERANGAN_BARANG,
-                ASAL_USUL,
+                asal_usul: ASAL_USUL,
                 updatedAt: UPDATEDAT
             },
             {
