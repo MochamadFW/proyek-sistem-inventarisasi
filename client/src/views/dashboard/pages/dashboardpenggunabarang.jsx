@@ -1,44 +1,30 @@
 import { Button, Container, Grid, ListItemSecondaryAction, Typography } from "@mui/material";
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { TextField, InputLabel, MenuItem, FormControl, Select } from "@mui/material";
 import { Box } from "@mui/material";
 import { createTheme, display } from "@mui/system";
 import { create } from "@mui/material/styles/createTransitions";
 import SubmitButton from "../../shared/components/button"
 import { RoomContext } from "../../../hooks/useRoomContext";
-import fetch from "node-fetch"
+import { render } from "vue";
+import Sidebar from "../../shared/components/sidebar";
 
-
-// import sidebar from "../../shared/components/sidebar.jsx"
 
 
 const DashboardPenggunaBarang = () => {
-  // const item = [
-  //   {
-  //     value: 'Kursi',
-  //     label: 'kursi',
-  //   },
-  //   {
-  //     value: 'Meja',
-  //     label: 'meja',
-  //   },
-  //   {
-  //     value: 'Papan Tulis',
-  //     label: 'papan tulis',
-  //   },
-  //   {
-  //     value: 'Pulpen',
-  //     label: 'pulpen',
-  //   },
-  // ]
 
-
-  const [items, setItems] = React.useState('Kursi');
+  const [items, setItems] = React.useState([]);
+  const { selectedRoom, setSelectedRoom } = useContext(RoomContext)
+  console.log(selectedRoom)
+  
+  React.useEffect(() => {
+    fetch("http://localhost:8081/ruangan/barang/" + selectedRoom)
+      .then((data) => data.json())
+      .then((data) => {setItems(data.data.namaBarang);})
+  },[selectedRoom]);
   const handleChangeItems = (event) => {
     setItems(event.target.value);
   };
-  const { selectedRoom, setSelectedRoom } = useContext(RoomContext)
-  console.log(selectedRoom)
   return (
     <React.Fragment>
       <Box
@@ -99,8 +85,6 @@ const DashboardPenggunaBarang = () => {
               >
 
               </TextField>
-
-
             </Box>
           </Box>
           <Box sx={{
@@ -125,9 +109,10 @@ const DashboardPenggunaBarang = () => {
                   onChange={handleChangeItems}
                   variant="filled"
                 >
-                  <MenuItem value={10}>Kursi</MenuItem>
-                  <MenuItem value={20}>Meja</MenuItem>
-                  <MenuItem value={30}>Papan Tulis</MenuItem>
+                  {
+                  items.map((data, index) =>
+                    <MenuItem key={index} value={data.nama_barang}>{data.nama_barang}</MenuItem>
+                  )}
                 </Select>
               </FormControl>
             </Box>
@@ -189,7 +174,6 @@ const DashboardPenggunaBarang = () => {
 }
 
 export default DashboardPenggunaBarang
-
 
 
 

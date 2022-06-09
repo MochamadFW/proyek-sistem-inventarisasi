@@ -22,15 +22,12 @@ import { DateContext } from "../../../hooks/useDateContext";
 import { RoomContext } from "../../../hooks/useRoomContext";
 import AuthContext from "../../../context/AuthProvider";
 import useAuth from "../../../hooks/useAuth";
-import axios from "axios";
 
-const getRoom = () => {
-    axios.get("")
-}
+
 const Sidebar = () => {
     const { selectedDate, setSelectedDate } = useContext(DateContext);
     const { selectedRoom, setSelectedRoom } = useContext(RoomContext);
-    const room = ["R. Kepala Dinas", "R. Sekretaris Dinas", "R. Kasubag Umpegdatin", "R. Staff Umum", "R. Kasubag Keuangan", "R. Keuangan I", "R. Keuangan II"]
+    const room = ["KEPALA DINAS PEKERJAAN UMUM", "KEPALA DINAS PEKERJAAN KHUSUS"]
     const navigate = useNavigate();
     let currentPath = useLocation();
     const [openPendataanCollapse, setOpenPendataanCollapse] = useState(false);
@@ -247,9 +244,9 @@ const Sidebar = () => {
                                                 value={selectedRoom}
                                                 label="Age"
                                                 onChange={handleChange}>
-                                                
-                                                {room.map((data, index) =>
-                                                    <MenuItem key={index} value={data}>{data}</MenuItem>
+                                                {
+                                                room.map((selectedRoom, index) =>
+                                                    <MenuItem key={index} value={selectedRoom}>{selectedRoom}</MenuItem>
                                                 )}
                                             </Select>
                                         </FormControl>
