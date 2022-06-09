@@ -74,7 +74,7 @@ const NotificationKegiatan = ({ data }) => {
 
 const TableBIB = ({ data, changed, setChange }) => {
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
     const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
     const ActionsPagination = () => { return (<></>) };
     function defaultLabelDisplayedRows({ from, to, count }) { return ``; };
@@ -474,7 +474,7 @@ const TableBIB = ({ data, changed, setChange }) => {
                 >
                     <TablePagination
                         sx={{ ml: -4 }}
-                        rowsPerPageOptions={[5, 10, 15, 25, 100]}
+                        rowsPerPageOptions={[10, 50, 75, {label: 'All', value: -1}]}
                         component="div"
                         count={data.length}
                         rowsPerPage={rowsPerPage}
@@ -759,213 +759,215 @@ const BukuInventarisBarang = () => {
                             title="Form Input"
                             sx={{ width: 366, maxHeight: 919, flexShrink: 0, mr: 2 }}
                         >
-                            <form onSubmit={handleSubmit}>
-                                <Box
-                                    component="div"
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "row",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                        mb: 2,
-                                        gap: 3
-                                    }}
-                                >
-                                    <Typography>No</Typography>
-                                    <TextField disabled hiddenLabel value={dataAllRuangan?.length + 1} id="filled-basic" label="" variant="filled" />
-                                </Box>
-                                <Box
-                                    component="div"
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        gap: 1,
-                                        mb: 2
-                                    }}
-                                >
-                                    <Typography>Kode Barang</Typography>
-                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
-                                        value={dataFormBuku?.kode_barang}
-                                        onChange={(event) => { setDataFormBuku((prev) => ({ ...prev, kode_barang: event.target.value })) }} />
-                                </Box>
-                                <Box
-                                    component="div"
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        gap: 1,
-                                        mb: 2
-                                    }}
-                                >
-                                    <Typography>Jenis / Nama Barang</Typography>
-                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
-                                        value={dataFormBuku.nama_barang} onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, nama_barang: value.target.value })) }} />
-                                </Box>
-                                <Box
-                                    component="div"
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "flex-start",
-                                        mb: 2,
-                                        gap: 2
-                                    }}
-                                >
-                                    <Typography>Merk/Model</Typography>
-                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
-                                        value={dataFormBuku.tipe_barang} onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, tipe_barang: value.target.value })) }} />
-                                </Box>
-                                <Box
-                                    component="div"
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "flex-start",
-                                        mb: 2,
-                                        gap: 2
-                                    }}
-                                >
-                                    <Typography>No. Seri Pabrik</Typography>
-                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
-                                        value={dataFormBuku.nomor_seri_pabrik} onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, nomor_seri_pabrik: value.target.value })) }} />
-                                </Box>
-                                <Box
-                                    component="div"
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "flex-start",
-                                        mb: 2,
-                                        gap: 2
-                                    }}
-                                >
-                                    <Typography>Mutasi</Typography>
-                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} disabled />
-                                </Box>
-                                <Box
-                                    component="div"
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "flex-start",
-                                        mb: 2,
-                                        gap: 2
-                                    }}
-                                >
-                                    <Typography>Asal Usul</Typography>
-                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
-                                        value={dataFormBuku.asal_usul} onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, asal_usul: value.target.value })) }}
-                                    />
-                                </Box>
-                                <Box
-                                    component="div"
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "flex-start",
-                                        mb: 2
-                                    }}
-                                >
-                                    <Typography>Tahun Perolehan</Typography>
-                                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                        <DatePicker
-                                            views={['year']}
-                                            label=""
-                                            value={dataFormBuku.tahun_perolehan}
-                                            inputFormat="yyyy"
-                                            onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, tahun_perolehan: value })) }}
-                                            renderInput={(params) => <TextField variant="filled" {...params} />}
-                                        />
-                                    </LocalizationProvider>
-                                </Box>
-                                <Box
-                                    component="div"
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "flex-start",
-                                        mb: 2,
-                                        gap: 2
-                                    }}
-                                >
-                                    <Typography>Jumlah Barang</Typography>
-                                    <TextField hiddenLabel type="number" InputProps={{ inputProps: { min: 1 } }} id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
-                                        value={dataFormBuku.jumlah_barang}
-                                        onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, jumlah_barang: value.target.value })) }}
-                                    />
-                                </Box>
-                                <Box
-                                    component="div"
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "flex-start",
-                                        mb: 2,
-                                        gap: 2
-                                    }}
-                                >
-                                    <Typography>Harga</Typography>
-                                    <TextField hiddenLabel id="filled-basic" label="Rp" variant="filled" sx={{ width: 1 }}
-                                        type="number"
-                                        InputProps={{ inputProps: { min: 0 } }}
-                                        value={dataFormBuku.harga_barang}
-                                        onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, harga_barang: value.target.value })) }}
-                                    />
-                                </Box>
-                                <Box
-                                    component="div"
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "flex-start",
-                                        mb: 2,
-                                        gap: 2
-                                    }}
-                                >
-                                    <Typography>Kondisi Barang</Typography>
-                                    <Select
-                                        value={dataFormBuku.keadaan_barang}
-                                        onChange={handleChangeSelect}
-                                        displayEmpty
-                                        inputProps={{ 'aria-label': 'Without label' }}
-                                        required
-                                        defaultValue=''
+                            <Box sx={{ pr: 1, pb: 2, m: 0, width: 1, maxHeight: 800, overflow: 'auto' }}>
+                                <form onSubmit={handleSubmit}>
+                                    <Box
+                                        component="div"
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "row",
+                                            justifyContent: "space-between",
+                                            alignItems: "center",
+                                            mb: 2,
+                                            gap: 3
+                                        }}
                                     >
-                                        <MenuItem value="Baik">Baik</MenuItem>
-                                        <MenuItem value="Kurang Baik">Kurang Baik</MenuItem>
-                                        <MenuItem value="Rusak Berat">Rusak Berat</MenuItem>
-                                    </Select>
-                                </Box>
-                                <Box
-                                    component="div"
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "flex-start",
-                                        mb: 2,
-                                        gap: 2
-                                    }}
-                                >
-                                    <Typography>Keterangan</Typography>
-                                    <TextField hiddenLabel multiline id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
-                                        value={dataFormBuku.keterangan_barang}
-                                        onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, keterangan_barang: value.target.value })) }} />
-                                </Box>
-                                <Button
-                                    Label="Submit"
-                                    type='submit'
-                                    sx={[
-                                        { width: 1, bgcolor: "#66BB6A", color: "font.white" },
-                                        {
-                                            '&:hover': {
-                                                bgcolor: "#4D8A4F",
-                                            },
-                                        }
-                                    ]}
-                                >
-                                    Submit
-                                </Button>
-                            </form>
+                                        <Typography>No</Typography>
+                                        <TextField disabled hiddenLabel value={dataAllRuangan?.length + 1} id="filled-basic" label="" variant="filled" />
+                                    </Box>
+                                    <Box
+                                        component="div"
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            gap: 1,
+                                            mb: 2
+                                        }}
+                                    >
+                                        <Typography>Kode Barang</Typography>
+                                        <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
+                                            value={dataFormBuku?.kode_barang}
+                                            onChange={(event) => { setDataFormBuku((prev) => ({ ...prev, kode_barang: event.target.value })) }} />
+                                    </Box>
+                                    <Box
+                                        component="div"
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            gap: 1,
+                                            mb: 2
+                                        }}
+                                    >
+                                        <Typography>Jenis / Nama Barang</Typography>
+                                        <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
+                                            value={dataFormBuku.nama_barang} onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, nama_barang: value.target.value })) }} />
+                                    </Box>
+                                    <Box
+                                        component="div"
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "flex-start",
+                                            mb: 2,
+                                            gap: 2
+                                        }}
+                                    >
+                                        <Typography>Merk/Model</Typography>
+                                        <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
+                                            value={dataFormBuku.tipe_barang} onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, tipe_barang: value.target.value })) }} />
+                                    </Box>
+                                    <Box
+                                        component="div"
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "flex-start",
+                                            mb: 2,
+                                            gap: 2
+                                        }}
+                                    >
+                                        <Typography>No. Seri Pabrik</Typography>
+                                        <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
+                                            value={dataFormBuku.nomor_seri_pabrik} onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, nomor_seri_pabrik: value.target.value })) }} />
+                                    </Box>
+                                    <Box
+                                        component="div"
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "flex-start",
+                                            mb: 2,
+                                            gap: 2
+                                        }}
+                                    >
+                                        <Typography>Mutasi</Typography>
+                                        <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} disabled />
+                                    </Box>
+                                    <Box
+                                        component="div"
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "flex-start",
+                                            mb: 2,
+                                            gap: 2
+                                        }}
+                                    >
+                                        <Typography>Asal Usul</Typography>
+                                        <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
+                                            value={dataFormBuku.asal_usul} onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, asal_usul: value.target.value })) }}
+                                        />
+                                    </Box>
+                                    <Box
+                                        component="div"
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "flex-start",
+                                            mb: 2
+                                        }}
+                                    >
+                                        <Typography>Tahun Perolehan</Typography>
+                                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                            <DatePicker
+                                                views={['year']}
+                                                label=""
+                                                value={dataFormBuku.tahun_perolehan}
+                                                inputFormat="yyyy"
+                                                onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, tahun_perolehan: value })) }}
+                                                renderInput={(params) => <TextField variant="filled" {...params} />}
+                                            />
+                                        </LocalizationProvider>
+                                    </Box>
+                                    <Box
+                                        component="div"
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "flex-start",
+                                            mb: 2,
+                                            gap: 2
+                                        }}
+                                    >
+                                        <Typography>Jumlah Barang</Typography>
+                                        <TextField hiddenLabel type="number" InputProps={{ inputProps: { min: 1 } }} id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
+                                            value={dataFormBuku.jumlah_barang}
+                                            onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, jumlah_barang: value.target.value })) }}
+                                        />
+                                    </Box>
+                                    <Box
+                                        component="div"
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "flex-start",
+                                            mb: 2,
+                                            gap: 2
+                                        }}
+                                    >
+                                        <Typography>Harga</Typography>
+                                        <TextField hiddenLabel id="filled-basic" label="Rp" variant="filled" sx={{ width: 1 }}
+                                            type="number"
+                                            InputProps={{ inputProps: { min: 0 } }}
+                                            value={dataFormBuku.harga_barang}
+                                            onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, harga_barang: value.target.value })) }}
+                                        />
+                                    </Box>
+                                    <Box
+                                        component="div"
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "flex-start",
+                                            mb: 2,
+                                            gap: 2
+                                        }}
+                                    >
+                                        <Typography>Kondisi Barang</Typography>
+                                        <Select
+                                            value={dataFormBuku.keadaan_barang}
+                                            onChange={handleChangeSelect}
+                                            displayEmpty
+                                            inputProps={{ 'aria-label': 'Without label' }}
+                                            required
+                                            defaultValue=''
+                                        >
+                                            <MenuItem value="Baik">Baik</MenuItem>
+                                            <MenuItem value="Kurang Baik">Kurang Baik</MenuItem>
+                                            <MenuItem value="Rusak Berat">Rusak Berat</MenuItem>
+                                        </Select>
+                                    </Box>
+                                    <Box
+                                        component="div"
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "flex-start",
+                                            mb: 2,
+                                            gap: 2
+                                        }}
+                                    >
+                                        <Typography>Keterangan</Typography>
+                                        <TextField hiddenLabel multiline id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
+                                            value={dataFormBuku.keterangan_barang}
+                                            onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, keterangan_barang: value.target.value })) }} />
+                                    </Box>
+                                    <Button
+                                        Label="Submit"
+                                        type='submit'
+                                        sx={[
+                                            { width: 1, bgcolor: "#66BB6A", color: "font.white" },
+                                            {
+                                                '&:hover': {
+                                                    bgcolor: "#4D8A4F",
+                                                },
+                                            }
+                                        ]}
+                                    >
+                                        Submit
+                                    </Button>
+                                </form>
+                            </Box>
                         </FormBox>
                     </Box>
                 </Box>
