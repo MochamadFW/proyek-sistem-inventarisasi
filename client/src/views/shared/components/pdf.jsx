@@ -385,7 +385,7 @@ const Mutasi = ({ data }) => {
                 <View style={[{ width: '8%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>Harga(Rp)</Text></View>
                 <View style={[{ width: "10%" }, styles.tableCell]}><Text>Keterangan</Text></View>
             </View >
-            {array.map((data, index) =>
+            {data.map((data, index) =>
                 <View style={{
                     flexGrow: 1,
                     display: 'flex',
@@ -397,26 +397,26 @@ const Mutasi = ({ data }) => {
                 }}>
                     <View style={{ width: '25%', display: "flex", flexDirection: 'column', alignItems: 'center' }}>
                         <View style={{ display: 'flex', flexDirection: 'row' }}>
-                            <View style={[{ width: "16%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>9</Text></View>
-                            <View style={[{ width: "42%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>10</Text></View>
-                            <View style={[{ width: "42%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>13</Text></View>
+                            <View style={[{ width: "16%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{index + 1}</Text></View>
+                            <View style={[{ width: "42%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.kode_barang} </Text></View>
+                            <View style={[{ width: "42%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.nomor_register} </Text></View>
                         </View>
                     </View>
                     <View style={{ width: '30%', display: "flex", flexDirection: 'column', alignItems: 'center' }}>
                         <View style={{ display: 'flex', flexDirection: 'row' }}>
-                            <View style={[{ width: "25%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>9</Text></View>
-                            <View style={[{ width: "25%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>10</Text></View>
-                            <View style={[{ width: "25%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>11</Text></View>
-                            <View style={[{ width: "25%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>13</Text></View>
+                            <View style={[{ width: "25%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.nama_barang} </Text></View>
+                            <View style={[{ width: "25%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.tipe_barang} </Text></View>
+                            <View style={[{ width: "25%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.nomor_seri_pabrik} </Text></View>
+                            <View style={[{ width: "25%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.bahan_barang} </Text></View>
                         </View>
                     </View>
-                    <View style={[{ width: '5%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{index + 1}</Text></View>
-                    <View style={[{ width: '5%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>2</Text></View>
-                    <View style={[{ width: '5%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>3</Text></View>
-                    <View style={[{ width: '7%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>4</Text></View>
-                    <View style={[{ width: '8%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>5</Text></View>
-                    <View style={[{ width: '8%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>6</Text></View>
-                    <View style={[{ width: "10%" }, styles.tableCell]}><Text>15</Text></View>
+                    <View style={[{ width: '5%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.asal_usul} </Text></View>
+                    <View style={[{ width: '5%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.tahun_perolehan} </Text></View>
+                    <View style={[{ width: '5%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text> </Text></View>
+                    <View style={[{ width: '7%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.keadaan_barang} </Text></View>
+                    <View style={[{ width: '8%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.jumlah_barang} </Text></View>
+                    <View style={[{ width: '8%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.harga_barang} </Text></View>
+                    <View style={[{ width: "10%" }, styles.tableCell]}><Text>{data.keterangan_barang} </Text></View>
                 </View>
             )}
             <AuthoritySignatureVerTwo />
@@ -580,7 +580,7 @@ const BeritaAcaraMutasi = ({ data }) => {
                 <View style={[{ width: '8%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>Harga(Rp)</Text></View>
                 <View style={[{ width: "10%" }, styles.tableCell]}><Text>Keterangan</Text></View>
             </View >
-            {array.map((data, index) =>
+            {data.map((data, index) =>
                 <View style={{
                     flexGrow: 1,
                     display: 'flex',
@@ -592,26 +592,26 @@ const BeritaAcaraMutasi = ({ data }) => {
                 }}>
                     <View style={{ width: '25%', display: "flex", flexDirection: 'column', alignItems: 'center' }}>
                         <View style={{ display: 'flex', flexDirection: 'row' }}>
-                            <View style={[{ width: "16%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>9</Text></View>
-                            <View style={[{ width: "42%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>10</Text></View>
-                            <View style={[{ width: "42%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>13</Text></View>
+                            <View style={[{ width: "16%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{index + 1}</Text></View>
+                            <View style={[{ width: "42%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.kode_barang} </Text></View>
+                            <View style={[{ width: "42%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.nomor_register} </Text></View>
                         </View>
                     </View>
                     <View style={{ width: '30%', display: "flex", flexDirection: 'column', alignItems: 'center' }}>
                         <View style={{ display: 'flex', flexDirection: 'row' }}>
-                            <View style={[{ width: "25%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>9</Text></View>
-                            <View style={[{ width: "25%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>10</Text></View>
-                            <View style={[{ width: "25%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>11</Text></View>
-                            <View style={[{ width: "25%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>13</Text></View>
+                            <View style={[{ width: "25%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.nama_barang} </Text></View>
+                            <View style={[{ width: "25%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.tipe_barang} </Text></View>
+                            <View style={[{ width: "25%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.nomor_seri_pabrik} </Text></View>
+                            <View style={[{ width: "25%", borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.bahan_barang} </Text></View>
                         </View>
                     </View>
-                    <View style={[{ width: '5%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{index + 1}</Text></View>
-                    <View style={[{ width: '5%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>2</Text></View>
-                    <View style={[{ width: '5%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>3</Text></View>
-                    <View style={[{ width: '7%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>4</Text></View>
-                    <View style={[{ width: '8%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>5</Text></View>
-                    <View style={[{ width: '8%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>6</Text></View>
-                    <View style={[{ width: "10%" }, styles.tableCell]}><Text>15</Text></View>
+                    <View style={[{ width: '5%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.asal_usul} </Text></View>
+                    <View style={[{ width: '5%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.tahun_perolehan}</Text></View>
+                    <View style={[{ width: '5%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text> </Text></View>
+                    <View style={[{ width: '7%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.keadaan_barang} </Text></View>
+                    <View style={[{ width: '8%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.jumlah_barang} </Text></View>
+                    <View style={[{ width: '8%', borderRight: '1 solid #000000' }, styles.tableCell]}><Text>{data.harga_barang} </Text></View>
+                    <View style={[{ width: "10%" }, styles.tableCell]}><Text>{data.keterangan_barang} </Text></View>
                 </View>
             )}
             <View style={{ fontSize: 8, marginVertical: 12 }}>
@@ -684,9 +684,9 @@ const PDF = () => {
                         <View style={{ display: 'flex', flexDirection: 'column' }}>
                             {type === "kir" ? <KIR data={data} /> : type === "kib" ?
                                 <KIB data={data} /> : type === "mutasi" ?
-                                    <Mutasi /> : type === "bib" ?
+                                    <Mutasi data={data} /> : type === "bib" ?
                                         <BukuInventarisBarang data={data} /> : type === "bam" ?
-                                            <BeritaAcaraMutasi /> : <LabelPDF data={data} />
+                                            <BeritaAcaraMutasi data={data} /> : <LabelPDF data={data} />
                             }
                         </View>
                     </Page>
