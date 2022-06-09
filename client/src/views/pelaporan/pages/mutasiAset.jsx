@@ -520,193 +520,199 @@ const PelaporanMutasiAset = () => {
       >
         <FormBox
           title="Form Input"
-          sx={{width:366, flexShrink: 0, mr:2}}
+          sx={{width:366, maxHeight: 919, flexShrink: 0, mr:2}}
         >
-          <form
-            onSubmit={HandleSubmit}
+          <Box
+            component="div"
+            sx={{pr: 1, pb: 2, m: 0, width: 1, maxHeight: 800, overflow: 'auto'}}
           >
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                mb: 2
-              }}
+            <form
+              onSubmit={HandleSubmit}
             >
-              <Typography>No Register</Typography>
-              <TextField hiddenLabel name="nomor_register" onChange={handleOnChangeInput} value={addFormData.nomor_register} variant="filled" sx={{ width: 1 }} />
-            </Box>
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                mb: 2
-              }}
-            >
-              <Typography>Jenis / Nama Barang</Typography>
-              <TextField hiddenLabel name="nama_barang" onChange={handleOnChangeInput} value={addFormData.nama_barang} variant="filled" sx={{ width: 1 }} />
-            </Box>
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                mb: 2
-              }}
-            >
-              <Typography>Merk/Model</Typography>
-              <TextField hiddenLabel name="tipe_barang" onChange={handleOnChangeInput} value={addFormData.tipe_barang} variant="filled" sx={{ width: 1 }} />
-            </Box>
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                mb: 2
-              }}
-            >
-              <Typography>No. Seri Pabrik</Typography>
-              <TextField hiddenLabel name="nomor_seri_pabrik" onChange={handleOnChangeInput} value={addFormData.nomor_seri_pabrik} variant="filled" sx={{ width: 1 }} />
-            </Box>
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                mb: 2
-              }}
-            >
-              <Typography>Ukuran</Typography>
-              <TextField hiddenLabel name="ukuran_barang" onChange={handleOnChangeInput} value={addFormData.ukuran_barang} variant="filled" sx={{ width: 1 }} />
-            </Box>
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                mb: 2
-              }}
-            >
-              <Typography>Bahan</Typography>
-              <TextField hiddenLabel name="bahan_barang" onChange={handleOnChangeInput} value={addFormData.bahan_barang} variant="filled" sx={{ width: 1 }} />
-            </Box>
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                mb: 2
-              }}
-            >
-              <Typography>Tahun Perolehan</Typography>
-              <TextField hiddenLabel name="tahun_perolehan" onChange={handleOnChangeInput} value={addFormData.tahun_perolehan} variant="filled" sx={{ width: 1 }} />
-            </Box>
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                mb: 2
-              }}
-            >
-              <Typography>Nomor Kode Barang</Typography>
-              <TextField hiddenLabel name="kode_barang" onChange={handleOnChangeInput} value={addFormData.kode_barang} variant="filled" sx={{ width: 1 }} />
-            </Box>
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                mb: 2
-              }}
-            >
-              <Typography>Jumlah Barang</Typography>
-              <TextField hiddenLabel name="jumlah_barang" onChange={handleOnChangeInput} value={addFormData.jumlah_barang} variant="filled" sx={{ width: 1 }} />
-            </Box>
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                mb: 2
-              }}
-            >
-              <Typography>Harga</Typography>
-              <TextField hiddenLabel name="harga_barang" onChange={handleOnChangeInput} value={addFormData.harga_barang} label="Rp" variant="filled" sx={{ width: 1 }} />
-            </Box>
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                mb: 2
-              }}
-            >
-              <Typography>Keadaan Barang</Typography>
-              <FormControl fullWidth sx={{ bgcolor: "#E8E8E8", borderBottom: 1, borderColor: "#8D8D8D", borderRadius: 1 }}>
-                <Select
-                  name="keadaan_barang"
-                  value={addFormData.keadaan_barang}
-                  onChange={handleOnChangeInput}
-                  displayEmpty
-                  inputProps={{ 'aria-label': 'Without label' }}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value="Baik">Baik</MenuItem>
-                  <MenuItem value="Kurang Baik">Kurang Baik</MenuItem>
-                  <MenuItem value="Rusak Berat">Rusak Berat</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-            <Box
-              component="div"
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                mb: 2
-              }}
-            >
-              <Typography>Keterangan</Typography>
-              <TextField hiddenLabel name="keterangan_barang" onChange={handleOnChangeInput} value={addFormData.keterangan_barang} variant="filled" sx={{ width: 1 }} />
-            </Box>
-            <Button
-              Types="submit"
-              Label="Submit"
-              sx={[
-                { width: 1, bgcolor: "#66BB6A", color: "font.white" },
-                {
-                  '&:hover': {
-                    bgcolor: "#4D8A4F",
-                  },
-                }
-              ]}
-            >
+              <Box
+                component="div"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  mb: 2
+                }}
+              >
+                <Typography>No Register</Typography>
+                <TextField hiddenLabel name="nomor_register" onChange={handleOnChangeInput} value={addFormData.nomor_register} variant="filled" sx={{ width: 1 }} />
+              </Box>
+              <Box
+                component="div"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  mb: 2
+                }}
+              >
+                <Typography>Jenis / Nama Barang</Typography>
+                <TextField hiddenLabel name="nama_barang" onChange={handleOnChangeInput} value={addFormData.nama_barang} variant="filled" sx={{ width: 1 }} />
+              </Box>
+              <Box
+                component="div"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  mb: 2
+                }}
+              >
+                <Typography>Merk/Model</Typography>
+                <TextField hiddenLabel name="tipe_barang" onChange={handleOnChangeInput} value={addFormData.tipe_barang} variant="filled" sx={{ width: 1 }} />
+              </Box>
+              <Box
+                component="div"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  mb: 2
+                }}
+              >
+                <Typography>No. Seri Pabrik</Typography>
+                <TextField hiddenLabel name="nomor_seri_pabrik" onChange={handleOnChangeInput} value={addFormData.nomor_seri_pabrik} variant="filled" sx={{ width: 1 }} />
+              </Box>
+              <Box
+                component="div"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  mb: 2
+                }}
+              >
+                <Typography>Ukuran</Typography>
+                <TextField hiddenLabel name="ukuran_barang" onChange={handleOnChangeInput} value={addFormData.ukuran_barang} variant="filled" sx={{ width: 1 }} />
+              </Box>
+              <Box
+                component="div"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  mb: 2
+                }}
+              >
+                <Typography>Bahan</Typography>
+                <TextField hiddenLabel name="bahan_barang" onChange={handleOnChangeInput} value={addFormData.bahan_barang} variant="filled" sx={{ width: 1 }} />
+              </Box>
+              <Box
+                component="div"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  mb: 2
+                }}
+              >
+                <Typography>Tahun Perolehan</Typography>
+                <TextField hiddenLabel name="tahun_perolehan" onChange={handleOnChangeInput} value={addFormData.tahun_perolehan} variant="filled" sx={{ width: 1 }} />
+              </Box>
+              <Box
+                component="div"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  mb: 2
+                }}
+              >
+                <Typography>Nomor Kode Barang</Typography>
+                <TextField hiddenLabel name="kode_barang" onChange={handleOnChangeInput} value={addFormData.kode_barang} variant="filled" sx={{ width: 1 }} />
+              </Box>
+              <Box
+                component="div"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  mb: 2
+                }}
+              >
+                <Typography>Jumlah Barang</Typography>
+                <TextField hiddenLabel name="jumlah_barang" onChange={handleOnChangeInput} value={addFormData.jumlah_barang} variant="filled" sx={{ width: 1 }} />
+              </Box>
+              <Box
+                component="div"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  mb: 2
+                }}
+              >
+                <Typography>Harga</Typography>
+                <TextField hiddenLabel name="harga_barang" onChange={handleOnChangeInput} value={addFormData.harga_barang} label="Rp" variant="filled" sx={{ width: 1 }} />
+              </Box>
+              <Box
+                component="div"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  mb: 2
+                }}
+              >
+                <Typography>Keadaan Barang</Typography>
+                <FormControl fullWidth sx={{ bgcolor: "#E8E8E8", borderBottom: 1, borderColor: "#8D8D8D", borderRadius: 1 }}>
+                  <Select
+                    name="keadaan_barang"
+                    value={addFormData.keadaan_barang}
+                    onChange={handleOnChangeInput}
+                    displayEmpty
+                    inputProps={{ 'aria-label': 'Without label' }}
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value="Baik">Baik</MenuItem>
+                    <MenuItem value="Kurang Baik">Kurang Baik</MenuItem>
+                    <MenuItem value="Rusak Berat">Rusak Berat</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+              <Box
+                component="div"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  mb: 2
+                }}
+              >
+                <Typography>Keterangan</Typography>
+                <TextField hiddenLabel name="keterangan_barang" onChange={handleOnChangeInput} value={addFormData.keterangan_barang} variant="filled" sx={{ width: 1 }} />
+              </Box>
+              <Button
+                Types="submit"
+                Label="Submit"
+                sx={[
+                  { width: 1, bgcolor: "#66BB6A", color: "font.white" },
+                  {
+                    '&:hover': {
+                      bgcolor: "#4D8A4F",
+                    },
+                  }
+                ]}
+              >
 
-            </Button>
-          </form>
+              </Button>
+            </form>
+          </Box>
         </FormBox>
         <FormBox
           title={"Mutasi Aset Ruangan " + namaRuangan}
-          sx={{maxWidth:1}}
+          sx={{maxWidth:1, height: 919}}
         >
 
           <TableContainer
             component={Paper}
+            sx={{ maxHeight: 672, overflow: 'auto' }}
           >
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
