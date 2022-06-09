@@ -22,7 +22,6 @@ import {
 
 } from '@mui/material';
 import Button from '../../../shared/components/button';
-import Layout from '../../../shared/components/layout';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
@@ -55,7 +54,10 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 'auto',
-  outline: 0
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
 };
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -106,6 +108,26 @@ const PencatatanRKD = () => {
     "asal_usul": ""
   });
 
+  // reset form
+  const resetFormData = {
+    "nomor_register": "",
+    "kode_ruangan": "12.10.17.05.01.2012.01.00.01",
+    "nama_ruangan": "KEPALA DINAS PEKERJAAN UMUM",
+    "luas_lantai": "21 m2",
+    "kode_barang": "",
+    "nama_barang": "",
+    "tipe_barang": "",
+    "nomor_seri_pabrik": "",
+    "ukuran_barang": "",
+    "bahan_barang": "",
+    "tahun_perolehan": "",
+    "jumlah_barang": 0,
+    "harga_barang": 0,
+    "keadaan_barang": "",
+    "keterangan_barang": "",
+    "asal_usul": ""
+  }
+
   // handle data changes on text field
   const handleOnChangeInput = (e) => {
     const { name, value } = e.target;
@@ -132,26 +154,6 @@ const PencatatanRKD = () => {
       console.log("wait for 1 second to push data.");
       getDataFromAPI();
     }.bind(this), 1000)
-
-    // reset form
-    const resetFormData = {
-      "nomor_register": "",
-      "kode_ruangan": "12.10.17.05.01.2012.01.00.01",
-      "nama_ruangan": "KEPALA DINAS PEKERJAAN UMUM",
-      "luas_lantai": "21 m2",
-      "kode_barang": "",
-      "nama_barang": "",
-      "tipe_barang": "",
-      "nomor_seri_pabrik": "",
-      "ukuran_barang": "",
-      "bahan_barang": "",
-      "tahun_perolehan": "",
-      "jumlah_barang": 0,
-      "harga_barang": 0,
-      "keadaan_barang": "",
-      "keterangan_barang": "",
-      "asal_usul": ""
-    }
     setAddFormData(resetFormData);
     setSuccessAlert(true);
     setTimeout(function() { //After 8 second, set render to true
@@ -159,22 +161,120 @@ const PencatatanRKD = () => {
     }.bind(this), 8000)
   };
 
+  const [editFormData, setEditFormData] = React.useState({
+    "nomor_register": "",
+    "kode_ruangan": "12.10.17.05.01.2012.01.00.01",
+    "nama_ruangan": "KEPALA DINAS PEKERJAAN UMUM",
+    "luas_lantai": "21 m2",
+    "kode_barang": "",
+    "nama_barang": "",
+    "tipe_barang": "",
+    "nomor_seri_pabrik": "",
+    "ukuran_barang": "",
+    "bahan_barang": "",
+    "tahun_perolehan": "",
+    "jumlah_barang": 0,
+    "harga_barang": 0,
+    "keadaan_barang": "",
+    "keterangan_barang": "",
+    "asal_usul": ""
+  });
+
+  // handle submit form for adding data
+  const handleEdit =  (event) => {
+    event.preventDefault();
+    console.log(editFormData);
+    fetch("http://localhost:8081/ruangan/" + editFormData.id, {
+      method: 'PUT',
+      body: JSON.stringify(editFormData),
+      headers: { 'Content-Type': 'application/json' },
+    })
+    .then(response => response.json())
+    .then(response => console.log(response));
+
+    // wait for adding data done & update data in table
+    setTimeout(function() { //After 1 second, set render to true
+      console.log("wait for 1 second to push data.");
+      getDataFromAPI();
+    }.bind(this), 1000)
+
+    handleCloseEdit();
+    setEditAlert(true);
+    setTimeout(function() { //After 8 second, set render to true
+      setEditAlert(false);
+    }.bind(this), 8000)
+  };
+
+  const [currentRow, setCurrentRow] = React.useState('');
+
+  // handle delete row for deleting data
+  const HandleDelete =  () => {
+    const link = "http://localhost:8081/ruangan/" + currentRow;
+    fetch(link, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    })
+    .then(response => response.json())
+    .then(response => console.log(response));
+    setDeleteToggle(false);
+    // wait for removing data done & update data in table
+    setTimeout(function() { //After 1 second, set render to true
+      console.log("wait for 1 second to push data.");
+      getDataFromAPI(ruangan);
+    }.bind(this), 1000);
+
+    setDeleteAlert(true);
+    setTimeout(function() { //After 8 second, set render to true
+      setDeleteAlert(false);
+    }.bind(this), 8000);
+  };
+
+  // get data barang by id
+  const getBarangById = (id) => {
+    fetch("http://localhost:8081/ruangan/" + id)
+    .then((data) => data.json())
+    .then((data) => {
+      setEditFormData(data.data.ruangan);
+      console.log(data.data.ruangan);
+    });
+  }
+
   // convert integer to money for price column in table
   const intToMoney = (valInt) => {
     var formatter = new Intl.NumberFormat('en-ID');
     return formatter.format(valInt);
   };
 
+  // handle data changes on edit form text field
+  const handleOnChangeInputEdit = (e) => {
+    const { name, value } = e.target;
+    setEditFormData(prevState => ({
+        ...prevState,
+        [name]: value
+    }));
+  };
+
   // modal function
   const [editToggle, setEditToggle] = React.useState(false);
-  const handleOpenEdit = () => setEditToggle(true);
-  const handleCloseEdit = () => setEditToggle(false);
+  const handleOpenEdit = (id) => {
+    setEditToggle(true);
+    getBarangById(id);
+  };
+  const handleCloseEdit = () => {
+    setEditToggle(false);
+    setEditFormData(resetFormData);
+  };
 
   const [deleteToggle, setDeleteToggle] = React.useState(false);
-  const handleOpenDelete = () => setDeleteToggle(true);
+  const handleOpenDelete = (kode) => {
+    setDeleteToggle(true);
+    setCurrentRow(kode);
+  };
   const handleCloseDelete = () => setDeleteToggle(false);
 
   const [successAlert, setSuccessAlert] = React.useState(false);
+  const [deleteAlert, setDeleteAlert] = React.useState(false);
+  const [editAlert, setEditAlert] = React.useState(false);
 
   const [ruangan, setRuangan] = React.useState(10);
 
@@ -511,7 +611,7 @@ const PencatatanRKD = () => {
                         sx={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}
                       >
                         <IconButton
-                          onClick={handleOpen}
+                          onClick={() => {handleOpenEdit(row.id)}}
                           color="primary" 
                           aria-label="edit" 
                           sx={[
@@ -522,14 +622,16 @@ const PencatatanRKD = () => {
                           <EditIcon />
                         </IconButton>
                         <Modal
-                          open={open}
-                          onClose={handleClose}
+                          open={editToggle}
+                          onClose={handleCloseEdit}
                           aria-labelledby="modal-modal-title"
                           aria-describedby="modal-modal-description"
                         >
                           <Box sx={[
-                            style
+                            style,
+                            {mx: "auto"}
                           ]}>
+                          <form onSubmit={handleEdit}>
                             <FormBox
                               title="Edit Form"
                               sx={{width:366, maxHeight: 600, flexShrink: 0, overflow: 'auto'}}
@@ -543,20 +645,8 @@ const PencatatanRKD = () => {
                                   mb: 2
                                 }}
                               >
-                                <Typography>Kode Barang</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
-                              </Box>
-                              <Box
-                                component="div"
-                                sx={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  justifyContent: "flex-start",
-                                  mb: 2
-                                }}
-                              >
                                 <Typography>Jenis / Nama Barang</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                                <TextField hiddenLabel name="nama_barang" onChange={handleOnChangeInputEdit} value={editFormData.nama_barang} variant="filled" sx={{width:1}} />
                               </Box>
                               <Box
                                 component="div"
@@ -568,7 +658,7 @@ const PencatatanRKD = () => {
                                 }}
                               >
                                 <Typography>Merk/Model</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                                <TextField hiddenLabel name="tipe_barang" onChange={handleOnChangeInputEdit} value={editFormData.tipe_barang} variant="filled" sx={{width:1}} />
                               </Box>
                               <Box
                                 component="div"
@@ -580,7 +670,7 @@ const PencatatanRKD = () => {
                                 }}
                               >
                                 <Typography>No. Seri Pabrik</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                                <TextField hiddenLabel name="nomor_seri_pabrik" onChange={handleOnChangeInputEdit} value={editFormData.nomor_seri_pabrik} variant="filled" sx={{width:1}} />
                               </Box>
                               <Box
                                 component="div"
@@ -592,7 +682,7 @@ const PencatatanRKD = () => {
                                 }}
                               >
                                 <Typography>Ukuran</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                                <TextField hiddenLabel name="ukuran_barang" onChange={handleOnChangeInputEdit} value={editFormData.ukuran_barang} variant="filled" sx={{width:1}} />
                               </Box>
                               <Box
                                 component="div"
@@ -604,7 +694,7 @@ const PencatatanRKD = () => {
                                 }}
                               >
                                 <Typography>Bahan</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                                <TextField hiddenLabel name="bahan_barang" onChange={handleOnChangeInputEdit} value={editFormData.bahan_barang} variant="filled" sx={{width:1}} />
                               </Box>
                               <Box
                                 component="div"
@@ -616,7 +706,7 @@ const PencatatanRKD = () => {
                                 }}
                               >
                                 <Typography>Tahun Perolehan</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                                <TextField hiddenLabel name="tahun_perolehan" onChange={handleOnChangeInputEdit} value={editFormData.tahun_perolehan} variant="filled" sx={{width:1}} />
                               </Box>
                               <Box
                                 component="div"
@@ -627,8 +717,8 @@ const PencatatanRKD = () => {
                                   mb: 2
                                 }}
                               >
-                                <Typography>Nomor Kode</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                                <Typography>Nomor Kode Barang</Typography>
+                                <TextField hiddenLabel name="kode_barang" onChange={handleOnChangeInputEdit} value={editFormData.kode_barang} variant="filled" sx={{width:1}} />
                               </Box>
                               <Box
                                 component="div"
@@ -640,7 +730,7 @@ const PencatatanRKD = () => {
                                 }}
                               >
                                 <Typography>Jumlah Barang</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                                <TextField hiddenLabel name="jumlah_barang" onChange={handleOnChangeInputEdit} value={editFormData.jumlah_barang} variant="filled" sx={{width:1}} />
                               </Box>
                               <Box
                                 component="div"
@@ -652,7 +742,19 @@ const PencatatanRKD = () => {
                                 }}
                               >
                                 <Typography>Harga</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="Rp" variant="filled" sx={{width:1}} />
+                                <TextField hiddenLabel name="harga_barang" onChange={handleOnChangeInputEdit} value={editFormData.harga_barang} label="Rp" variant="filled" sx={{width:1}} />
+                              </Box>
+                              <Box
+                                component="div"
+                                sx={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  justifyContent: "flex-start",
+                                  mb: 2
+                                }}
+                              >
+                                <Typography>Asal Usul</Typography>
+                                <TextField hiddenLabel name="asal_usul" onChange={handleOnChangeInputEdit} value={editFormData.asal_usul} variant="filled" sx={{ width: 1 }} />
                               </Box>
                               <Box
                                 component="div"
@@ -666,17 +768,18 @@ const PencatatanRKD = () => {
                                 <Typography>Keadaan Barang</Typography>
                                 <FormControl fullWidth sx={{bgcolor:"#E8E8E8", borderBottom: 1, borderColor: "#8D8D8D", borderRadius: 1}}>
                                   <Select
-                                    value={addFormData.keadaan_barang}
-                                    onChange={handleOnChangeInput}
+                                    name="keadaan_barang"
+                                    value={editFormData.keadaan_barang}
+                                    onChange={handleOnChangeInputEdit}
                                     displayEmpty
                                     inputProps={{ 'aria-label': 'Without label' }}
                                   >
                                     <MenuItem value="">
                                       <em>None</em>
                                     </MenuItem>
-                                    <MenuItem value={10}>Baik</MenuItem>
-                                    <MenuItem value={20}>Kurang Baik</MenuItem>
-                                    <MenuItem value={30}>Rusak Berat</MenuItem>
+                                    <MenuItem value="Baik">Baik</MenuItem>
+                                    <MenuItem value="Kurang Baik">Kurang Baik</MenuItem>
+                                    <MenuItem value="Rusak Berat">Rusak Berat</MenuItem>
                                   </Select>
                                 </FormControl>
                               </Box>
@@ -690,10 +793,11 @@ const PencatatanRKD = () => {
                                 }}
                               >
                                 <Typography>Keterangan</Typography>
-                                <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                                <TextField hiddenLabel name="keterangan_barang" onChange={handleOnChangeInputEdit} value={editFormData.keterangan_barang} variant="filled" sx={{width:1}} />
                               </Box>
                               <Button
-                                Label="Submit Edit"
+                                Types="submit"
+                                Label="Submit"
                                 sx={[
                                   {width: 1, bgcolor: "#66BB6A", color: "font.white"},
                                   {
@@ -702,24 +806,62 @@ const PencatatanRKD = () => {
                                     },
                                   }
                                 ]}
-                              />
+                              >
+
+                              </Button>
                             </FormBox>
+                          </form>
                           </Box>
                         </Modal>
                         <IconButton
-                          color="primary"
-                          aria-label="delete"
+                          onClick={() => {handleOpenDelete(row.id)}}
+                          color="primary" 
+                          aria-label="delete" 
                           sx={[
-                            { bgcolor: "#F44336", borderRadius: 2 },
-                            { '&:hover': { bgcolor: "#B83229" } }
+                            {bgcolor: "#F44336", borderRadius: 2, p: 1, height: 1},
+                            { '&:hover': {bgcolor: "#B83229"} }
                           ]}
                         >
                           <DeleteIcon />
                         </IconButton>
+                        <Modal
+                          open={deleteToggle}
+                          onClose={handleCloseDelete}
+                          aria-labelledby="modal-modal-title"
+                          aria-describedby="modal-modal-description"
+                        >
+                          <Box sx={style}>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                              Apakah anda yakin ingin menghapus data ini?
+                            </Typography>
+                            <Box
+                              component="div"
+                              sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                mt: 4
+                              }}
+                            >
+                              <Button
+                                Label="Batalkan"
+                                sx={[{bgcolor: "#3084F2", color: "font.white"}, {'&:hover': {bgcolor: "#29B6F6"}}]}
+                                Click={handleCloseDelete}
+                              />
+                              <Button
+                                Click={() => { HandleDelete() }}
+                                Label="Hapus"
+                                color="error"
+                                sx={[{bgcolor: "#F44336", color: "font.white"}, {'&:hover': {bgcolor: "#B83229"}}]}
+                              />
+                            </Box>
+                          </Box>
+                        </Modal>
                         </Box>
                       </TableCell>
                       <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">
-                        {row.id}
+                        {index}
                       </TableCell>
                       <TableCell sx={{ border: 1 }} align="center">{row.nama_barang}</TableCell>
                       <TableCell sx={{ border: 1 }} align="center">{row.tipe_barang}</TableCell>
@@ -764,6 +906,45 @@ const PencatatanRKD = () => {
               sx={{ mt: 2 }}
             >
               Data berhasil ditambahkan!
+            </Alert>
+          </Collapse>
+          <Collapse in={editAlert}>
+            <Alert
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setEditAlert(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+              sx={{ mt: 2 }}
+            >
+              Data berhasil diedit!
+            </Alert>
+          </Collapse>
+          <Collapse in={deleteAlert}>
+            <Alert
+              severity="error"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setDeleteAlert(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+              sx={{ mt: 2 }}
+            >
+              Data berhasil dihapus!
             </Alert>
           </Collapse>
           <Box
