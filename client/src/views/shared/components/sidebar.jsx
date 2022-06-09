@@ -44,13 +44,15 @@ const Sidebar = () => {
             name: 'Siti Mulyani',
             NIP: '197101231994032004',
             position: 'Kepala Sub Bagian Umpegdatin',
-            status: 'Online'
+            status: 'Online',
+            id: 'sitimulyani'
         },
         {
             name: 'Arin Setiawan',
             NIP: '197306092008011004',
             position: 'Pengurus Barang Pengguna',
-            status: 'Offline'
+            status: 'Offline',
+            id: 'arinsetiawan'
         }
     ]
 
@@ -97,6 +99,8 @@ const Sidebar = () => {
         localStorage.removeItem("user")
         navigate('/login')
     }
+    const loggedin = JSON.parse(localStorage.getItem('user'));
+    const loggedInAccount = account.filter(function (el) { return el.id === loggedin.user });
     return (
         <Box
             sx={{
@@ -270,25 +274,25 @@ const Sidebar = () => {
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     {account.map((data) =>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', px: 3, mb: 3, userSelect: "none", MozUserSelect: "none" }}>
-                            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '8px' }}>
-                                <Icon sx={{ color: 'font.white' }}>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 2, px: 3, mb: 2, userSelect: "none", MozUserSelect: "none" }}>
+                            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }}>
+                                <Icon sx={{ color: 'font.grey' }}>
                                     person
                                 </Icon>
-                                <Box sx={{ color: "font.white" }}>
-                                    <Typography variant="body1" fontWeight="bold">
+                                <Box sx={{ color: "font.grey" }}>
+                                    <Typography fontWeight="black" variant="subtitle1">
                                         {data.name}
                                     </Typography>
-                                    <Typography variant="subtitle2">
+                                    <Typography fontSize="8pt" variant="subtitle2">
                                         {data.NIP}
                                     </Typography>
-                                    <Typography variant="subtitle2">
+                                    <Typography fontSize="8pt" variant="subtitle2">
                                         {data.position}
                                     </Typography>
                                 </Box>
                             </Box>
-                            <Box sx={{ px: 2, py: 1, backgroundColor: data.status === "Online" ? "success.main" : "error.main", color: 'font.white', borderRadius: "8px" }}>
-                                {data.status}
+                            <Box sx={{ px: 2, py: 1, backgroundColor: loggedInAccount.length > 0 ? loggedInAccount[0].name === data.name ? "success.main" : "error.main" : "error.main", color: 'font.white', borderRadius: "8px" }}>
+                                {loggedInAccount.length > 0 ? loggedInAccount[0].name === data.name ? "Online" : "Offline" : "Offline"}
                             </Box>
                         </Box>)}
 

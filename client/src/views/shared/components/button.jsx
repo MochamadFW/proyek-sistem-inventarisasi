@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 
-const SubmitButton = ({sx = [], Label, Types, Click }) => {
+const SubmitButton = ({sx = [], Label, Types, Click, Disabled }) => {
 
     return (
         <Button
@@ -24,6 +24,7 @@ const SubmitButton = ({sx = [], Label, Types, Click }) => {
             }
             variant="contained"
             onClick={Click}
+            disabled={Disabled}
             >
             {Label}
         </Button>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import { 
+import {
   Typography,
   Table,
   TableBody,
@@ -76,11 +76,11 @@ const PencatatanRKU = () => {
   const [dataTable, setDataTable] = React.useState([]);
   const getDataFromAPI = () => {
     fetch("http://localhost:8081/ruangan/barang/KASUBAG%20UMPEGDATIN")
-    .then((data) => data.json())
-    .then((data) => {
-      setDataTable(data.data.namaBarang);
-      console.log(data.data.namaBarang);
-    });
+      .then((data) => data.json())
+      .then((data) => {
+        setDataTable(data.data.namaBarang);
+        console.log(data.data.namaBarang);
+      });
   }
 
   // mount data at first loading page
@@ -132,13 +132,13 @@ const PencatatanRKU = () => {
   const handleOnChangeInput = (e) => {
     const { name, value } = e.target;
     setAddFormData(prevState => ({
-        ...prevState,
-        [name]: value
+      ...prevState,
+      [name]: value
     }));
   };
 
   // handle submit form for adding data
-  const HandleSubmit =  (event) => {
+  const HandleSubmit = (event) => {
     event.preventDefault();
     console.log(addFormData);
     fetch("http://localhost:8081/ruangan/newruangan", {
@@ -146,17 +146,17 @@ const PencatatanRKU = () => {
       body: JSON.stringify(addFormData),
       headers: { 'Content-Type': 'application/json' },
     })
-    .then(response => response.json())
-    .then(response => console.log(response));
+      .then(response => response.json())
+      .then(response => console.log(response));
 
     // wait for adding data done & update data in table
-    setTimeout(function() { //After 1 second, set render to true
+    setTimeout(function () { //After 1 second, set render to true
       console.log("wait for 1 second to push data.");
       getDataFromAPI();
     }.bind(this), 1000)
     setAddFormData(resetFormData);
     setSuccessAlert(true);
-    setTimeout(function() { //After 8 second, set render to true
+    setTimeout(function () { //After 8 second, set render to true
       setSuccessAlert(false);
     }.bind(this), 8000)
   };
@@ -315,7 +315,7 @@ const PencatatanRKU = () => {
       >
         <Box
           component="div"
-          sx={{width:366, flexShrink: 0, mr:2}}
+          sx={{ width: 366, flexShrink: 0, mr: 2 }}
         >
         </Box>
         <Box
@@ -331,8 +331,8 @@ const PencatatanRKU = () => {
           }}
         >
           <TablePagination
-            sx={{ml: -4}}
-            rowsPerPageOptions={[10, 50, 75, {label: 'All', value: -1}]}
+            sx={{ ml: -4 }}
+            rowsPerPageOptions={[10, 50, 75, { label: 'All', value: -1 }]}
             component="div"
             count={dataTable.length}
             rowsPerPage={rowsPerPage}
@@ -386,11 +386,11 @@ const PencatatanRKU = () => {
       >
         <FormBox
           title="Form Input"
-          sx={{width:366, maxHeight: 919, flexShrink: 0, mr:2}}
+          sx={{ width: 366, maxHeight: 919, flexShrink: 0, mr: 2 }}
         >
           <Box
             component="div"
-            sx={{pr: 1, pb: 2, m: 0, width: 1, maxHeight: 800, overflow: 'auto'}}
+            sx={{ pr: 1, pb: 2, m: 0, width: 1, maxHeight: 800, overflow: 'auto' }}
           >
             <form
               onSubmit={HandleSubmit}
@@ -573,9 +573,9 @@ const PencatatanRKU = () => {
         </FormBox>
         <FormBox
           title="Kartu Inventaris Ruangan Kasubag Umpegdatin"
-          sx={{maxWidth:1, height: 919}}
+          sx={{ maxWidth: 1, height: 919 }}
         >
-          <TableContainer 
+          <TableContainer
             component={Paper}
             sx={{ maxHeight: 672, overflow: 'auto' }}
           >
@@ -861,7 +861,7 @@ const PencatatanRKU = () => {
                         </Box>
                       </TableCell>
                       <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">
-                        {index}
+                        {index + 1}
                       </TableCell>
                       <TableCell sx={{ border: 1 }} align="center">{row.nama_barang}</TableCell>
                       <TableCell sx={{ border: 1 }} align="center">{row.tipe_barang}</TableCell>
@@ -949,13 +949,18 @@ const PencatatanRKU = () => {
           </Collapse>
           <Box
             component="div"
-            sx={{width: 1,  display: 'flex', justifyContent: 'flex-end', mt: 6}}
+            sx={{ width: 1, display: 'flex', justifyContent: 'flex-end', mt: 6, gap: 2 }}
           >
-            <Box onClick={() => (navigate('/pdf', { state: { type: 'label' } }))}>
-              <Button
-                Label="Laporan KIR"
-              />
-            </Box>
+            <Button
+              Label="Laporan KIR"
+              Click={() => (navigate('/pdf', { state: { type: 'kir', data: dataTable, } }))}
+              Disabled={dataTable.length > 0 ? false : true}
+            />
+            <Button
+              Label="Label"
+              Click={() => (navigate('/pdf', { state: { type: 'label', data: dataTable, } }))}
+              Disabled={dataTable.length > 0 ? false : true}
+            />
           </Box>
         </FormBox>
       </Box>

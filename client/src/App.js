@@ -35,7 +35,8 @@ const theme = createTheme({
     },
     font: {
       main: "#263238",
-      white: "#FFFFFF"
+      white: "#FFFFFF",
+      grey:'#EEEEEE',
     },
     button: {
       main: '#F2D424',
@@ -85,7 +86,7 @@ function App() {
                     <Route path="buku-inventaris-barang" element={<BukuInventarisBarang />} />
                   </Route>
                 </Route>
-                <Route element={<RequireAuth allowedRole="Pengguna_barang" />}>
+                <Route element={<RequireAuth allowedRole="pengguna_barang" />}>
                   <Route path="/pengguna" element={<DashboardPenggunaBarang />} />
                   <Route path="/pengguna/kib" element={<PenggunaKib />} />
                   <Route path="/pengguna/kir" element={<PenggunaKir />} />
