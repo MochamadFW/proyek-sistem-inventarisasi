@@ -97,7 +97,7 @@ const PenggunaKib = () => {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
   const ActionsPagiantion = () => { return (<></>) };
   function defaultLabelDisplayedRows({ from, to, count }) { return ``; };
-  
+
   return (
     <React.Fragment>
       <Box
@@ -144,7 +144,7 @@ const PenggunaKib = () => {
                 <TableRow
                   sx={{ bgcolor: '#66BB6A' }}
                 >
-                  <TableCell sx={{ border: 0 }} align="center" colSpan={9} />
+                  <TableCell sx={{ border: 0 }} align="center" colSpan={8} />
                   <TableCell sx={{ border: 1, borderTop: 0 }} align="center" colSpan={5}>
                     Nomor
                   </TableCell>
@@ -204,7 +204,7 @@ const PenggunaKib = () => {
         <Button
           Label="Laporan KIB"
           sx={{
-            mt: 12,
+            mt: 4,
           }}
         />
       </Box>
