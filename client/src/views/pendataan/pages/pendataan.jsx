@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Alert, Box, Badge, Icon, IconButton, Snackbar, Typography, TextField, Dialog, Popover } from "@mui/material";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -12,7 +12,6 @@ import moment from 'moment';
 import { DateContext } from "../../../hooks/useDateContext";
 import { KegiatanContext } from "../../../hooks/useKegiatanContext";
 
-import Layout from "../../shared/components/layout";
 import SubmitButton from "../../shared/components/button";
 
 import '../../shared/style/scrollbar.css'
@@ -23,14 +22,18 @@ const NotificationKegiatan = ({ data }) => {
             <Box sx={{ backgroundColor: 'secondary.main', px: 2, py: 3, overflowY: 'hidden' }}>
                 <Typography variant="h6" color="font.white">Notifikasi</Typography>
             </Box>
-            <Box className="menu" sx={{ width: '320px', maxHeight: '100%', gap: 2, display: 'flex', flexDirection: 'column', px: 3, py: 2, overflowX: 'hidden', overflowY: 'scroll', userSelect: "none", MozUserSelect: "none" }}>
-                {data.map((datas, index) => (
-                    <Box sx={{ width: '100%', borderBottom: index === (data.length - 1) ? '' : '1px solid rgba(0,0,0,.1)', wordBreak: 'break-all' }} key={index}>
-                        <Typography variant="subtitle2">{moment(datas.tanggalKegiatan).format("DD MMMM YYYY")}</Typography>
-                        <Typography variant="body1">{datas.namaKegiatan}</Typography>
-                    </Box>)
-                )}
-            </Box>
+            {data === undefined ?
+                <Box sx={{ width: '100%', wordBreak: 'break-all' }}>
+                    <Typography variant="body1" color="#CCCCCC">Tidak terdapat kegiatan</Typography>
+                </Box> :
+                <Box className="menu" sx={{ width: '320px', maxHeight: '100%', gap: 2, display: 'flex', flexDirection: 'column', px: 3, py: 2, overflowX: 'hidden', overflowY: 'scroll', userSelect: "none", MozUserSelect: "none" }}>
+                    {data.map((datas, index) => (
+                        <Box sx={{ width: '100%', borderBottom: index === (data.length - 1) ? '' : '1px solid rgba(0,0,0,.1)', wordBreak: 'break-all' }} key={index}>
+                            <Typography variant="subtitle2">{moment(new Date(datas.tanggal_kegiatan)).format("DD MMMM YYYY")}</Typography>
+                            <Typography variant="body1">{datas.nama_kegiatan}</Typography>
+                        </Box>)
+                    )}
+                </Box>}
         </Box >
     )
 }
@@ -39,7 +42,24 @@ const FormKegiatan = ({ onSubmit, setDate }) => {
     const [value, setValue] = useState({ namaKegiatan: "", tanggalKegiatan: new Date() });
     function handleSubmitAddKegiatan(event) {
         event.preventDefault();
-        setDate((prevState) => ([...prevState, value]));
+        fetch("http://localhost:8081/jadwalkegiatan/newjadwalkegiatan", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(
+                {
+                    "tanggal_kegiatan": value.tanggalKegiatan,
+                    "nama_kegiatan": value.namaKegiatan
+                }
+            )
+        })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Success:', result.message);
+            })
+            .then(setValue({ namaKegiatan: "", tanggalKegiatan: new Date() }))
+
         onSubmit();
     }
 
@@ -77,7 +97,7 @@ const FormKegiatan = ({ onSubmit, setDate }) => {
                         />
                     </Box>
                     <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
-                        <SubmitButton Label="Tambah Kegiatan" Types='submit' sx={{ backgroundColor: 'button.submit', '&:hover': { backgroundColor: '#4A874D' } }} />
+                        <SubmitButton Label="Tambah Kegiatan" Types='submit' sx={{ color: 'font.white', backgroundColor: 'button.submit', '&:hover': { backgroundColor: '#4A874D' } }} />
                     </Box>
                 </Box>
             </form>
@@ -88,9 +108,14 @@ const FormKegiatan = ({ onSubmit, setDate }) => {
 const Pendataan = () => {
     const { selectedDate, setSelectedDate } = useContext(DateContext);
     const { selectedKegiatan, setSelectedKegiatan } = useContext(KegiatanContext);
+    useEffect(() => {
+        fetch("http://localhost:8081/jadwalkegiatan/alljadwalkegiatan")
+            .then((response) => response.json())
+            .then((json) => { setSelectedKegiatan(json.data.jadwal) })
+    }, [selectedKegiatan]);
     const renderEventsDay = (date, selectedDates, pickersDayProps) => {
-        const matchedStyles = selectedKegiatan.reduce((a, v) => {
-            return isSameDay(date, v.tanggalKegiatan) ? {
+        const matchedStyles = selectedKegiatan?.reduce((a, v) => {
+            return isSameDay(date, new Date(v.tanggal_kegiatan)) ? {
                 backgroundColor: "secondary.main",
                 color: "font.white",
                 '&:hover, &:focus': { backgroundColor: "secondary.darker" },
