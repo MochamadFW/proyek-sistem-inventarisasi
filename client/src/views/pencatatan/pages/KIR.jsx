@@ -95,60 +95,75 @@ const PencatatanKib = () => {
   return (
     <React.Fragment>
       <Box
-        component="div"
         sx={{
-          width: 686,
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-          mb: 2,
-          ml: "auto",
+          maxWidth: 1,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center"
         }}
       >
-        <TablePagination
-          sx={{ml: -4}}
-          rowsPerPageOptions={[5, 10, 15, 25, 100]}
+        <Box
           component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          labelRowsPerPage=""
-          ActionsComponent={ActionsPagiantion}
-          labelDisplayedRows={defaultLabelDisplayedRows}
-        />
-        <FormControl variant="filled" sx={{ minWidth: 120 }}>
-          <InputLabel id="demo-simple-select-filled-label">Ruangan</InputLabel>
-          <Select
-            labelId="demo-simple-select-filled-label"
-            id="demo-simple-select-filled"
-            value={ruangan}
-            onChange={handleChangeRuangan}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Staff Umum</MenuItem>
-            <MenuItem value={20}>R. Kepala Dinas</MenuItem>
-            <MenuItem value={30}>R. Sektretaris Dinas</MenuItem>
-          </Select>
-        </FormControl>
-        <Paper
-          component="form"
-          sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 237, bgcolor: "#E5E5E5", ml: "auto" }}
+          sx={{width:366, flexShrink: 0, mr:2}}
         >
-          <InputBase
-            sx={{ ml: 1, flex: 1 }}
-            placeholder="Search"
-            inputProps={{ 'aria-label': 'search' }}
-            variant="filled"
+        </Box>
+        <Box
+          component="div"
+          sx={{
+            width: 1,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            mb: 2,
+            ml: "auto",
+          }}
+        >
+          <TablePagination
+            sx={{ml: -4}}
+            rowsPerPageOptions={[5, 10, 15, 25, 100]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            labelRowsPerPage=""
+            ActionsComponent={ActionsPagiantion}
+            labelDisplayedRows={defaultLabelDisplayedRows}
           />
-          <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
-            <SearchIcon />
-          </IconButton>
-        </Paper>
+          <FormControl variant="filled" sx={{ minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-filled-label">Ruangan</InputLabel>
+            <Select
+              labelId="demo-simple-select-filled-label"
+              id="demo-simple-select-filled"
+              value={ruangan}
+              onChange={handleChangeRuangan}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>Staff Umum</MenuItem>
+              <MenuItem value={20}>R. Kepala Dinas</MenuItem>
+              <MenuItem value={30}>R. Sektretaris Dinas</MenuItem>
+            </Select>
+          </FormControl>
+          <Paper
+            component="form"
+            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 237, bgcolor: "#E5E5E5", ml: "auto", borderRadius: 0 }}
+          >
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Search"
+              inputProps={{ 'aria-label': 'search' }}
+              variant="filled"
+            />
+            <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+              <SearchIcon />
+            </IconButton>
+          </Paper>
+        </Box>
       </Box>
       <Box
         sx={{

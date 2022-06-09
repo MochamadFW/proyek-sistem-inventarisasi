@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
     Badge,
     Box,
-    FormControl,
+    Button,
     Icon,
     IconButton,
     InputBase,
@@ -32,8 +32,7 @@ import moment from 'moment';
 
 import { KegiatanContext } from '../../../hooks/useKegiatanContext';
 
-import Button from '../../shared/components/button';
-import Layout from '../../shared/components/layout';
+import ButtonMUI from '../../shared/components/button';
 import FormBox from '../../shared/components/formBox';
 import { Navigate, useNavigate } from 'react-router-dom';
 
@@ -69,29 +68,10 @@ function createData(no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, 
     return { no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, harga, baik, kbaik, rberat, ketmutasi };
 }
 
-const rows = [
-    createData(1, 159, 6.0, 24, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-    createData(2, 237, 9.0, 37, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-    createData(3, 262, 16.0, 24, 6.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-    createData(4, 305, 3.7, 67, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-    createData(5, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-    createData(6, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-    createData(7, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-    createData(8, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-    createData(9, 159, 6.0, 24, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-    createData(10, 237, 9.0, 37, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-    createData(11, 262, 16.0, 24, 6.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-    createData(12, 305, 3.7, 67, 4.3, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-    createData(13, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-    createData(14, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-    createData(15, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-    createData(16, 356, 16.0, 49, 3.9, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0),
-];
-
-const TableBIB = () => {
+const TableBIB = ({ data }) => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
     const ActionsPagination = () => { return (<></>) };
     function defaultLabelDisplayedRows({ from, to, count }) { return ``; };
     const handleChangePage = (event, newPage) => {
@@ -101,6 +81,7 @@ const TableBIB = () => {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
+    const navigate = useNavigate();
     return (
         <React.Fragment>
             <Box
@@ -119,7 +100,7 @@ const TableBIB = () => {
                     sx={{ ml: -4 }}
                     rowsPerPageOptions={[5, 10, 15, 25, 100]}
                     component="div"
-                    count={rows.length}
+                    count={data.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}
@@ -176,57 +157,56 @@ const TableBIB = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row, index) => (
-                                    <StyledTableRow
-                                        key={row.name}
-                                    >
-                                        <TableCell sx={{ border: 1, borderTop: 0, borderLeft: 0 }} size="small" component="th" scope="row" align="left">
-                                            <Box
-                                                sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}
+                            {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
+                                <StyledTableRow
+                                    key={index}
+                                >
+                                    <TableCell sx={{ border: 1, borderTop: 0, borderLeft: 0 }} size="small" component="th" scope="row" align="left">
+                                        <Box
+                                            sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}
+                                        >
+                                            <IconButton
+                                                color="primary"
+                                                aria-label="edit"
+                                                sx={[
+                                                    { bgcolor: "#FFA726", borderRadius: 2, mr: 1 },
+                                                    { '&:hover': { bgcolor: "#CB841B" } }
+                                                ]}
                                             >
-                                                <IconButton
-                                                    color="primary"
-                                                    aria-label="edit"
-                                                    sx={[
-                                                        { bgcolor: "#FFA726", borderRadius: 2, mr: 1 },
-                                                        { '&:hover': { bgcolor: "#CB841B" } }
-                                                    ]}
-                                                >
-                                                    <EditIcon />
-                                                </IconButton>
-                                                <IconButton
-                                                    color="primary"
-                                                    aria-label="delete"
-                                                    sx={[
-                                                        { bgcolor: "#F44336", borderRadius: 2 },
-                                                        { '&:hover': { bgcolor: "#B83229" } }
-                                                    ]}
-                                                >
-                                                    <DeleteIcon />
-                                                </IconButton>
-                                            </Box>
-                                        </TableCell>
-                                        <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">
-                                            {row.no}
-                                        </TableCell>
-                                        <TableCell sx={{ border: 1 }} align="center">{row.jenis}</TableCell>
-                                        <TableCell sx={{ border: 1 }} align="center">{row.merk}</TableCell>
-                                        <TableCell sx={{ border: 1 }} align="center">{row.noseri}</TableCell>
-                                        <TableCell sx={{ border: 1 }} align="center">{row.ukuran}</TableCell>
-                                        <TableCell sx={{ border: 1 }} align="center">{row.bahan}</TableCell>
-                                        <TableCell sx={{ border: 1 }} align="center">{row.tahun}</TableCell>
-                                        <TableCell sx={{ border: 1 }} align="center">{row.nokode}</TableCell>
-                                        <TableCell sx={{ border: 1 }} align="center">{row.reg}</TableCell>
-                                        <TableCell sx={{ border: 1 }} align="center">{row.harga}</TableCell>
-                                        <TableRow>
-                                            <TableCell sx={{ borderRight: 1, borderBottom: 1 }} align="center"><Box sx={{ width: '28px' }}>{row.baik}</Box></TableCell>
-                                            <TableCell sx={{ borderRight: 1, borderBottom: 1 }} align="center"><Box sx={{ width: '48px' }}>{row.kbaik}</Box></TableCell>
-                                            <TableCell sx={{ borderBottom: 1 }} align="center"><Box sx={{ width: '42px' }}>{row.rberat}</Box></TableCell>
-                                        </TableRow>
-                                        <TableCell sx={{ border: 1, borderRight: 0 }} align="center">{row.ketmutasi}</TableCell>
-                                    </StyledTableRow>
-                                ))}
+                                                <EditIcon />
+                                            </IconButton>
+                                            <IconButton
+                                                color="primary"
+                                                aria-label="delete"
+                                                sx={[
+                                                    { bgcolor: "#F44336", borderRadius: 2 },
+                                                    { '&:hover': { bgcolor: "#B83229" } }
+                                                ]}
+                                            >
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </Box>
+                                    </TableCell>
+                                    <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">
+                                        {index + 1}
+                                    </TableCell>
+                                    <TableCell sx={{ border: 1 }} align="center">{row.kode_barang}</TableCell>
+                                    <TableCell sx={{ border: 1 }} align="center">{row.nama_barang}</TableCell>
+                                    <TableCell sx={{ border: 1 }} align="center">{row.tipe_barang}</TableCell>
+                                    <TableCell sx={{ border: 1 }} align="center">{row.nomor_seri_pabrik}</TableCell>
+                                    <TableCell sx={{ border: 1 }} align="center">{row.ukuran_barang}</TableCell>
+                                    <TableCell sx={{ border: 1 }} align="center">{row.asal_usul}</TableCell>
+                                    <TableCell sx={{ border: 1 }} align="center">{row.tahun_perolehan}</TableCell>
+                                    <TableCell sx={{ border: 1 }} align="center">{row.jumlah_barang}</TableCell>
+                                    <TableCell sx={{ border: 1 }} align="center">Rp{Intl.NumberFormat('en-US').format(row.harga_barang)}</TableCell>
+                                    <TableRow sx={{ display: 'flex', }}>
+                                        <TableCell sx={{ borderRight: 1, borderBottom: 1 }} align="center"><Box sx={{ width: '28px', height: '100%' }}>{row.keadaan_barang === "Baik" ? row.jumlah_barang : "-"}</Box></TableCell>
+                                        <TableCell sx={{ borderRight: 1, borderBottom: 1 }} align="center"><Box sx={{ width: '48px', height: '100%' }}>{row.keadaan_barang === "Kurang Baik" ? row.jumlah_barang : "-"}</Box></TableCell>
+                                        <TableCell sx={{ borderBottom: 1 }} align="center"><Box sx={{ width: '42px', height: '100%' }}>{row.keadaan_barang === "Rusak Berat" ? row.jumlah_barang : "-"}</Box></TableCell>
+                                    </TableRow>
+                                    <TableCell sx={{ border: 1, borderRight: 0 }} align="center">{row.keterangan_barang}</TableCell>
+                                </StyledTableRow>
+                            ))}
                             {emptyRows > 0 && (
                                 <TableRow
                                     style={{
@@ -243,8 +223,8 @@ const TableBIB = () => {
                     component="div"
                     sx={{ width: 1, display: 'flex', justifyContent: 'flex-end' }}
                 >
-                    <Box onClick={() => { Navigate("/pdf", { state: { type: 'bib' } }) }}>
-                        <Button
+                    <Box onClick={() => { navigate("/pdf", { state: { type: 'bib', data: data } }) }}>
+                        <ButtonMUI
                             Label="Buku Inventaris Barang"
                             sx={{
                                 mt: 12,
@@ -269,12 +249,91 @@ const BukuInventarisBarang = () => {
     };
     const openNotification = Boolean(anchorNotification);
     const idNotification = openNotification ? 'notification-popover' : undefined;
-    const [age, setAge] = useState('');
+    const [dataAllRuangan, setDataAllRuangan] = useState();
+    const [dataFormBuku, setDataFormBuku] = useState(
+        {
+            kode_ruangan: " ",
+            nomor_register: " ",
+            nama_ruangan: " ",
+            luas_lantai: " ",
+            kode_barang: " ",
+            nama_barang: " ",
+            tipe_barang: " ",
+            nomor_seri_pabrik: " ",
+            asal_usul: " ",
+            ukuran_barang: " ",
+            bahan_barang: " ",
+            tahun_perolehan: " ",
+            jumlah_barang: 1,
+            harga_barang: 0,
+            keadaan_barang: " ",
+            keterangan_barang: " "
+        }
+    );
+    useEffect(() => {
+        fetch("http://localhost:8081/ruangan/allruangan").
+            then((data) => data.json()).
+            then((data) => setDataAllRuangan(data.data.ruangan))
+    }, [dataFormBuku]);
     const handleChangeSelect = (event) => {
-        setAge(event.target.value);
+        setDataFormBuku((prev) => ({ ...prev, keadaan_barang: event.target.value }));
     };
-    const [value, setValue] = useState({ namaKegiatan: "", tanggalKegiatan: new Date() });
-    const navigate = useNavigate();
+    function handleSubmit(event) {
+        event.preventDefault();
+        fetch("http://localhost:8081/ruangan/newruangan/",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(
+                    {
+                        kode_ruangan: dataFormBuku.kode_ruangan,
+                        nomor_register: dataFormBuku.nomor_register,
+                        nama_ruangan: dataFormBuku.nama_ruangan,
+                        luas_lantai: dataFormBuku.luas_lantai,
+                        kode_barang: dataFormBuku.kode_barang,
+                        nama_barang: dataFormBuku.nama_barang,
+                        tipe_barang: dataFormBuku.tipe_barang,
+                        nomor_seri_pabrik: dataFormBuku.nomor_seri_pabrik,
+                        asal_usul: dataFormBuku.asal_usul,
+                        ukuran_barang: dataFormBuku.ukuran_barang,
+                        bahan_barang: dataFormBuku.bahan_barang,
+                        tahun_perolehan: String(dataFormBuku.tahun_perolehan.getFullYear()),
+                        jumlah_barang: Number(dataFormBuku.jumlah_barang),
+                        harga_barang: Number(dataFormBuku.harga_barang),
+                        keadaan_barang: dataFormBuku.keadaan_barang,
+                        keterangan_barang: dataFormBuku.keterangan_barang
+                    }
+                )
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Success:', result);
+            }).then(setDataFormBuku({
+                kode_ruangan: "",
+                nomor_register: "",
+                nama_ruangan: "",
+                luas_lantai: "",
+                kode_barang: "",
+                nama_barang: "",
+                tipe_barang: "",
+                nomor_seri_pabrik: "",
+                asal_usul: "",
+                ukuran_barang: "",
+                bahan_barang: "",
+                tahun_perolehan: null,
+                jumlah_barang: 1,
+                harga_barang: 0,
+                keadaan_barang: "",
+                keterangan_barang: ""
+            }))
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    if (dataAllRuangan === undefined) { return <h1>Loading</h1> }
     return (
         <React.Fragment>
             <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
@@ -305,7 +364,7 @@ const BukuInventarisBarang = () => {
                             title="Form Input"
                         >
 
-                            <FormControl fullWidth variant="filled">
+                            <form onSubmit={handleSubmit}>
                                 <Box
                                     component="div"
                                     sx={{
@@ -318,7 +377,7 @@ const BukuInventarisBarang = () => {
                                     }}
                                 >
                                     <Typography>No</Typography>
-                                    <TextField disabled hiddenLabel id="filled-basic" label="" variant="filled" />
+                                    <TextField disabled hiddenLabel value={dataAllRuangan?.length + 1} id="filled-basic" label="" variant="filled" />
                                 </Box>
                                 <Box
                                     component="div"
@@ -330,7 +389,9 @@ const BukuInventarisBarang = () => {
                                     }}
                                 >
                                     <Typography>Kode Barang</Typography>
-                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
+                                        value={dataFormBuku?.kode_barang}
+                                        onChange={(event) => { setDataFormBuku((prev) => ({ ...prev, kode_barang: event.target.value })) }} />
                                 </Box>
                                 <Box
                                     component="div"
@@ -342,7 +403,8 @@ const BukuInventarisBarang = () => {
                                     }}
                                 >
                                     <Typography>Jenis / Nama Barang</Typography>
-                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
+                                        value={dataFormBuku.nama_barang} onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, nama_barang: value.target.value })) }} />
                                 </Box>
                                 <Box
                                     component="div"
@@ -355,7 +417,8 @@ const BukuInventarisBarang = () => {
                                     }}
                                 >
                                     <Typography>Merk/Model</Typography>
-                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
+                                        value={dataFormBuku.tipe_barang} onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, tipe_barang: value.target.value })) }} />
                                 </Box>
                                 <Box
                                     component="div"
@@ -368,7 +431,8 @@ const BukuInventarisBarang = () => {
                                     }}
                                 >
                                     <Typography>No. Seri Pabrik</Typography>
-                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
+                                        value={dataFormBuku.nomor_seri_pabrik} onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, nomor_seri_pabrik: value.target.value })) }} />
                                 </Box>
                                 <Box
                                     component="div"
@@ -381,7 +445,7 @@ const BukuInventarisBarang = () => {
                                     }}
                                 >
                                     <Typography>Mutasi</Typography>
-                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} disabled />
                                 </Box>
                                 <Box
                                     component="div"
@@ -394,7 +458,9 @@ const BukuInventarisBarang = () => {
                                     }}
                                 >
                                     <Typography>Asal Usul</Typography>
-                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                    <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
+                                        value={dataFormBuku.asal_usul} onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, asal_usul: value.target.value })) }}
+                                    />
                                 </Box>
                                 <Box
                                     component="div"
@@ -408,11 +474,11 @@ const BukuInventarisBarang = () => {
                                     <Typography>Tahun Perolehan</Typography>
                                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                                         <DatePicker
+                                            views={['year']}
                                             label=""
-                                            value={value.tanggalKegiatan}
-                                            onChange={(newValue) => {
-                                                setValue((prevState) => ({ ...prevState, tanggalKegiatan: newValue }));
-                                            }}
+                                            value={dataFormBuku.tahun_perolehan}
+                                            inputFormat="yyyy"
+                                            onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, tahun_perolehan: value })) }}
                                             renderInput={(params) => <TextField variant="filled" {...params} />}
                                         />
                                     </LocalizationProvider>
@@ -428,7 +494,10 @@ const BukuInventarisBarang = () => {
                                     }}
                                 >
                                     <Typography>Jumlah Barang</Typography>
-                                    <TextField hiddenLabel type="number" InputProps={{ inputProps: { min: 1 } }} id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                    <TextField hiddenLabel type="number" InputProps={{ inputProps: { min: 1 } }} id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
+                                        value={dataFormBuku.jumlah_barang}
+                                        onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, jumlah_barang: value.target.value })) }}
+                                    />
                                 </Box>
                                 <Box
                                     component="div"
@@ -441,7 +510,12 @@ const BukuInventarisBarang = () => {
                                     }}
                                 >
                                     <Typography>Harga</Typography>
-                                    <TextField hiddenLabel id="filled-basic" label="Rp" variant="filled" sx={{ width: 1 }} />
+                                    <TextField hiddenLabel id="filled-basic" label="Rp" variant="filled" sx={{ width: 1 }}
+                                        type="number"
+                                        InputProps={{ inputProps: { min: 0 } }}
+                                        value={dataFormBuku.harga_barang}
+                                        onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, harga_barang: value.target.value })) }}
+                                    />
                                 </Box>
                                 <Box
                                     component="div"
@@ -455,14 +529,15 @@ const BukuInventarisBarang = () => {
                                 >
                                     <Typography>Kondisi Barang</Typography>
                                     <Select
-                                        value={age}
+                                        value={dataFormBuku.keadaan_barang}
                                         onChange={handleChangeSelect}
                                         displayEmpty
                                         inputProps={{ 'aria-label': 'Without label' }}
+                                        required
                                     >
-                                        <MenuItem value={10}>Baik</MenuItem>
-                                        <MenuItem value={20}>Kurang Baik</MenuItem>
-                                        <MenuItem value={30}>Rusak Berat</MenuItem>
+                                        <MenuItem value="Baik">Baik</MenuItem>
+                                        <MenuItem value="Kurang Baik">Kurang Baik</MenuItem>
+                                        <MenuItem value="Rusak Berat">Rusak Berat</MenuItem>
                                     </Select>
                                 </Box>
                                 <Box
@@ -476,11 +551,14 @@ const BukuInventarisBarang = () => {
                                     }}
                                 >
                                     <Typography>Keterangan</Typography>
-                                    <TextField hiddenLabel multiline id="filled-basic" label="" variant="filled" sx={{ width: 1 }} />
+                                    <TextField hiddenLabel multiline id="filled-basic" label="" variant="filled" sx={{ width: 1 }}
+                                        value={dataFormBuku.keterangan_barang}
+                                        onChange={(value) => { setDataFormBuku((prev) => ({ ...prev, keterangan_barang: value.target.value })) }} />
                                 </Box>
+                                {/* <Box> */}
                                 <Button
                                     Label="Submit"
-                                    Types="submit"
+                                    type='submit'
                                     sx={[
                                         { width: 1, bgcolor: "#66BB6A", color: "font.white" },
                                         {
@@ -490,13 +568,15 @@ const BukuInventarisBarang = () => {
                                         }
                                     ]}
                                 >
+                                    Submit
                                 </Button>
-                            </FormControl>
+                                {/* </Box> */}
+                            </form>
                         </FormBox>
                     </Box>
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <TableBIB />
+                    <TableBIB data={dataAllRuangan} />
                 </Box>
             </Box>
         </React.Fragment >
