@@ -12,7 +12,6 @@ import Login from './views/login/pages/login';
 import PenggunaKib from './views/pengguna/pages/KIB'
 import PenggunaKir from './views/pengguna/pages/KIR'
 import PencatatanKib from './views/pencatatan/KIB/pages/KIB'
-import PencatatanKir from './views/pencatatan/pages/KIR'
 import PelaporanMutasiAset from "./views/pelaporan/pages/mutasiAset";
 import BukuInventarisBarang from "./views/pelaporan/pages/bukuinventarisbarang";
 import RequireAuth from "./views/shared/components/RequireAuth";
@@ -73,7 +72,6 @@ function App() {
                       <Route path="b" element={<PencatatanKib />} />
                     </Route>
                     <Route path="kir">
-                      <Route path="staff-umum" element={<PencatatanKir />} />
                       <Route path="ruang-kepala-dinas" element={<PencatatanRKD />} />
                       <Route path="ruang-sekretaris-dinas" element={<PencatatanRSD />} />
                       <Route path="ruang-kasubag-umpegdatin" element={<PencatatanRKU />} />

@@ -494,7 +494,7 @@ const PencatatanRSD = () => {
                   sx={{ bgcolor: '#66BB6A' }}
                 >
                   {headerRow.map((htxt, index) => (
-                    <TableCell sx={{ border: 1, '&:first-child': { borderLeft: 0, borderTop: 0 }, '&:last-child': { borderRight: 0 } }} align="center">{htxt}</TableCell>
+                    <TableCell key={index} sx={{ border: 1, '&:first-child': { borderLeft: 0, borderTop: 0 }, '&:last-child': { borderRight: 0 } }} align="center">{htxt}</TableCell>
                   ))}
                 </TableRow>
               </TableHead>
@@ -504,7 +504,7 @@ const PencatatanRSD = () => {
                 : dataTable)
                 .map((row, index) => (
                   <StyledTableRow
-                    key={row.id}
+                    key={index}
                   >
                     <TableCell sx={{ border: 1, borderTop:0, borderLeft: 0 }} size="small" component="th" scope="row" align="left">
                       <Box
