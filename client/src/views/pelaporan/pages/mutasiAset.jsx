@@ -22,6 +22,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Typography } from '@mui/material';
+import Checkbox from '@mui/material/Checkbox';
+import Modal from '@mui/material/Modal';
+
 import { useNavigate } from 'react-router-dom';
 
 function createData(no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, harga, baik, kbaik, rberat, ketmutasi) {
@@ -65,6 +68,18 @@ const headerRow = [
   "Keterangan"
 ]
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 'auto',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: '#E5E5E5',
@@ -76,6 +91,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const PelaporanMutasiAset = () => {
+  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
   const [age, setAge] = React.useState('');
 
@@ -84,6 +100,10 @@ const PelaporanMutasiAset = () => {
   const handleChangeRuangan = (event) => {
     setRuangan(event.target.value);
   };
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleChangeSelect = (event) => {
     setAge(event.target.value);
@@ -108,60 +128,75 @@ const PelaporanMutasiAset = () => {
   return (
     <React.Fragment>
       <Box
-        component="div"
         sx={{
-          width: 686,
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-          mb: 2,
-          ml: "auto",
+          maxWidth: 1,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center"
         }}
       >
-        <TablePagination
-          sx={{ ml: -4 }}
-          rowsPerPageOptions={[5, 10, 15, 25, 100]}
+        <Box
           component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          labelRowsPerPage=""
-          ActionsComponent={ActionsPagiantion}
-          labelDisplayedRows={defaultLabelDisplayedRows}
-        />
-        <FormControl variant="filled" sx={{ minWidth: 120 }}>
-          <InputLabel id="demo-simple-select-filled-label">Ruangan</InputLabel>
-          <Select
-            labelId="demo-simple-select-filled-label"
-            id="demo-simple-select-filled"
-            value={ruangan}
-            onChange={handleChangeRuangan}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Staff Umum</MenuItem>
-            <MenuItem value={20}>R. Kepala Dinas</MenuItem>
-            <MenuItem value={30}>R. Sektretaris Dinas</MenuItem>
-          </Select>
-        </FormControl>
-        <Paper
-          component="form"
-          sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 237, bgcolor: "#E5E5E5", ml: "auto" }}
+          sx={{width:366, flexShrink: 0, mr:2}}
         >
-          <InputBase
-            sx={{ ml: 1, flex: 1 }}
-            placeholder="Search"
-            inputProps={{ 'aria-label': 'search' }}
-            variant="filled"
+        </Box>
+        <Box
+          component="div"
+          sx={{
+            width: 1,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            mb: 2,
+            ml: "auto",
+          }}
+        >
+          <TablePagination
+            sx={{ml: -4}}
+            rowsPerPageOptions={[5, 10, 15, 25, 100]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            labelRowsPerPage=""
+            ActionsComponent={ActionsPagiantion}
+            labelDisplayedRows={defaultLabelDisplayedRows}
           />
-          <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
-            <SearchIcon />
-          </IconButton>
-        </Paper>
+          <FormControl variant="filled" sx={{ minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-filled-label">Ruangan</InputLabel>
+            <Select
+              labelId="demo-simple-select-filled-label"
+              id="demo-simple-select-filled"
+              value={ruangan}
+              onChange={handleChangeRuangan}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>Staff Umum</MenuItem>
+              <MenuItem value={20}>R. Kepala Dinas</MenuItem>
+              <MenuItem value={30}>R. Sektretaris Dinas</MenuItem>
+            </Select>
+          </FormControl>
+          <Paper
+            component="form"
+            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 237, bgcolor: "#E5E5E5", ml: "auto", borderRadius: 0 }}
+          >
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Search"
+              inputProps={{ 'aria-label': 'search' }}
+              variant="filled"
+            />
+            <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+              <SearchIcon />
+            </IconButton>
+          </Paper>
+        </Box>
       </Box>
       <Box
         sx={{
@@ -174,7 +209,7 @@ const PelaporanMutasiAset = () => {
       >
         <FormBox
           title="Form Input"
-          sx={{ width: 366, mr: 2 }}
+          sx={{width:366, flexShrink: 0, mr:2}}
         >
           <Box
             component="div"
@@ -350,7 +385,7 @@ const PelaporanMutasiAset = () => {
         </FormBox>
         <FormBox
           title="Mutasi Aset Ruangan Staff Umum"
-          sx={{ maxWidth: 686 }}
+          sx={{maxWidth:1}}
         >
 
           <TableContainer
@@ -380,54 +415,248 @@ const PelaporanMutasiAset = () => {
               </TableHead>
               <TableBody>
                 {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row, index) => (
-                    <StyledTableRow
-                      key={row.name}
-                    >
-                      <TableCell sx={{ border: 1, borderTop: 0, borderLeft: 0 }} size="small" component="th" scope="row" align="left">
-                        <Box
-                          sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}
+                .map((row, index) => (
+                  <StyledTableRow
+                    key={row.name}
+                  >
+                    <TableCell sx={{ border: 1, borderTop:0, borderLeft: 0 }} size="small" component="th" scope="row" align="left">
+                      <Box
+                        sx={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}
+                      >
+                        <IconButton 
+                          onClick={handleOpen}
+                          color="primary" 
+                          aria-label="edit" 
+                          sx={[
+                            {bgcolor: "#FFA726", borderRadius: 2, mr:1, p: 1, height: 1},
+                            { '&:hover': {bgcolor: "#CB841B"} }
+                          ]}
                         >
-                          <IconButton
-                            color="primary"
-                            aria-label="edit"
-                            sx={[
-                              { bgcolor: "#FFA726", borderRadius: 2, mr: 1 },
-                              { '&:hover': { bgcolor: "#CB841B" } }
-                            ]}
+                          <EditIcon />
+                        </IconButton>
+                        <Modal
+                          open={open}
+                          onClose={handleClose}
+                          aria-labelledby="modal-modal-title"
+                          aria-describedby="modal-modal-description"
+                        >
+                          <Box sx={[
+                            style,
+                            {mx: "auto"}
+                          ]}>
+                          <FormBox
+                            title="Edit Form"
+                            sx={{width:366, maxHeight: 600, flexShrink: 0, overflow: 'auto'}}
                           >
-                            <EditIcon />
-                          </IconButton>
-                          <IconButton
-                            color="primary"
-                            aria-label="delete"
-                            sx={[
-                              { bgcolor: "#F44336", borderRadius: 2 },
-                              { '&:hover': { bgcolor: "#B83229" } }
-                            ]}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </Box>
-                      </TableCell>
-                      <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">
-                        {row.no}
-                      </TableCell>
-                      <TableCell sx={{ border: 1 }} align="center">{row.jenis}</TableCell>
-                      <TableCell sx={{ border: 1 }} align="center">{row.merk}</TableCell>
-                      <TableCell sx={{ border: 1 }} align="center">{row.noseri}</TableCell>
-                      <TableCell sx={{ border: 1 }} align="center">{row.ukuran}</TableCell>
-                      <TableCell sx={{ border: 1 }} align="center">{row.bahan}</TableCell>
-                      <TableCell sx={{ border: 1 }} align="center">{row.tahun}</TableCell>
-                      <TableCell sx={{ border: 1 }} align="center">{row.nokode}</TableCell>
-                      <TableCell sx={{ border: 1 }} align="center">{row.reg}</TableCell>
-                      <TableCell sx={{ border: 1 }} align="center">{row.harga}</TableCell>
-                      <TableCell sx={{ border: 1 }} align="center">{row.baik}</TableCell>
-                      <TableCell sx={{ border: 1 }} align="center">{row.kbaik}</TableCell>
-                      <TableCell sx={{ border: 1 }} align="center">{row.rberat}</TableCell>
-                      <TableCell sx={{ border: 1, borderRight: 0 }} align="center">{row.ketmutasi}</TableCell>
-                    </StyledTableRow>
-                  ))}
+                            <Box
+                              component="div"
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                mb: 2
+                              }}
+                            >
+                              <Typography>No Register</Typography>
+                              <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                            </Box>
+                            <Box
+                              component="div"
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                mb: 2
+                              }}
+                            >
+                              <Typography>Jenis / Nama Barang</Typography>
+                              <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                            </Box>
+                            <Box
+                              component="div"
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                mb: 2
+                              }}
+                            >
+                              <Typography>Merk/Model</Typography>
+                              <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                            </Box>
+                            <Box
+                              component="div"
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                mb: 2
+                              }}
+                            >
+                              <Typography>No. Seri Pabrik</Typography>
+                              <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                            </Box>
+                            <Box
+                              component="div"
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                mb: 2
+                              }}
+                            >
+                              <Typography>Ukuran</Typography>
+                              <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                            </Box>
+                            <Box
+                              component="div"
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                mb: 2
+                              }}
+                            >
+                              <Typography>Bahan</Typography>
+                              <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                            </Box>
+                            <Box
+                              component="div"
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                mb: 2
+                              }}
+                            >
+                              <Typography>Tahun Perolehan</Typography>
+                              <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                            </Box>
+                            <Box
+                              component="div"
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                mb: 2
+                              }}
+                            >
+                              <Typography>Nomor Kode</Typography>
+                              <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                            </Box>
+                            <Box
+                              component="div"
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                mb: 2
+                              }}
+                            >
+                              <Typography>Jumlah Barang</Typography>
+                              <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                            </Box>
+                            <Box
+                              component="div"
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                mb: 2
+                              }}
+                            >
+                              <Typography>Harga</Typography>
+                              <TextField hiddenLabel id="filled-basic" label="Rp" variant="filled" sx={{width:1}} />
+                            </Box>
+                            <Box
+                              component="div"
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                mb: 2
+                              }}
+                            >
+                              <Typography>Keadaan Barang</Typography>
+                              <FormControl fullWidth sx={{bgcolor:"#E8E8E8", borderBottom: 1, borderColor: "#8D8D8D", borderRadius: 1}}>
+                                <Select
+                                  value={age}
+                                  onChange={handleChangeSelect}
+                                  displayEmpty
+                                  inputProps={{ 'aria-label': 'Without label' }}
+                                >
+                                  <MenuItem value="">
+                                    <em>None</em>
+                                  </MenuItem>
+                                  <MenuItem value={10}>Baik</MenuItem>
+                                  <MenuItem value={20}>Kurang Baik</MenuItem>
+                                  <MenuItem value={30}>Rusak Berat</MenuItem>
+                                </Select>
+                              </FormControl>
+                            </Box>
+                            <Box
+                              component="div"
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                mb: 2
+                              }}
+                            >
+                              <Typography>Keterangan</Typography>
+                              <TextField hiddenLabel id="filled-basic" label="" variant="filled" sx={{width:1}} />
+                            </Box>
+                            <Button
+                              Label="Submit"
+                              sx={[
+                                {width: 1, bgcolor: "#66BB6A", color: "font.white"},
+                                {
+                                  '&:hover': {
+                                    bgcolor: "#4D8A4F",
+                                  },
+                                }
+                              ]}
+                            >
+
+                            </Button>
+                          </FormBox>
+                          </Box>
+                        </Modal>
+                        <IconButton
+                          color="primary" 
+                          aria-label="delete" 
+                          sx={[
+                            {bgcolor: "#F44336", borderRadius: 2, p: 1, height: 1},
+                            { '&:hover': {bgcolor: "#B83229"} }
+                          ]}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                        <Checkbox
+                          color="success"
+                          {...label}
+                          sx={{ '& .MuiSvgIcon-root': { fontSize: 36 } }}
+                        />
+                      </Box>
+                    </TableCell>
+                    <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">
+                      {row.no}
+                    </TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.jenis}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.merk}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.noseri}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.ukuran}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.bahan}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.tahun}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.nokode}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.reg}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.harga}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.baik}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.kbaik}</TableCell>
+                <TableCell sx={{ border: 1 }} align="center">{row.rberat}</TableCell>
+                <TableCell sx={{ border: 1, borderRight: 0 }} align="center">{row.ketmutasi}</TableCell>
+                  </StyledTableRow>
+                ))}
                 {emptyRows > 0 && (
                   <TableRow
                     style={{

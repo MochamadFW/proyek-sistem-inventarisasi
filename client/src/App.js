@@ -11,7 +11,7 @@ import Pendataan from './views/pendataan/pages/pendataan';
 import Login from './views/login/pages/login';
 import PenggunaKib from './views/pengguna/pages/KIB'
 import PenggunaKir from './views/pengguna/pages/KIR'
-import PencatatanKib from './views/pencatatan/pages/KIB'
+import PencatatanKib from './views/pencatatan/KIB/pages/KIB'
 import PencatatanKir from './views/pencatatan/pages/KIR'
 import PelaporanMutasiAset from "./views/pelaporan/pages/mutasiAset";
 import BukuInventarisBarang from "./views/pelaporan/pages/bukuinventarisbarang";
@@ -77,7 +77,7 @@ function App() {
                     <Route path="buku-inventaris-barang" element={<BukuInventarisBarang />} />
                   </Route>
                 </Route>
-                <Route element={<RequireAuth allowedRole="Pengguna_barang" />}>
+                <Route element={<RequireAuth allowedRole="pengguna_barang" />}>
                   <Route path="/pengguna" element={<DashboardPenggunaBarang />} />
                   <Route path="/pengguna/kib" element={<PenggunaKib />} />
                   <Route path="/pengguna/kir" element={<PenggunaKir />} />
