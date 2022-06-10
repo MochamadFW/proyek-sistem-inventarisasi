@@ -23,7 +23,6 @@ import {
     Snackbar,
     Alert,
     Modal,
-    CircularProgress,
 } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -38,7 +37,7 @@ import { KegiatanContext } from '../../../hooks/useKegiatanContext';
 
 import ButtonMUI from '../../shared/components/button';
 import FormBox from '../../shared/components/formBox';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
@@ -63,8 +62,12 @@ const NotificationKegiatan = ({ data }) => {
                     </Box>
                     : data.map((datas, index) => (
                         <Box sx={{ width: '100%', borderBottom: index === (data.length - 1) ? '' : '1px solid rgba(0,0,0,.1)', wordBreak: 'break-all' }} key={index}>
-                            <Typography variant="subtitle2">{moment(new Date(datas.tanggal_kegiatan)).format("DD MMMM YYYY")}</Typography>
-                            <Typography variant="body1">{datas.nama_kegiatan}</Typography>
+                            <Typography variant="subtitle2">Nama Pengaju: {datas.nama_pengaju}</Typography>
+                            <Typography variant="subtitle2">Nama Ruangan: {datas.nama_ruangan}</Typography>
+                            <Typography variant="subtitle2">Nama Barang: {datas.nama_barang}</Typography>
+                            <Typography variant="subtitle2">Jenis Kerusakan: {datas.jenis_kerusakan}</Typography>
+                            <Typography variant="subtitle2">Jumlah Barang: {datas.jumlah_barang}</Typography>
+                            <Typography variant="subtitle2">Keterangan: {datas.keterangan_barang}</Typography>
                         </Box>)
                     )}
             </Box>
@@ -454,13 +457,13 @@ const TableBIB = ({ data, changed, setChange }) => {
     function handleSearch(event) {
         setSearchValue(event.target.value);
         let result = [];
-        result = data.filter((data) => { return data.nama_barang.toLowerCase().search(searchValue.toLowerCase()) != -1; });
+        result = data.filter((data) => { return data.nama_barang.toLowerCase().search(searchValue.toLowerCase()) !== -1; });
         if (event.target.value.length <= 0) { setSearchedTable(data) };
         setSearchedTable(result);
     };
     return (
         <React.Fragment>
-            <Box sx={{ display: 'flex', flexDirection: 'column', maxWidth:689 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', maxWidth: 689 }}>
                 <Box
                     component="div"
                     sx={{
@@ -474,7 +477,7 @@ const TableBIB = ({ data, changed, setChange }) => {
                 >
                     <TablePagination
                         sx={{ ml: -4 }}
-                        rowsPerPageOptions={[10, 50, 75, {label: 'All', value: -1}]}
+                        rowsPerPageOptions={[10, 50, 75, { label: 'All', value: -1 }]}
                         component="div"
                         count={data.length}
                         rowsPerPage={rowsPerPage}
@@ -621,7 +624,6 @@ const TableBIB = ({ data, changed, setChange }) => {
 }
 
 const BukuInventarisBarang = () => {
-    const { selectedKegiatan, setSelectedKegiatan } = useContext(KegiatanContext);
     const [anchorNotification, setAnchorNotification] = useState(null);
     const handleClickNotification = (event) => {
         setAnchorNotification(event.currentTarget);
@@ -653,14 +655,20 @@ const BukuInventarisBarang = () => {
         }
     );
     const [deletedData, setDeletedData] = useState(false);
+    const [notifications, setNotifications] = useState();
     useEffect(() => {
-        fetch("http://localhost:8081/ruangan/allruangan").
-            then((data) => data.json()).
-            then((data) => setDataAllRuangan(data.data.ruangan))
+        fetch("http://localhost:8081/ruangan/allruangan")
+            .then((data) => data.json())
+            .then((data) => setDataAllRuangan(data.data.ruangan))
     }, [dataFormBuku, deletedData]);
     const handleChangeSelect = (event) => {
         setDataFormBuku((prev) => ({ ...prev, keadaan_barang: event.target.value }));
     };
+    useEffect(() => {
+        fetch("http://localhost:8081/permintaan/allpermintaan")
+            .then(response => response.json())
+            .then(json => setNotifications(json.data.permintaan));
+    }, []);
     function handleSubmit(event) {
         event.preventDefault();
         fetch("http://localhost:8081/ruangan/newruangan/",
@@ -751,7 +759,7 @@ const BukuInventarisBarang = () => {
                             marginThreshold={0}
                             PaperProps={{ sx: 'overflowY:hidden' }}
                         >
-                            <NotificationKegiatan data={selectedKegiatan} />
+                            <NotificationKegiatan data={notifications} />
                         </Popover>
                     </Box>
                     <Box>
