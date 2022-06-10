@@ -2,6 +2,7 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { DateProvider } from "./hooks/useDateContext";
 import { KegiatanProvider } from "./hooks/useKegiatanContext";
+import { RoomProvider } from "./hooks/useRoomContext";
 import React from "react";
 
 import { AuthProvider } from "./context/AuthProvider";
@@ -56,6 +57,7 @@ function App() {
   return (
     <AuthProvider>
       <ThemeProvider theme={theme}>
+        <RoomProvider>
         <DateProvider>
           <KegiatanProvider>
             <Routes>
@@ -88,6 +90,7 @@ function App() {
             </Routes>
           </KegiatanProvider>
         </DateProvider>
+        </RoomProvider>
       </ThemeProvider>
     </AuthProvider>
   );
