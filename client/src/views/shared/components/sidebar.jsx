@@ -27,7 +27,41 @@ import useAuth from "../../../hooks/useAuth";
 const Sidebar = () => {
     const { selectedDate, setSelectedDate } = useContext(DateContext);
     const { selectedRoom, setSelectedRoom } = useContext(RoomContext);
-    const room = ["KEPALA DINAS PEKERJAAN UMUM", "KEPALA DINAS PEKERJAAN KHUSUS"]
+    const room = [
+        { name: "R. Kepala Dinas Pekerjaan Umum", value: "KEPALA DINAS PEKERJAAN UMUM" },
+        { name: "R. Sekretaris Dinas Pekerjaan Umum", value: "SEKRETARIS DINAS PEKERJAAN UMUM" },
+        { name: "R. Kasubag Umpegdatin", value: "KASUBAG UMPEGDATIN" },
+        { name: "R. Staff Umum", value: "STAFF UMUM" },
+        { name: "R. Kasubag Keuangan", value: "KASUBAG KEUANGAN" },
+        { name: "R. Keuangan I", value: "KEUANGAN I" },
+        { name: "R. Keuangan II", value: "KEUANGAN II" },
+        { name: "R. Rapat I", value: "RAPAT I" },
+        { name: "R. Rapat II", value: "RAPAT II" },
+        { name: "R. Kontrol", value: "KONTROL" },
+        { name: "R. Sekuriti", value: "SEKURITI" },
+        { name: "R. Kepala Bidang Jalan dan Jembatan", value: "KEPALA BIDANG JALAN DAN JEMBATAN" },
+        { name: "R. Bidang Jalan dan Jembatan", value: "BIDANG JALAN DAN JEMBATAN" },
+        { name: "R. Kasi Perencanaan JJ", value: "KASI PERENCANAAN JJ" },
+        { name: "R. Kasi Pembangungan dan Pemeliharaan", value: "KASI PEMBANGUNAN DAN PEMELIHARAAN" },
+        { name: "R. Kasi Pengendalian dan Pemanfaatan", value: "KASI PENGENDALIAN DAN PEMANFAATAN" },
+        { name: "R. Arsip SDA", value: "ARSIP SDA" },
+        { name: "R. Rapat III", value: "RAPAT III" },
+        { name: "R. Rapat IV", value: "RAPAT IV" },
+        { name: "R. Sumber Daya Air", value: "SUMBER DAYA AIR" },
+        { name: "R. Kepala Bidang Pendayagunaan SDA", value: "KEPALA BIDANG PENDAYAGUNAAN SDA" },
+        { name: "R. Kasi Perencanaan Pendayagunaan SDA", value: "KASI PERENCANAAN PENDAYAGUNAAN SDA" },
+        { name: "R. Kasi Pembangunan dan Pemeliharaan Pendayagunaan SDA", value: "KASI PEMBANGUNAN DAN PEMELIHARAAN PENDAYAGUNAAN SDA" },
+        { name: "R. Kasi Pengendalian dan Pemanfaatan Pendayagunaan  SDA", value: "KASI PENGENDALIAN DAN PEMANFAATAN PENDAYAGUNAAN SDA" },
+        { name: "R. Kepala Bidang Pengendalian Daya Rusak Air", value: "KEPALA BIDANG PENGENDALIAN DAYA RUSAK AIR" },
+        { name: "R. Kasi Perencanaan PDRA", value: "KASI PERENCANAAN PDRA" },
+        { name: "R. Kasi Pembangunan dan Pemeliharaan PDRA", value: "KASI PEMBANGUNAN DAN PEMELIHARAAN PDRA" },
+        { name: "R. Kasi Pengendalian dan Pemanfaatan PDRA", value: "KASI PENGENDALIAN DAN PEMANFAATAN PDRA" },
+        { name: "R. Kepala Bidang Drainase dan Trotoar", value: "KEPALA BIDANG DRAINASE DAN TROTOAR" },
+        { name: "R. Bidang Drainase dan Trotoar", value: "BIDANG DRAINASE DAN TROTOAR" },
+        { name: "R. Kasi Perencanaan Drainase dan Trotoar", value: "KASI PERENCANAAN DRAINASE DAN TROTOAR" },
+        { name: "R. Kasi Pembangunan dan Pemeliharaan Drainase dan Trotoar", value: "KASI PEMBANGUNAN DAN PEMELIHARAAN DRAINASE TROTOAR" },
+        { name: "R. Kasi Pengendalian dan Pemanfaatan Drainase dan Trotoar", value: "KASI PENGENDALIAN DAN PEMANFAATAN DRAINASE DAN TROTOAR" }
+    ]
     const navigate = useNavigate();
     let currentPath = useLocation();
     const [openPendataanCollapse, setOpenPendataanCollapse] = useState(false);
@@ -241,13 +275,14 @@ const Sidebar = () => {
                                                 sx={{ width: '200px' }}
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
-                                                value={selectedRoom}
+                                                value={selectedRoom.name}
                                                 label="Age"
+                                                renderValue={() => selectedRoom.name}
                                                 onChange={handleChange}>
                                                 {
-                                                room.map((selectedRoom, index) =>
-                                                    <MenuItem key={index} value={selectedRoom}>{selectedRoom}</MenuItem>
-                                                )}
+                                                    room.map((selectedRoom, index) =>
+                                                        <MenuItem key={index} value={selectedRoom}>{selectedRoom.name}</MenuItem>
+                                                    )}
                                             </Select>
                                         </FormControl>
                                     </ListItem>
