@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import {
+import { 
   Typography,
   Table,
   TableBody,
@@ -70,17 +70,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const PencatatanRKD = () => {
+const PencatatanRKI = () => {
 
   // get data table from api
   const [dataTable, setDataTable] = React.useState([]);
   const getDataFromAPI = () => {
-    fetch("http://localhost:8081/ruangan/barang/KEPALA%20DINAS%20PEKERJAAN%20UMUM")
-      .then((data) => data.json())
-      .then((data) => {
-        setDataTable(data.data.namaBarang);
-        console.log(data.data.namaBarang);
-      });
+    fetch("http://localhost:8081/ruangan/barang/KEUANGAN%20I")
+    .then((data) => data.json())
+    .then((data) => {
+      setDataTable(data.data.namaBarang);
+      console.log(data.data.namaBarang);
+    });
   }
 
   // mount data at first loading page
@@ -91,9 +91,9 @@ const PencatatanRKD = () => {
   // data fe storage
   const [addFormData, setAddFormData] = React.useState({
     "nomor_register": "",
-    "kode_ruangan": "12.10.17.05.01.2012.01.00.01",
-    "nama_ruangan": "KEPALA DINAS PEKERJAAN UMUM",
-    "luas_lantai": "21 m2",
+    "kode_ruangan": "12.10.17.05.01.2012.01.03.02",
+    "nama_ruangan": "KEUANGAN I",
+    "luas_lantai": "",
     "kode_barang": "",
     "nama_barang": "",
     "tipe_barang": "",
@@ -111,9 +111,9 @@ const PencatatanRKD = () => {
   // reset form
   const resetFormData = {
     "nomor_register": "",
-    "kode_ruangan": "12.10.17.05.01.2012.01.00.01",
-    "nama_ruangan": "KEPALA DINAS PEKERJAAN UMUM",
-    "luas_lantai": "21 m2",
+    "kode_ruangan": "12.10.17.05.01.2012.01.03.02",
+    "nama_ruangan": "KEUANGAN I",
+    "luas_lantai": "",
     "kode_barang": "",
     "nama_barang": "",
     "tipe_barang": "",
@@ -132,13 +132,13 @@ const PencatatanRKD = () => {
   const handleOnChangeInput = (e) => {
     const { name, value } = e.target;
     setAddFormData(prevState => ({
-      ...prevState,
-      [name]: value
+        ...prevState,
+        [name]: value
     }));
   };
 
   // handle submit form for adding data
-  const HandleSubmit = (event) => {
+  const HandleSubmit =  (event) => {
     event.preventDefault();
     console.log(addFormData);
     fetch("http://localhost:8081/ruangan/newruangan", {
@@ -146,26 +146,26 @@ const PencatatanRKD = () => {
       body: JSON.stringify(addFormData),
       headers: { 'Content-Type': 'application/json' },
     })
-      .then(response => response.json())
-      .then(response => console.log(response));
+    .then(response => response.json())
+    .then(response => console.log(response));
 
     // wait for adding data done & update data in table
-    setTimeout(function () { //After 1 second, set render to true
+    setTimeout(function() { //After 1 second, set render to true
       console.log("wait for 1 second to push data.");
       getDataFromAPI();
     }.bind(this), 1000)
     setAddFormData(resetFormData);
     setSuccessAlert(true);
-    setTimeout(function () { //After 8 second, set render to true
+    setTimeout(function() { //After 8 second, set render to true
       setSuccessAlert(false);
     }.bind(this), 8000)
   };
 
   const [editFormData, setEditFormData] = React.useState({
     "nomor_register": "",
-    "kode_ruangan": "12.10.17.05.01.2012.01.00.01",
-    "nama_ruangan": "KEPALA DINAS PEKERJAAN UMUM",
-    "luas_lantai": "21 m2",
+    "kode_ruangan": "12.10.17.05.01.2012.01.03.02",
+    "nama_ruangan": "KEUANGAN I",
+    "luas_lantai": "",
     "kode_barang": "",
     "nama_barang": "",
     "tipe_barang": "",
@@ -276,7 +276,7 @@ const PencatatanRKD = () => {
   const [deleteAlert, setDeleteAlert] = React.useState(false);
   const [editAlert, setEditAlert] = React.useState(false);
 
-  const [ruangan, setRuangan] = React.useState(10);
+  const [ruangan, setRuangan] = React.useState(60);
 
   const handleChangeRuangan = (event) => {
     setRuangan(event.target.value);
@@ -315,7 +315,7 @@ const PencatatanRKD = () => {
       >
         <Box
           component="div"
-          sx={{ width: 366, flexShrink: 0, mr: 2 }}
+          sx={{width:366, flexShrink: 0, mr:2}}
         >
         </Box>
         <Box
@@ -331,8 +331,8 @@ const PencatatanRKD = () => {
           }}
         >
           <TablePagination
-            sx={{ ml: -4 }}
-            rowsPerPageOptions={[10, 50, 75, { label: 'All', value: -1 }]}
+            sx={{ml: -4}}
+            rowsPerPageOptions={[10, 50, 75, {label: 'All', value: -1}]}
             component="div"
             count={dataTable.length}
             rowsPerPage={rowsPerPage}
@@ -386,11 +386,11 @@ const PencatatanRKD = () => {
       >
         <FormBox
           title="Form Input"
-          sx={{ width: 366, maxHeight: 919, flexShrink: 0, mr: 2 }}
+          sx={{width:366, maxHeight: 919, flexShrink: 0, mr:2}}
         >
           <Box
             component="div"
-            sx={{ pr: 1, pb: 2, m: 0, width: 1, maxHeight: 800, overflow: 'auto' }}
+            sx={{pr: 1, pb: 2, m: 0, width: 1, maxHeight: 800, overflow: 'auto'}}
           >
             <form
               onSubmit={HandleSubmit}
@@ -572,10 +572,10 @@ const PencatatanRKD = () => {
           </Box>
         </FormBox>
         <FormBox
-          title="Kartu Inventaris Ruangan Kepala Dinas"
-          sx={{ maxWidth: 1, height: 919 }}
+          title="Kartu Inventaris Ruangan Keuangan I"
+          sx={{maxWidth:1, height: 919}}
         >
-          <TableContainer
+          <TableContainer 
             component={Paper}
             sx={{ maxHeight: 672, overflow: 'auto' }}
           >
@@ -968,4 +968,4 @@ const PencatatanRKD = () => {
   );
 }
 
-export default PencatatanRKD;
+export default PencatatanRKI;

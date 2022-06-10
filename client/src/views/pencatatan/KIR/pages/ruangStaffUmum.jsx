@@ -70,12 +70,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const PencatatanRKD = () => {
+const PencatatanRSU = () => {
 
   // get data table from api
   const [dataTable, setDataTable] = React.useState([]);
   const getDataFromAPI = () => {
-    fetch("http://localhost:8081/ruangan/barang/KEPALA%20DINAS%20PEKERJAAN%20UMUM")
+    fetch("http://localhost:8081/ruangan/barang/STAFF%20UMUM")
       .then((data) => data.json())
       .then((data) => {
         setDataTable(data.data.namaBarang);
@@ -91,9 +91,9 @@ const PencatatanRKD = () => {
   // data fe storage
   const [addFormData, setAddFormData] = React.useState({
     "nomor_register": "",
-    "kode_ruangan": "12.10.17.05.01.2012.01.00.01",
-    "nama_ruangan": "KEPALA DINAS PEKERJAAN UMUM",
-    "luas_lantai": "21 m2",
+    "kode_ruangan": "12.10.17.05.01.2012.01.03.01",
+    "nama_ruangan": "STAFF UMUM",
+    "luas_lantai": "",
     "kode_barang": "",
     "nama_barang": "",
     "tipe_barang": "",
@@ -111,9 +111,9 @@ const PencatatanRKD = () => {
   // reset form
   const resetFormData = {
     "nomor_register": "",
-    "kode_ruangan": "12.10.17.05.01.2012.01.00.01",
-    "nama_ruangan": "KEPALA DINAS PEKERJAAN UMUM",
-    "luas_lantai": "21 m2",
+    "kode_ruangan": "12.10.17.05.01.2012.01.03.01",
+    "nama_ruangan": "STAFF UMUM",
+    "luas_lantai": "",
     "kode_barang": "",
     "nama_barang": "",
     "tipe_barang": "",
@@ -156,16 +156,16 @@ const PencatatanRKD = () => {
     }.bind(this), 1000)
     setAddFormData(resetFormData);
     setSuccessAlert(true);
-    setTimeout(function () { //After 8 second, set render to true
+    setTimeout(function() { //After 8 second, set render to true
       setSuccessAlert(false);
     }.bind(this), 8000)
   };
 
   const [editFormData, setEditFormData] = React.useState({
     "nomor_register": "",
-    "kode_ruangan": "12.10.17.05.01.2012.01.00.01",
-    "nama_ruangan": "KEPALA DINAS PEKERJAAN UMUM",
-    "luas_lantai": "21 m2",
+    "kode_ruangan": "12.10.17.05.01.2012.01.03.01",
+    "nama_ruangan": "STAFF UMUM",
+    "luas_lantai": "",
     "kode_barang": "",
     "nama_barang": "",
     "tipe_barang": "",
@@ -276,7 +276,7 @@ const PencatatanRKD = () => {
   const [deleteAlert, setDeleteAlert] = React.useState(false);
   const [editAlert, setEditAlert] = React.useState(false);
 
-  const [ruangan, setRuangan] = React.useState(10);
+  const [ruangan, setRuangan] = React.useState(40);
 
   const handleChangeRuangan = (event) => {
     setRuangan(event.target.value);
@@ -572,7 +572,7 @@ const PencatatanRKD = () => {
           </Box>
         </FormBox>
         <FormBox
-          title="Kartu Inventaris Ruangan Kepala Dinas"
+          title="Kartu Inventaris Ruangan Staff Umum"
           sx={{ maxWidth: 1, height: 919 }}
         >
           <TableContainer
@@ -968,4 +968,4 @@ const PencatatanRKD = () => {
   );
 }
 
-export default PencatatanRKD;
+export default PencatatanRSU;

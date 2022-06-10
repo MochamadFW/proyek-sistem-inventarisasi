@@ -19,6 +19,22 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 
+const headerRow = [
+  "No. Urut",
+  "Nama barang / Jenis barang",
+  "Merk/Model",
+  "No. Seri Barang",
+  "Ukuran",
+  "Bahan",
+  "Tahun Pembuatan / Pembelian",
+  "Nomor kode Barang",
+  "Jumlah Barang / Register (X)",
+  "Harga Beli / Perolehan",
+  "Asal Usul",
+  "Keadaan Barang",
+  "Keterangan Mutasi dll"
+];
+
 function createData(no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, harga, baik, kbaik, rberat, ketmutasi) {
   return { no, jenis, merk, noseri, ukuran, bahan, tahun, nokode, reg, harga, baik, kbaik, rberat, ketmutasi};
 }
@@ -46,14 +62,52 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const PenggunaKir = () => {
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [dataTable, setDataTable] = React.useState([]);
   
-  const [ruangan, setRuangan] = React.useState('');
+  const [ruangan, setRuangan] = React.useState(10);
 
   const handleChangeRuangan = (event) => {
     setRuangan(event.target.value);
   };
+
+  const getCurrentKodeRuangan = (x) => {
+    let kodeRuangan;
+    switch (x) {
+      case 10: kodeRuangan = '12.10.17.05.01.2012.01.00.01'; break;
+      case 20: kodeRuangan = '12.10.17.05.01.2012.01.02.01'; break;
+      case 30: kodeRuangan = '12.10.17.05.01.2012.01.03.02'; break;
+      case 40: kodeRuangan = '12.10.17.05.01.2012.01.03.01'; break;
+      case 50: kodeRuangan = '12.10.17.05.01.2012.01.04.01'; break;
+      case 60: kodeRuangan = '12.10.17.05.01.2012.01.03.02'; break;
+      default: kodeRuangan = '12.10.17.05.01.2012.01.00.01'; break;
+    };
+
+    return kodeRuangan;
+  };
+
+  React.useEffect(() => {
+    const getDataFromAPI = (x) => {
+      setRuangan(x);
+      const curKodeRuangan = getCurrentKodeRuangan(x);
+      fetch("http://localhost:8081/ruangan/kode_ruangan/" + curKodeRuangan)
+        .then((data) => data.json())
+        .then((data) => {
+          setDataTable(data.data.ruangan);
+          console.log(data.data.ruangan, "Data API");
+        });
+    };
+
+    getDataFromAPI(ruangan);
+  }, [ruangan]);
+
+  // convert integer to money for price column in table
+  const intToMoney = (valInt) => {
+    var formatter = new Intl.NumberFormat('en-ID');
+    return formatter.format(valInt);
+  };
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -86,7 +140,7 @@ const PenggunaKir = () => {
       >
         <TablePagination
           sx={{ml: -4}}
-          rowsPerPageOptions={[5, 10, 15, 25, 100]}
+          rowsPerPageOptions={[10, 50, 75, {label: 'All', value: -1}]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
@@ -105,12 +159,12 @@ const PenggunaKir = () => {
             value={ruangan}
             onChange={handleChangeRuangan}
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Staff Umum</MenuItem>
-            <MenuItem value={20}>R. Kepala Dinas</MenuItem>
-            <MenuItem value={30}>R. Sektretaris Dinas</MenuItem>
+            <MenuItem value={10}>R. Kepala Dinas</MenuItem>
+            <MenuItem value={20}>R. Sektretaris Dinas</MenuItem>
+            <MenuItem value={30}>R. Kasubag Umpegdatin</MenuItem>
+            <MenuItem value={40}>R. Staff Umum</MenuItem>
+            <MenuItem value={50}>R. Kasubag Keuangan</MenuItem>
+            <MenuItem value={60}>R. Keuangan I</MenuItem>
           </Select>
         </FormControl>
         <Paper
@@ -128,79 +182,56 @@ const PenggunaKir = () => {
           </IconButton>
         </Paper>
       </Box>
-      <TableContainer 
-        component={Paper}
-      >
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow
-              sx={{bgcolor:'#66BB6A'}}
-            >
-              <TableCell sx={{ border: 0 }} align="center" colSpan={10}>
-                
-              </TableCell>
-              <TableCell sx={{ border: 1, borderTop: 0 }}align="center" colSpan={3}>
-                Keadaan Barang
-              </TableCell>
-              <TableCell sx={{ border: 0 }} align="center" colSpan={1}>
-                
-              </TableCell>
-            </TableRow>
-            <TableRow
-              sx={{bgcolor:'#66BB6A'}}
-            >
-              <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">No. Urut</TableCell>
-              <TableCell sx={{ border: 1 }} align="center">Nama barang / Jenis barang</TableCell>
-              <TableCell sx={{ border: 1 }} align="center">Merk/Model</TableCell>
-              <TableCell sx={{ border: 1 }} align="center">No. Seri nokode</TableCell>
-              <TableCell sx={{ border: 1 }} align="center">Ukuran</TableCell>
-              <TableCell sx={{ border: 1 }} align="center">Bahan</TableCell>
-              <TableCell sx={{ border: 1 }} align="center">Tahun Pembuatan / Pembelian</TableCell>
-              <TableCell sx={{ border: 1 }} align="center">Nomor kode Barang</TableCell>
-              <TableCell sx={{ border: 1 }} align="center">Jumlah Barang / Register (X)</TableCell>
-              <TableCell sx={{ border: 1 }} align="center">Harga Beli / Perolehan</TableCell>
-              <TableCell sx={{ border: 1 }} align="center">Baik (B)</TableCell>
-              <TableCell sx={{ border: 1 }} align="center">Kurang Baik (KB)</TableCell>
-              <TableCell sx={{ border: 1 }} align="center">Rusak Berat (RB)</TableCell>
-              <TableCell sx={{ border: 1, borderRight: 0}} align="center">Keterangan Mutasi dll</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((row, index) => (
-              <StyledTableRow
-                key={row.name}
-              >
-                <TableCell sx={{ border: 1, borderLeft: 0 }} align="center" component="th" scope="row">
-                  {row.no}
-                </TableCell>
-                <TableCell sx={{ border: 1 }} align="center">{row.jenis}</TableCell>
-                <TableCell sx={{ border: 1 }} align="center">{row.merk}</TableCell>
-                <TableCell sx={{ border: 1 }} align="center">{row.noseri}</TableCell>
-                <TableCell sx={{ border: 1 }} align="center">{row.ukuran}</TableCell>
-                <TableCell sx={{ border: 1 }} align="center">{row.bahan}</TableCell>
-                <TableCell sx={{ border: 1 }} align="center">{row.tahun}</TableCell>
-                <TableCell sx={{ border: 1 }} align="center">{row.nokode}</TableCell>
-                <TableCell sx={{ border: 1 }} align="center">{row.reg}</TableCell>
-                <TableCell sx={{ border: 1 }} align="center">{row.harga}</TableCell>
-                <TableCell sx={{ border: 1 }} align="center">{row.baik}</TableCell>
-                <TableCell sx={{ border: 1 }} align="center">{row.kbaik}</TableCell>
-                <TableCell sx={{ border: 1 }} align="center">{row.rberat}</TableCell>
-                <TableCell sx={{ border: 1, borderRight: 0 }} align="center">{row.ketmutasi}</TableCell>
-              </StyledTableRow>
-            ))}
-            {emptyRows > 0 && (
-              <TableRow
-                style={{
-                  height: 53 * emptyRows,
-                }}
-              >
-                <TableCell colSpan={6} />
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+          <TableContainer
+            component={Paper}
+          >
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow
+                  sx={{ bgcolor: '#66BB6A' }}
+                >
+                  {headerRow.map((htxt, index) => (
+                    <TableCell key={index} sx={{ border: 1, borderTop: 0, '&:first-child': { borderLeft: 0 }, '&:last-child': { borderRight: 0 } }} align="center">{htxt}</TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {(rowsPerPage > 0
+                ? dataTable.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                : dataTable)
+                .map((row, index) => (
+                  <StyledTableRow
+                    key={index}
+                  >
+                      <TableCell sx={{ border: 1, borderLeft: 0 }} align="center">
+                        {index + 1}
+                      </TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.nama_barang}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.tipe_barang}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.nomor_seri_pabrik}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.ukuran_barang}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.bahan_barang}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.tahun_perolehan}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.kode_barang}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.jumlah_barang}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{intToMoney(row.harga_barang)}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.asal_usul}</TableCell>
+                      <TableCell sx={{ border: 1 }} align="center">{row.keadaan_barang}</TableCell>
+                      <TableCell sx={{ border: 1, borderRight: 0 }} align="center">{row.keterangan_barang}</TableCell>
+                    </StyledTableRow>
+                  ))}
+                {emptyRows > 0 && (
+                  <TableRow
+                    style={{
+                      height: 53 * emptyRows,
+                    }}
+                  >
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
       <Box
         component="div"
         sx={{width: 1, display: 'flex', justifyContent: 'flex-end'}}
@@ -208,7 +239,7 @@ const PenggunaKir = () => {
         <Button
           Label="Laporan KIR"
           sx={{
-            mt: 12,
+            mt: 4,
           }}
         />
       </Box>

@@ -22,14 +22,18 @@ const NotificationKegiatan = ({ data }) => {
             <Box sx={{ backgroundColor: 'secondary.main', px: 2, py: 3, overflowY: 'hidden' }}>
                 <Typography variant="h6" color="font.white">Notifikasi</Typography>
             </Box>
-            <Box className="menu" sx={{ width: '320px', maxHeight: '100%', gap: 2, display: 'flex', flexDirection: 'column', px: 3, py: 2, overflowX: 'hidden', overflowY: 'scroll', userSelect: "none", MozUserSelect: "none" }}>
-                {data.map((datas, index) => (
-                    <Box sx={{ width: '100%', borderBottom: index === (data.length - 1) ? '' : '1px solid rgba(0,0,0,.1)', wordBreak: 'break-all' }} key={index}>
-                        <Typography variant="subtitle2">{moment(new Date(datas.tanggal_kegiatan)).format("DD MMMM YYYY")}</Typography>
-                        <Typography variant="body1">{datas.nama_kegiatan}</Typography>
-                    </Box>)
-                )}
-            </Box>
+            {data === undefined ?
+                <Box sx={{ width: '100%', wordBreak: 'break-all' }}>
+                    <Typography variant="body1" color="#CCCCCC">Tidak terdapat kegiatan</Typography>
+                </Box> :
+                <Box className="menu" sx={{ width: '320px', maxHeight: '100%', gap: 2, display: 'flex', flexDirection: 'column', px: 3, py: 2, overflowX: 'hidden', overflowY: 'scroll', userSelect: "none", MozUserSelect: "none" }}>
+                    {data.map((datas, index) => (
+                        <Box sx={{ width: '100%', borderBottom: index === (data.length - 1) ? '' : '1px solid rgba(0,0,0,.1)', wordBreak: 'break-all' }} key={index}>
+                            <Typography variant="subtitle2">{moment(new Date(datas.tanggal_kegiatan)).format("DD MMMM YYYY")}</Typography>
+                            <Typography variant="body1">{datas.nama_kegiatan}</Typography>
+                        </Box>)
+                    )}
+                </Box>}
         </Box >
     )
 }

@@ -112,11 +112,11 @@ const Sidebar = () => {
             name: 'Kartu Inventaris Ruangan (KIR)',
             menu: [
                 { id: 1, name: 'R. Kepala Dinas', link: '/pencatatan/kir/ruang-kepala-dinas' },
-                { id: 2, name: 'R. Sekretaris Dinas', link: '#' },
-                { id: 3, name: 'R. Kasubag Umpegdatin', link: '#' },
-                { id: 4, name: 'R. Staff Umum', link: '/pencatatan/kir/staff-umum' },
-                { id: 5, name: 'R. Kasubag Keuangan', link: '#' },
-                { id: 6, name: 'R. Keuangan I', link: '#' },
+                { id: 2, name: 'R. Sekretaris Dinas', link: '/pencatatan/kir/ruang-sekretaris-dinas' },
+                { id: 3, name: 'R. Kasubag Umpegdatin', link: '/pencatatan/kir/ruang-kasubag-umpegdatin' },
+                { id: 4, name: 'R. Staff Umum', link: '/pencatatan/kir/ruang-staff-umum' },
+                { id: 5, name: 'R. Kasubag Keuangan', link: '/pencatatan/kir/ruang-kasubag-keuangan' },
+                { id: 6, name: 'R. Keuangan I', link: '/pencatatan/kir/ruang-keuangan-i' },
             ]
         }
     ];
@@ -313,19 +313,19 @@ const Sidebar = () => {
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     {account.map((data) =>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', px: 3, mb: 3, userSelect: "none", MozUserSelect: "none" }}>
-                            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '8px' }}>
-                                <Icon sx={{ color: 'font.white' }}>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 2, px: 3, mb: 2, userSelect: "none", MozUserSelect: "none" }}>
+                            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }}>
+                                <Icon sx={{ color: 'font.grey' }}>
                                     person
                                 </Icon>
-                                <Box sx={{ color: "font.white" }}>
-                                    <Typography variant="body1" fontWeight="bold">
+                                <Box sx={{ color: "font.grey" }}>
+                                    <Typography fontWeight="black" variant="subtitle1">
                                         {data.name}
                                     </Typography>
-                                    <Typography variant="subtitle2">
+                                    <Typography fontSize="8pt" variant="subtitle2">
                                         {data.NIP}
                                     </Typography>
-                                    <Typography variant="subtitle2">
+                                    <Typography fontSize="8pt" variant="subtitle2">
                                         {data.position}
                                     </Typography>
                                 </Box>
