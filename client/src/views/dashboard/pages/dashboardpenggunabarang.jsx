@@ -65,7 +65,6 @@ const DashboardPenggunaBarang = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           nama_pengaju: namaPengaju,
-          tanggal_permintaan: new Date(),
           nama_ruangan: selectedRoom.value,
           nama_barang: selectedItems,
           jumlah_barang: selectedTotalItem,
