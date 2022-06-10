@@ -46,8 +46,7 @@ const Login = () => {
                 })
             setPassword('');
             setUser('');
-            localStorage.getItem('user').role === "Pengguna_barang" ? navigate("/pengguna", { replace: true }) : navigate(from, { replace: true })
-
+            JSON.parse(localStorage.getItem('user')).role === "pengguna_barang" ? navigate("/pengguna", { replace: true }) : navigate(from, { replace: true })
         }
         catch (err) {
             console.error(err);
